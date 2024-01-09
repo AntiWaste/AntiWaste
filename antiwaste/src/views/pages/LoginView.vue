@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <nav-top></nav-top>
     <h1>Login</h1>
     <form @submit.prevent="login">
       <div class="container">
@@ -21,16 +22,16 @@
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
   },
   methods: {
     login() {
       // Perform registration logic here
-      console.log('Registration submitted');
-      console.log('Username:', this.username);
-      console.log('Password:', this.password);
+      console.log("Registration submitted");
+      console.log("Username:", this.username);
+      console.log("Password:", this.password);
     },
   },
 };
@@ -54,8 +55,8 @@ body {
   margin-bottom: 20px;
 }
 
-input[type='text'],
-input[type='password'] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
