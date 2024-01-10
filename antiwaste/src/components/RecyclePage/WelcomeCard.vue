@@ -1,28 +1,20 @@
 <template>
   <div id="app">
-    <v-card class="mx-auto" max-width="400">
+    <v-card class="mx-auto" max-width="1247.62" max-height="437.28">
       <v-img
         class="align-end text-white"
-        height="200"
+        height="437.28"
         src="../../assets/image 20.png"
         cover
       >
-        <v-card-title>Top 10 Australian beaches</v-card-title>
+        <v-card-title max-width="1053" max-height="156" class="text-md-h4"
+          >Welcome to KompongCham Recycling’s Store</v-card-title
+        >
+        <v-card-title class="text-h6">
+          Please enjoy buying our product, feel free to delivery to other
+          province too.
+        </v-card-title>
       </v-img>
-
-      <v-card-subtitle class="pt-4"> Number 10 </v-card-subtitle>
-
-      <v-card-text>
-        <div>Whitehaven Beach</div>
-
-        <div>Whitsunday Island, Whitsunday Islands</div>
-      </v-card-text>
-
-      <v-card-actions>
-        <v-btn color="orange"> Share </v-btn>
-
-        <v-btn color="orange"> Explore </v-btn>
-      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -30,8 +22,6 @@
 <script>
 export default {
   name: "WelcomeCard",
-  components: {
-    // NavTop,
-  },
+  components: {},
 };
 </script>
