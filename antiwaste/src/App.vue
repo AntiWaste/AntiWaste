@@ -4,11 +4,6 @@
       <router-view />
     </v-main>
   </v-app>
-  <div id="app">
-    <div>
-      <router-view />
-    </div>
-  </div>
 </template>
 
 <script>

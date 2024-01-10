@@ -7,9 +7,6 @@ import { loadFonts } from './plugins/webfontloader';
 loadFonts();
 
 createApp(App).use(router).use(vuetify).mount('#app');
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
 
 //import component
 import NavTop from './components/NavTop.vue';
