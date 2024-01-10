@@ -7,12 +7,3 @@ import { loadFonts } from './plugins/webfontloader';
 loadFonts();
 
 createApp(App).use(router).use(vuetify).mount('#app');
-
-//import component
-import NavTop from './components/NavTop.vue';
-const app = createApp(App);
-
-//add components to 'app'
-app.component('nav-top', NavTop);
-
-app.use(router).mount('#app');
