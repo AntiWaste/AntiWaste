@@ -1,10 +1,37 @@
 <template>
-  <div class="home">
-    <nav-top></nav-top>
-    <h2>This is Home Page</h2>
+  <!-- <NavTop /> -->
+  <div class="text-center">
+    <v-btn color="primary">
+      Open Dialog
+      <v-dialog v-model="dialog" activator="parent" width="auto">
+        <v-card>
+          <v-card-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" block @click="dialog = false"
+              >Close Dialog</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-btn>
   </div>
 </template>
 
 <script>
-export default { name: "HomeView" };
+// import NavTop from '@/components/NavTop.vue';
+export default {
+  // components: {
+  //   NavTop,
+  // },
+  data() {
+    return {
+      dialog: false,
+    };
+  },
+};
+
+// Components
 </script>

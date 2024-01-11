@@ -3,7 +3,11 @@
     <h1>Register</h1>
     <div class="register">
       <div class="register-left">
-        <img src="../../assets/7884850_3725847.jpg" alt="" width="400" />
+        <img
+          src="https://img.freepik.com/free-vector/people-recycling-together_23-2148520835.jpg?w=1060&t=st=1704798340~exp=1704798940~hmac=ba277727527a9ab253f49db3ccc3b6eb2795102bd40010253f9d2ed8b0b39eff"
+          alt=""
+          width="400"
+        />
       </div>
       <form @submit.prevent="register" class="from" width="400">
         <div class="register-left-text">
