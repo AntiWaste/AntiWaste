@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <!-- <NavTop /> -->
   <div class="text-center">
     <v-btn color="primary">
@@ -18,16 +17,10 @@
         </v-card>
       </v-dialog>
     </v-btn>
-=======
-  <div class="home">
-    <nav-top></nav-top>
-    <h2>This is Home Page</h2>
->>>>>>> 01aa8f161a1ad48446aae27ac3c62c741da9ae06
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 // import NavTop from '@/components/NavTop.vue';
 export default {
   // components: {
@@ -41,7 +34,4 @@ export default {
 };
 
 // Components
-=======
-export default { name: "HomeView" };
->>>>>>> 01aa8f161a1ad48446aae27ac3c62c741da9ae06
 </script>
