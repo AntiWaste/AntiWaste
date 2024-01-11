@@ -1,24 +1,4 @@
 <template>
-<<<<<<< HEAD
-<div class="login">
-    <nav-top></nav-top>
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-        <div class="container">
-            <div class="username">
-                <label for="username">Username</label>
-                <input type="text" id="username" v-model="username" required />
-            </div>
-            <div class="password">
-                <label for="psw">Password</label>
-                <input type="password" id="password" v-model="password" required />
-            </div>
-
-            <button type="submit">Login</button>
-        </div>
-    </form>
-</div>
-=======
   <v-card class="login-container">
     <h2 v-if="isLogin">LOGIN</h2>
     <h2 v-else>Register</h2>
@@ -196,7 +176,6 @@
       </div>
     </div>
   </v-card>
->>>>>>> main
 </template>
 
 <script>
@@ -204,21 +183,6 @@
 import { Service } from '@/Service/service';
 
 export default {
-<<<<<<< HEAD
-    data() {
-        return {
-            username: "",
-            password: "",
-        };
-    },
-    methods: {
-        login() {
-            // Perform registration logic here
-            console.log("Registration submitted");
-            console.log("Username:", this.username);
-            console.log("Password:", this.password);
-        },
-=======
   data() {
     return {
       username: '',
@@ -281,9 +245,8 @@ export default {
       await Service.SignUp(UserInp).then(() => {
         this.isLogin = true;
       });
->>>>>>> main
     },
-};
+}}
 </script>
 
 <style scoped>
@@ -392,44 +355,4 @@ export default {
 body {
     font-family: Arial, sans-serif;
 }
-<<<<<<< HEAD
-
-.container {
-    width: 300px;
-    padding: 16px;
-    background-color: white;
-    margin: 0 auto;
-    margin-top: 100px;
-    border: 1px solid black;
-    border-radius: 4px;
-}
-
-.username {
-    margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #4caf50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-=======
->>>>>>> main
 </style>

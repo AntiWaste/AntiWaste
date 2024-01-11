@@ -9,15 +9,6 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-<<<<<<< HEAD
-              <a href="#/login" class="nav-link">Login</a>
-            </li>
-            <li class="nav-item">
-              <a href="#/register" class="nav-link">Sign up</a>
-            </li>
-            <li class="nav-item">
-              <a href="#/calendar" class="nav-link">Calendar</a>
-=======
               <a href="/trash" class="nav-link">Trash</a>
             </li>
             <li class="nav-item">
@@ -31,7 +22,6 @@
             </li>
             <li class="nav-item">
               <a href="/register" class="nav-link">Sign up</a>
->>>>>>> main
             </li>
           </ul>
         </div>
