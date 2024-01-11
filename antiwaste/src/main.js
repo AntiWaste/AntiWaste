@@ -11,6 +11,8 @@ import { aliases, fa } from "vuetify/iconsets/fa";
 import NavTop from "./components/NavTop.vue";
 import WelcomeCard from "./components/RecyclePage/WelcomeCard.vue";
 import CategoriesIcon from "./components/RecyclePage/CategoriesIcon.vue";
+import CarouselCard from "./components/RecyclePage/CarouselCard.vue";
+import ProductRecyleCard from "./components/RecyclePage/ProductRecycleCard";
 
 // Import Vuetify components and directives if needed
 import * as components from "vuetify/components";
@@ -33,6 +35,8 @@ const vuetify = createVuetify({
 app.component("nav-top", NavTop);
 app.component("welcome-card", WelcomeCard);
 app.component("categories-icon", CategoriesIcon);
+app.component("carousel-card", CarouselCard);
+app.component("product-recyle-card", ProductRecyleCard);
 
 // Register components
 app.component("v-app", components.VApp);
