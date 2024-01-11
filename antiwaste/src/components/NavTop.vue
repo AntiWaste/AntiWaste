@@ -9,13 +9,19 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a href="#/login" class="nav-link">Login</a>
+              <a href="/trash" class="nav-link">Trash</a>
             </li>
             <li class="nav-item">
-              <a href="#/register" class="nav-link">Sign up</a>
+              <a href="/recycle" class="nav-link">Recycle</a>
             </li>
             <li class="nav-item">
-              <a href="#/calendar" class="nav-link">Calendar</a>
+              <a href="/event" class="nav-link">Event</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact" class="nav-link">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a href="/register" class="nav-link">Sign up</a>
             </li>
           </ul>
         </div>

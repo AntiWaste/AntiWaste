@@ -1,6 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/pages/LoginView.vue';
 import HomeViewVue from '@/views/HomeView.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import RecycleView from '../views/RecycleView.vue';
 
 const routes = [
   {
@@ -12,6 +14,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeViewVue,
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView,
+  },
+  {
+    path: '/recycle',
+    name: 'recycle',
+    component: RecycleView,
   },
   {
     path: '/about',
