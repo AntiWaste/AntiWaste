@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import CarouselCard from '@/components/CarouselCard.vue';
 import RegisterView from '@/views/pages/RegisterView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/pages/LoginView.vue';
+=======
+import LoginView from '../views/pages/LoginView.vue';
+import HomeViewVue from '@/views/HomeView.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import RecycleView from '../views/RecycleView.vue';
+>>>>>>> main
 
 const routes = [
   {
@@ -10,14 +18,23 @@ const routes = [
     component: LoginView,
   },
   {
-    path: '/register',
-    name: 'register',
-    component: RegisterView,
+    path: '/',
+    name: 'home',
+    component: HomeViewVue,
   },
   {
     path: '/',
     name: 'home',
+<<<<<<< HEAD
     component: CarouselCard,
+=======
+    component: HomeView,
+  },
+  {
+    path: '/recycle',
+    name: 'recycle',
+    component: RecycleView,
+>>>>>>> main
   },
   {
     path: '/about',
