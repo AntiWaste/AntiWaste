@@ -1,7 +1,9 @@
+
 <template>
+  <NavTop/>
   <v-carousel
     cycle
-    height="600"
+    height="400"
     hide-delimiter-background
     show-arrows="hover"
   >
@@ -33,7 +35,14 @@
         <img :src="logo" alt="Logo" class="logo-image" />
       </b-carousel-slide>
   </div>
+  <TrashCenter/>
+  <AboutUs/>
+  <TrustUser/>
+  <FaqQues/>
+  <FooterBar/>
 </template>
+
+
 <style scoped>
 .logo-carousel {
   display: flex;
@@ -51,7 +60,21 @@
 
 
 <script>
+ import AboutUs from '@/components/HomePage/AboutUs.vue';
+import FooterBar from '@/components/SharePage/FooterBar.vue';
+import TrashCenter from '../HomePage/TrashCenter.vue';
+import TrustUser from '../HomePage/TrustUser.vue';
+import NavTop from '../NavTop.vue';
+import FaqQues from './FaqQues.vue';
   export default {
+     components:{
+    FooterBar,
+    TrashCenter,
+    NavTop,
+    FaqQues,
+    AboutUs,
+    TrustUser,
+},
     data () {
       return {
         colors: [

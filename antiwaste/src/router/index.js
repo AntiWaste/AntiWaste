@@ -1,4 +1,4 @@
-import CarouselCard from '@/components/CarouselCard.vue';
+import CarouselCard from '@/components/HomePage/CarouselCard.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/pages/LoginView.vue';
