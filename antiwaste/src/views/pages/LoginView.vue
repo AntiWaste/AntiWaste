@@ -198,9 +198,17 @@ export default {
       State: 'Register Now',
       isActive: false,
       role: '',
-      roleOptions: ['Admin', 'User', 'Service Provider', 'Guest'],
+      roleOptions: ['Admin', 'User', 'Service Provider'],
     };
   },
+  mounted() {
+    if (localStorage.getItem('user')) {
+      this.$router.push('/');
+    } else {
+      this.$router.push('/login');
+    }
+  },
+
   methods: {
     ToggleClick() {
       // this.isActive = !this.isActive;
@@ -224,9 +232,7 @@ export default {
           username: this.username,
           password: this.password,
         };
-        await Service.Login(UserInp).then(() => {
-          this.$router.push('/');
-        });
+        await Service.Login(UserInp);
       }
     },
     async register(e) {
@@ -242,11 +248,23 @@ export default {
         phone: this.phone,
         role: this.role,
       };
-      await Service.SignUp(UserInp).then(() => {
-        this.isLogin = true;
-      });
+      if (
+        this.username === '' ||
+        this.email === '' ||
+        this.password === '' ||
+        this.confirm_password === '' ||
+        this.phone === '' ||
+        this.role === ''
+      ) {
+        this.validateError = true;
+        this.PasswordError = 'Please fill all the fields.';
+      } else {
+        this.validateError = false;
+      }
+      await Service.SignUp(UserInp);
     },
-}}
+  },
+};
 </script>
 
 <style scoped>
@@ -353,6 +371,6 @@ export default {
 }
 
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 </style>

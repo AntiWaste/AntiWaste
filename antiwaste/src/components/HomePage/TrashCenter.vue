@@ -73,6 +73,6 @@
 </template>
 <style scoped>
 .background {
-  background-color: rgb(249, 249, 249);
+  background-color: rgb(227, 227, 227);
 }
 </style>

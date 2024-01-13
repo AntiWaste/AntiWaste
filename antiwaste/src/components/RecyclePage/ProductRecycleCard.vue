@@ -175,6 +175,13 @@ export default {
       setTimeout(() => (this.loading = false), 2000);
     },
   },
+  mounted() {
+    if (localStorage.getItem('user')) {
+      this.$router.push('/recycle');
+    } else {
+      this.$router.push('/login');
+    }
+  },
 };
 </script>
 <style scoped>

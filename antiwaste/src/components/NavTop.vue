@@ -20,8 +20,11 @@
             <li class="nav-item">
               <a href="/contact" class="nav-link">Contact</a>
             </li>
-            <li class="nav-item">
-              <a href="/login" class="nav-link">Sign up</a>
+            <li class="nav-item" v-if="isAuth">
+              <a href="/login" class="nav-link">Log Out</a>
+            </li>
+            <li class="nav-item" v-else>
+              <a href="/login" class="nav-link">Login</a>
             </li>
           </ul>
         </div>
@@ -29,16 +32,29 @@
     </nav>
   </div>
 </template>
-  <script>
+<script>
 export default {
-  name: "NavTop",
+  name: 'NavTop',
   components: {
     // NavTop,
+  },
+  data() {
+    return {
+      isAuth: false,
+    };
+  },
+
+  mounted() {
+    if (localStorage.getItem('user')) {
+      this.isAuth = true;
+    } else {
+      this.$router.push('/login');
+    }
   },
 };
 </script>
 <style scoped>
-.nav-link:hover{
+.nav-link:hover {
   font-size: large;
   font-weight: 500;
 }

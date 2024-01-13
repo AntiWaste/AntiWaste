@@ -1,41 +1,41 @@
-import CarouselCard from "@/components/HomePage/CarouselCard.vue";
-import ContactUs from "@/views/ContactUs.vue";
-import { createRouter, createWebHistory } from "vue-router";
-import LoginView from "../views/pages/LoginView.vue";
+import CarouselCard from '@/components/HomePage/CarouselCard.vue';
+import ContactUs from '@/views/ContactUs.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import LoginView from '../views/pages/LoginView.vue';
 
 const routes = [
   {
-    path: "/login",
-    name: "login",
+    path: '/login',
+    name: 'login',
     component: LoginView,
   },
   {
-    path: "/contact",
-    name: "contactus",
+    path: '/contact',
+    name: 'contactus',
     component: ContactUs,
   },
   {
-    path: "/",
-    name: "home",
+    path: '/',
+    name: 'home',
     component: CarouselCard,
   },
   {
-    path: "/about",
-    name: "about",
+    path: '/about',
+    name: 'about',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
   {
-    path: "/recycle",
-    name: "recycle",
+    path: '/recycle',
+    name: 'recycle',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/RecycleView.vue"),
+      import(/* webpackChunkName: "about" */ '../views/RecycleView.vue'),
   },
 ];
 
