@@ -26,14 +26,9 @@
   <script>
 export default { name: "recycleView" };
 </script>
-<!-- <script>
-body{
-  margin
-}
-</script> -->
 <style scoped>
 body {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 h3 {
   margin-top: 10px;
