@@ -177,7 +177,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .custom-card {
   /* max-width: 1000px; */
   width: 425px;
