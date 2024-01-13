@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand navbar-light">
       <div class="container">
         <a href="https://khalibre.com/" class="navbar-brand">AntiWaste</a>
-        <div class="collapse navbar-collapse v-btn--fixed">
+        <div class="collapse navbar-collapse v-btn--fixed pr-15">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
