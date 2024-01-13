@@ -177,6 +177,7 @@
     </div>
   </v-card>
 </template>
+
 <script>
 //import service
 import { Service } from '@/Service/service';
@@ -245,8 +246,7 @@ export default {
         this.isLogin = true;
       });
     },
-  },
-};
+}}
 </script>
 
 <style scoped>
@@ -353,6 +353,6 @@ export default {
 }
 
 body {
-  font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 </style>
