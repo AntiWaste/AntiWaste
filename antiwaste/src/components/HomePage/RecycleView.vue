@@ -15,18 +15,18 @@
         <!-- Right: Text Content -->
         <v-col>
           <div>
-            <v-card-title class="headline pt-10"
+            <v-card-title class="pt-5 text-left headline pt-10"
               >How to post recycling product and reach customer?</v-card-title
             >
             <v-card-text>
-              <p class="pt-5 text-center text-md-left">
+              <p class="pt-5 text-left">
                 Highlight the Eco-friendly and sustainable aspects of your
                 recycling products. Emphasize their role in reducing waste,
                 conserving resources, and promoting a circular economy. Use
                 vivid language and captivating images to showcase the products'
                 unique features and benefits.
               </p>
-              <p>
+              <p class="pt-5 text-left">
                 Attract new customers and encourage repeat purchases by offering
                 discounts, loyalty programs, and special promotions. Consider
                 bundling products, offering free shipping, or providing

@@ -19,7 +19,7 @@
         </v-form>
       </v-col>
 
-      <v-col cols="12" md="6" class="">
+      <v-col cols="12" md="6" >
         <!-- Additional Contact Information Goes Here -->
         <v-card>
           <h2 class="space">Contact Information</h2>
@@ -63,9 +63,9 @@
     background: url(https://eu-images.contentstack.com/v3/assets/blt4a147f9e36f0754a/blte32d8e995a5fe495/65201243c592551ab2f031ac/GlobalRecyclingDay-2019.jpg) center/cover no-repeat;
     height: 400px; /* Adjust the height as needed */
   }
-  .space{
+   .space{
     padding-top: 30px;
     padding-left: 20px;
-  }
+  } 
   </style>
   

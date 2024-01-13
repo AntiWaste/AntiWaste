@@ -2,12 +2,12 @@
   <div color="primary">
     <v-row justify="center">
       <v-col cols="12" md="3">
-        <img src="path/to/logo.png" alt="Logo" class="footer-logo" />
+        <a href="#" class="navbar-brand">AntiWaste</a>
       </v-col>
 
       <v-col cols="12" md="6" class="text-center">
         <v-row>
-          <v-col v-for="link in footerLinks" :key="link.id" cols="12" md="4">
+          <v-col class="py-10" v-for="link in footerLinks" :key="link.id" cols="12" md="4">
             <v-text text color="white" @click="this.$router.push(link.route)">{{
               link.label
             }}</v-text>
@@ -36,8 +36,11 @@ export default {
     return {
       footerLinks: [
         { id: 1, label: 'Home', route: '/' },
-        { id: 2, label: 'Products', route: '/product' },
-        { id: 3, label: 'Contact', route: '/contact' },
+        { id: 2, label: 'Event', route: '/product' },
+        { id: 3, label: 'Trash', route: '/contact' },
+        { id: 4, label: 'Recycle', route: '/product' },
+        { id: 5, label: 'FAQs', route: '/contact' },
+        { id: 6, label: 'Contact', route: '/product' },
       ],
       socialIcons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin'],
     };

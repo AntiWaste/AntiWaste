@@ -1,15 +1,15 @@
 <template>
   <div id="nav" class="nav">
-    <nav class="navbar navbar-expand navbar-light fixed-top">
+    <nav class="navbar navbar-expand navbar-light">
       <div class="container">
         <a href="https://khalibre.com/" class="navbar-brand">AntiWaste</a>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse v-btn--fixed pr-15">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a href="/trash" class="nav-link">Trash</a>
+              <a href="/event" class="nav-link">Trash</a>
             </li>
             <li class="nav-item">
               <a href="/recycle" class="nav-link">Recycle</a>
@@ -55,6 +55,9 @@ export default {
 </script>
 <style scoped>
 .nav-link:hover {
+}
+.nav-link:hover {
+  color: darkgreen;
   font-size: large;
   font-weight: 500;
 }
