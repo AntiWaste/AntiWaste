@@ -1,10 +1,11 @@
 <template>
-        <div class="font-weight-bold text-h3 text-center pt-10 bg-grey-lighten-5">
+  <!-- <div class="background"> -->
+        <div class="font-weight-bold text-h3 text-center pt-10">
     Rubbish Services
     </div>
-    <p class="text-center pt-5 bg-grey-lighten-5 pb-5 ">Three private companies that manage trash collection in PhnomPenh under the supervision of the PhnomPenh Municipal Administration
+    <p class="text-center pt-5 pb-5 ">Three private companies that manage trash collection in PhnomPenh under the supervision of the PhnomPenh Municipal Administration
     </p>
-    <v-item-group class="bg-grey-lighten-5 py-10 ">
+    <v-item-group class=" py-10 ">
     <v-row class="d-flex">
         <v-card
     class="mx-auto"
@@ -56,4 +57,10 @@
 </v-card>
 </v-row>  
   </v-item-group>
+  <!-- </div> -->
   </template>
+  <style scoped>
+  .background{
+    background-color: rgb(249, 249, 249);
+}
+  </style>

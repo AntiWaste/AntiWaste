@@ -35,10 +35,12 @@
         <img :src="logo" alt="Logo" class="logo-image" />
       </b-carousel-slide>
   </div>
-  <TrashCenter/>
   <AboutUs/>
+  <TrashCenter/>
+  <RecycleView/>
   <TrustUser/>
   <FaqQues/>
+  <FooterBar/>
   <FooterBar/>
 </template>
 
@@ -61,19 +63,19 @@
 
 <script>
  import AboutUs from '@/components/HomePage/AboutUs.vue';
-import FooterBar from '@/components/SharePage/FooterBar.vue';
 import TrashCenter from '../HomePage/TrashCenter.vue';
 import TrustUser from '../HomePage/TrustUser.vue';
 import NavTop from '../NavTop.vue';
 import FaqQues from './FaqQues.vue';
+import RecycleView from './RecycleView.vue';
   export default {
      components:{
-    FooterBar,
     TrashCenter,
     NavTop,
     FaqQues,
     AboutUs,
     TrustUser,
+    RecycleView,
 },
     data () {
       return {

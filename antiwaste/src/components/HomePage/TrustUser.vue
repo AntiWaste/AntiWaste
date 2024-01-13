@@ -1,5 +1,5 @@
 <template>
-<v-container class="all">
+<v-container>
     <div class="font-weight-bold text-h3 text-center py-10">
         Helping a local zero waste
         A Collaborative for a Sustainable Future
@@ -52,9 +52,7 @@ export default {
   
   
 <style scoped>
-.all{
-    background-color: rgb(249, 249, 249);
-}
+
 .headline {
     font-size: 24px;
     font-weight: bold;

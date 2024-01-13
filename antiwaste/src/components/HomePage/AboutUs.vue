@@ -1,4 +1,5 @@
 <template>
+  <div class="background">
   <v-container>
     <div class="font-weight-bold text-h3 text-center py-10">
         About Us
@@ -36,6 +37,7 @@
        
     </v-row>
   </v-container>
+</div>
 </template>
 
 <style scoped>
@@ -67,7 +69,9 @@
     font-weight: bold;
     margin-bottom: 20px;
   }
-  
+  .background {
+    background-color: rgb(249, 249, 249);
+  }
   /* Add more custom styles as needed */
   </style>
   

@@ -1,4 +1,5 @@
 <template>
+    <div class="background">
 <v-container>
     <div class="font-weight-bold text-h3 text-center py-10">
         Frequently Asked Questions
@@ -69,6 +70,7 @@
         </v-expand-transition>
     </v-card>
 </v-container>
+</div>
 </template>
 
   
@@ -95,6 +97,9 @@ export default {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+}
+.background{
+    background-color: rgb(249, 249, 249);
 }
 
 /* Add more custom styles as needed */
