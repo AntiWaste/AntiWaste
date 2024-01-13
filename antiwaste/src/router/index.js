@@ -1,6 +1,6 @@
 import CarouselCard from '@/components/HomePage/CarouselCard.vue';
+import ContactUs from '@/views/ContactUs.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/pages/LoginView.vue';
 
 const routes = [
@@ -10,9 +10,9 @@ const routes = [
     component: LoginView,
   },
   {
-    path: '/',
-    name: 'home',
-    component: HomeView,
+    path: '/contact',
+    name: 'contactus',
+    component: ContactUs,
   },
   {
     path: '/',
