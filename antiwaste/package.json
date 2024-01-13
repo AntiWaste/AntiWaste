@@ -10,7 +10,9 @@
   "dependencies": {
     "@mdi/font": "5.9.55",
     "axios": "^1.6.5",
+    "cloudinary-vue": "^1.2.4",
     "core-js": "^3.8.3",
+    "multer-storage-cloudinary": "^4.0.0",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
