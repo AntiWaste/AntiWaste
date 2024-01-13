@@ -12,6 +12,7 @@
             <v-col cols="6">
               <!-- Left side with text -->
               <div class="text-container">
+                <h6>Best Deal Online on Recycle Plastics</h6>
                 <h2>{{ item.title }}</h2>
                 <p>{{ item.description }}</p>
               </div>
@@ -36,8 +37,8 @@ export default {
       carouselItems: [
         {
           src: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
-          title: "Docks",
-          description: "Beautiful docks under the sky",
+          title: "Flower Jar",
+          description: "Up to 80% OFF",
         },
         {
           src: "https://cdn.vuetifyjs.com/images/cards/hotel.jpg",

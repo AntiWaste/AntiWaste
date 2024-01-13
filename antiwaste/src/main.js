@@ -4,6 +4,7 @@ import router from "./router";
 import { createVuetify } from "vuetify";
 import "@fortawesome/fontawesome-free/css/all.css"; // Ensure your project is capable of handling css files
 import { aliases, fa } from "vuetify/iconsets/fa";
+// import { Cloudinary } from "cloudinary-vue";
 
 // import "vuetify/styles";
 
@@ -30,7 +31,23 @@ const vuetify = createVuetify({
     },
   },
 });
-
+// app.use(Cloudinary, {
+//   configuration: {
+//     cloudName: "dbuzmmqyh",
+//     apiKey: "593593823476781",
+//   },
+// });
+// const storage = new CloudinaryStorage({
+//   Cloudinary,
+//   params: {
+//     folder: "YelpCamp",
+//     allowedFormats: ["jpeg", "png", "jpg"],
+//   },
+// });
+// module.exports = {
+//   Cloudinary, //what we've configure
+//   storage,
+// };
 //add components to 'app'
 app.component("nav-top", NavTop);
 app.component("welcome-card", WelcomeCard);

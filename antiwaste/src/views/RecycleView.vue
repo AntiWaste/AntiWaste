@@ -3,7 +3,9 @@
     <nav-top></nav-top>
     <body>
       <welcome-card></welcome-card>
-      <v-card-title class="text-lg-h5">Top categories </v-card-title>
+      <v-card-title class="text-lg-h5">
+        <h3>Top categories</h3>
+      </v-card-title>
       <categories-icon> </categories-icon>
       <div>
         <h3>Popular product that recycle from plastics</h3>
