@@ -11,8 +11,10 @@
         <h3>Popular product that recycle from plastics</h3>
         <product-recyle-card></product-recyle-card>
       </div>
-
       <carousel-card></carousel-card>
+      <div>
+        <h3>Recenty Viewed</h3>
+      </div>
     </body>
   </div>
 </template>
@@ -28,6 +30,10 @@ body{
 <style>
 body {
   margin-top: 30px;
+}
+h3 {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 </style>
   
