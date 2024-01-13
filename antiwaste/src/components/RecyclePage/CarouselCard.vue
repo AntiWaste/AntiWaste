@@ -70,7 +70,7 @@
 
 <script>
 export default {
-  name: "YourComponent",
+  name: 'YourComponent',
 };
 </script>
 
