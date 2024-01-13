@@ -9,7 +9,7 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a href="/trash" class="nav-link">Trash</a>
+              <a href="/event" class="nav-link">Trash</a>
             </li>
             <li class="nav-item">
               <a href="/recycle" class="nav-link">Recycle</a>
