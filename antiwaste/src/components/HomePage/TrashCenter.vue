@@ -71,8 +71,4 @@
     </v-item-group>
   </div>
 </template>
-<style scoped>
-.background {
-  background-color: rgb(249, 249, 249);
-}
-</style>
+

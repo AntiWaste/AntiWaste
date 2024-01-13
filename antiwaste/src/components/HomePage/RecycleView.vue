@@ -19,7 +19,7 @@
               >How to post recycling product and reach customer?</v-card-title
             >
             <v-card-text>
-              <p class="pt-5 text-center text-md-left">
+              <p class="pt-5 text-md-left">
                 Highlight the Eco-friendly and sustainable aspects of your
                 recycling products. Emphasize their role in reducing waste,
                 conserving resources, and promoting a circular economy. Use

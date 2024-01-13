@@ -1,9 +1,9 @@
 <template>
   <div id="nav" class="nav">
-    <nav class="navbar navbar-expand navbar-light fixed-top">
+    <nav class="navbar navbar-expand navbar-light">
       <div class="container">
         <a href="https://khalibre.com/" class="navbar-brand">AntiWaste</a>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse v-btn--fixed">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Home</a>
@@ -39,6 +39,7 @@ export default {
 </script>
 <style scoped>
 .nav-link:hover{
+  color: darkgreen;
   font-size: large;
   font-weight: 500;
 }
