@@ -21,7 +21,7 @@
               <a href="/contact" class="nav-link">Contact</a>
             </li>
             <li class="nav-item">
-              <a href="/register" class="nav-link">Sign up</a>
+              <a href="/login" class="nav-link">Sign up</a>
             </li>
           </ul>
         </div>
@@ -37,3 +37,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.nav-link:hover{
+  font-size: large;
+  font-weight: 500;
+}
+</style>

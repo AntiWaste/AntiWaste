@@ -1,19 +1,19 @@
 <template>
   <div color="primary">
     <v-row justify="center">
-      <!-- <v-col cols="12" md="3">
+      <v-col cols="12" md="3">
         <img src="path/to/logo.png" alt="Logo" class="footer-logo" />
       </v-col>
 
       <v-col cols="12" md="6" class="text-center">
         <v-row>
           <v-col v-for="link in footerLinks" :key="link.id" cols="12" md="4">
-            <v-btn text color="white" @click="this.$router.push(link.route)">{{
+            <v-text text color="white" @click="this.$router.push(link.route)">{{
               link.label
-            }}</v-btn>
+            }}</v-text>
           </v-col>
         </v-row>
-      </v-col> -->
+      </v-col>
 
       <v-col cols="12" md="3" class="text-right">
         <v-icon v-for="icon in socialIcons" :key="icon" class="mr-2">{{
