@@ -1,45 +1,67 @@
 <template>
-  <div id="nav" class="nav">
-    <nav class="navbar navbar-expand navbar-light fixed-top text-decoration-color-white">
-      <div class="container">
-        <a href="#" class="navbar-brand">AntiWaste</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="/trash" class="nav-link">Trash</a>
-            </li>
-            <li class="nav-item">
-              <a href="/recycle" class="nav-link">Recycle</a>
-            </li>
-            <li class="nav-item">
-              <a href="/event" class="nav-link">Event</a>
-            </li>
-            <li class="nav-item">
-              <a href="/contact" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a href="/login" class="nav-link">Sign up</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </div>
+<div class="nav d-flex justify-space-between pa-4">
+    <div class="justify-center text-black font-weight-bold "> Anti Waste</div>
+    <ul class="ul">
+        <li class="li">
+            <a class="a" href="/">Home</a>
+        </li>
+        <li class="li">
+            <a href="/trash" class="a">Trash</a>
+        </li>
+        <li class="li">
+            <a href="/recycle" class="a">Recycle</a>
+        </li>
+        <li class="li">
+            <a href="/event" class="a">Event</a>
+        </li>
+        <li class="li">
+            <a href="/contact" class="a">Contact</a>
+        </li>
+        <li class="li">
+            <a href="/login" class="a">Sign up</a>
+        </li>
+    </ul>
+</div>
 </template>
-  <script>
+
+  
+<script>
 export default {
-  name: "NavTop",
-  components: {
-    // NavTop,
-  },
+    name: "NavTop",
+    components: {
+        // NavTop,
+    },
 };
 </script>
+
 <style scoped>
-.nav-link:hover{
+nav {
+    position: sticky;
+    width: 100%;
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li a {
+    color: grey;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    color: lightgreen;
+}
+
+/* .nav-link:hover{
   font-size: large;
   font-weight: 500;
-}
+
+} */
 </style>

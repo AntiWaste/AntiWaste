@@ -18,8 +18,6 @@
 </v-container>
 </template>
 
-  
-  
 <script>
 export default {
     data() {
@@ -49,10 +47,8 @@ export default {
     },
 };
 </script>
-  
-  
-<style scoped>
 
+<style scoped>
 .headline {
     font-size: 24px;
     font-weight: bold;
