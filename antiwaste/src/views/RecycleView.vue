@@ -16,7 +16,7 @@
 </template>
   
   <script>
-export default { name: "recycleView" };
+export default { name: "RecycleView" };
 </script>
 <!-- <script>
 body{

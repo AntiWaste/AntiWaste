@@ -1,8 +1,8 @@
 <template>
   <div id="nav" class="nav">
-    <nav class="navbar navbar-expand navbar-light fixed-top">
+    <nav class="navbar navbar-expand navbar-light fixed-top text-decoration-color-white">
       <div class="container">
-        <a href="https://khalibre.com/" class="navbar-brand">AntiWaste</a>
+        <a href="#" class="navbar-brand">AntiWaste</a>
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">

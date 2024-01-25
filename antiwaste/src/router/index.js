@@ -1,8 +1,9 @@
-import CarouselCard from '@/components/HomePage/CarouselCard.vue';
+import CarouselCard from '@/components/Home/CarouselCard.vue';
+import TopBar from '@/components/HomePage/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
+import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/pages/LoginView.vue';
-
 const routes = [
   {
     path: '/login',
@@ -28,6 +29,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
+  {
+    path: '/trash',
+    name: 'Home',
+    component: TopBar,
+  },
+  {
+    path:'/event',
+    name: 'Event',
+    component: EventView,
+  }
 ];
 
 const router = createRouter({
