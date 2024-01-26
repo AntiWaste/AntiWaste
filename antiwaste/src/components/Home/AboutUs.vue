@@ -1,12 +1,22 @@
 <template>
 <div class="background">
     <v-container>
-        <div class="font-weight-bold text-h3 text-center py-10">
-            About Us
+        <div class="d-flex justify-space-between">
+            <div>
+                <v-img cover class="p-6" width="400" height="350" src="../../assets/event/Frame 35.png"></v-img>
+            </div>
+            <div class="d-flex flex-column justify-center ">
+                <div class="font-weight-bold text-h4 pb-4">
+                    About Us
+                </div>
+                <p>In the heart of Cambodia, a movement is stirring, one that seeks to transform the nation's relationship with waste. This movement is fueled by a collective determination to embrace zero-waste principles, embarking on a journey towards a more sustainable and environmentally conscious future.</p>
+                <v-btn class="bg-green text-white w-25">Learn More</v-btn>
+            </div>
+            
         </div>
 
-        <v-row>
-            <!-- Left Column: Introduction -->
+        <!-- <v-row>
+
             <v-col cols="12" md="4">
                 <v-card>
                     <v-card-title class="headline">Our Mission</v-card-title>
@@ -16,7 +26,6 @@
                 </v-card>
             </v-col>
 
-            <!-- Right Column: Team Information -->
             <v-col cols="12" md="4">
                 <v-card>
                     <v-card-title class="headline">Who We Are?</v-card-title>
@@ -35,23 +44,12 @@
                 </v-card>
             </v-col>
 
-        </v-row>
+        </v-row> -->
     </v-container>
 </div>
 </template>
 
-<style scoped>
-.headline {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 16px;
-    text-align: center;
-}
 
-/* Add more custom styles as needed */
-</style>
-
-  
 <script>
 export default {
     data() {
@@ -67,9 +65,6 @@ export default {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-  }
-  .background {
-    background-color: rgb(249, 249, 249);
   }
   /* Add more custom styles as needed */
   </style>

@@ -1,6 +1,7 @@
 <template>
-<v-container>
-    <div class="font-weight-bold text-h3 text-center py-10">
+<div class="background">
+    <v-container>
+    <div class="font-weight-bold text-h4 text-center py-10">
         Helping a local zero waste
         A Collaborative for a Sustainable Future
     </div>
@@ -15,7 +16,7 @@
             </v-col>
         </v-row>
     </v-flex>
-</v-container>
+</v-container></div>
 </template>
 
 <script>
@@ -75,6 +76,8 @@ export default {
     margin-top: 8px;
     color: #888;
 }
-
+.background {
+    background-color: rgb(249, 249, 249);
+}
 /* Add more custom styles as needed */
 </style>

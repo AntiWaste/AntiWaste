@@ -1,7 +1,7 @@
 <template>
-<div class="background">
+<!-- <div class="background"> -->
     <v-container>
-        <div class="font-weight-bold text-h3 text-center py-10">
+        <div class="font-weight-bold text-h4 text-center py-10">
             Frequently Asked Questions
         </div>
 
@@ -69,7 +69,7 @@
             </v-expand-transition>
         </v-card>
     </v-container>
-</div>
+<!-- </div> -->
 </template>
 
 <script>
@@ -90,7 +90,7 @@ export default {
 
 <style scoped>
 .headline {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
 }

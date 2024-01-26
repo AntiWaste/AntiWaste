@@ -1,4 +1,4 @@
-import CarouselCard from '@/components/Home/CarouselCard.vue';
+import HomePage from '@/components/Home/HomePage.vue';
 import TopBar from '@/components/HomePage/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
@@ -18,7 +18,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: CarouselCard,
+    component: HomePage,
   },
   {
     path: '/about',

@@ -1,14 +1,25 @@
 <template>
-<div class="background">
-    <v-container>
-        <v-row>
-            <!-- Left: Photo or Icons -->
+<!-- <div class="background"> -->
+<v-container>
+
+    <div class="d-flex justify-space-between align-center p-10">
+        <v-img cover width="350" height="400" src="../../assets/event/pana.png"></v-img>
+        <div class="d-flex flex-column justify-center pl-10 ">
+                <div class="font-weight-bold text-h4 pb-4">
+                    How to post recycling product and reach customer?
+                </div>
+                <p>Highlight the Eco-friendly and sustainable aspects of your recycling products. Emphasize their role in reducing waste, conserving resources, and promoting a circular economy. Use vivid language and captivating images to showcase the products' unique features and benefits.  Attract new customers and encourage repeat purchases by offering discounts, loyalty programs, and special promotions. Consider bundling products, offering free shipping, or providing incentives for referrals.</p>
+                <v-btn class="bg-green text-white w-25">Learn More</v-btn>
+            </div>
+    </div>
+
+    <!-- <v-row>
+
             <v-col>
-                <!-- Add your photo or icons here -->
+
                 <img src="https://www.wastesorted.wa.gov.au/assets/gfx/der138-wastesorted-website-768-x-5002.jpg" alt="Product Image" class="product-image" />
             </v-col>
 
-            <!-- Right: Text Content -->
             <v-col>
                 <div>
                     <v-card-title class="headline pt-10">How to post recycling product and reach customer?</v-card-title>
@@ -25,12 +36,11 @@
                     </v-card-actions>
                 </div>
             </v-col>
-        </v-row>
-    </v-container>
-</div>
+        </v-row> -->
+</v-container>
+<!-- </div> -->
 </template>
 
-  
 <script>
 export default {
     methods: {
@@ -41,13 +51,9 @@ export default {
 };
 </script>
 
-  
 <style scoped>
 .product-image {
     width: 100%;
 }
 
-.background {
-    background-color: rgb(249, 249, 249);
-}
 </style>
