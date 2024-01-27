@@ -16,7 +16,7 @@
             density="compact"
             placeholder="Username "
             variant="outlined"
-            v-model="username"
+            v-model="registerForm.name"
           ></v-text-field>
         </div>
         <div class="wrap-f">
@@ -29,7 +29,7 @@
             density="compact"
             placeholder="Email "
             variant="outlined"
-            v-model="email"
+            v-model="registerForm.email"
           ></v-text-field>
         </div>
         <div class="wrap-f">
@@ -42,10 +42,10 @@
             density="compact"
             placeholder="Password "
             variant="outlined"
-            v-model="password"
+            v-model="registerForm.password"
           ></v-text-field>
         </div>
-        <div class="_icon bg-green">Register</div>
+        <div class="_icon bg-green" @click="register">Register</div>
 
         <p class="signup">
           Already have an account?
@@ -78,10 +78,7 @@ export default {
   data() {
     return {
       img: Image,
-      loginForm: {
-        email: '',
-        password: '',
-      },
+
       registerForm: {
         name: '',
         email: '',
@@ -90,13 +87,14 @@ export default {
     };
   },
   methods: {
-    login() {
-      // Implement login logic
-      console.log('Logging in...', this.loginForm);
-    },
     register() {
-      // Implement register logic
-      console.log('Registering...', this.registerForm);
+      const payload = {
+        name: this.registerForm.name,
+        email: this.registerForm.email,
+        password: this.registerForm.password,
+      };
+
+      console.log('Register in...', payload);
     },
   },
 };

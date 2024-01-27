@@ -33,10 +33,11 @@
             v-model="LoginForm.password"
           ></v-text-field>
         </div>
-        <div class="_icon bg-green">Login</div>
+        <div class="_icon bg-green" @click="login">Login</div>
 
         <p class="signup">
-          don't you have account? <a href="#" @click="this.$router.push('form')">Sign Up</a>
+          don't you have account?
+          <a href="#" @click="this.$router.push('form')">Sign Up</a>
         </p>
         <div class="login-methods2 text-center">
           <div class="_icon">
@@ -74,12 +75,13 @@ export default {
   },
   methods: {
     login() {
+      const payload = {
+        email: this.LoginForm.email,
+        password: this.LoginForm.password,
+      };
+
       // Implement login logic
-      console.log('Logging in...', this.loginForm);
-    },
-    register() {
-      // Implement register logic
-      console.log('Registering...', this.registerForm);
+      console.log('Logging in...', payload);
     },
   },
 };
