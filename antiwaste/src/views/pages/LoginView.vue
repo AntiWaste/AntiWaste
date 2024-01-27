@@ -4,33 +4,14 @@
     <h2 v-else>Register</h2>
     <div :class="{ login_info_switch: isLogin, login_info: !isLogin }">
       <div class="login-img">
-        <img
-          v-if="isLogin"
-          src="https://images.unsplash.com/photo-1525695230005-efd074980869?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          width="350px"
-          height="510px"
-        />
-        <img
-          v-else
-          src="https://images.unsplash.com/photo-1525695230005-efd074980869?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          width="350px"
-          height="547px"
-        />
+        <img v-if="isLogin" :src="img" alt="" width="350px" height="510px" />
+        <img v-else :src="img" alt="" width="350px" height="547px" />
         <div v-if="!isLogin" class="login-methods text-center">
           <v-icon start icon="mdi-facebook" class="icon" color="blue"></v-icon>
           <v-icon start icon="mdi-google" class="icon" color="green"></v-icon>
           <v-icon start icon="mdi-twitter" class="icon" color="blue"></v-icon>
         </div>
 
-        <!-- <v-card-text
-          v-if="isLogin"
-          @click="isLogin = false"
-          class="switch-btn text-center"
-        >
-          Sign Up now <v-icon icon="mdi-chevron-right"></v-icon>
-        </v-card-text> -->
         <v-card-text @click="ToggleClick" class="switch-btn text-center">
           {{ State }}<v-icon icon="mdi-chevron-right"></v-icon>
         </v-card-text>
@@ -48,7 +29,6 @@
           density="compact"
           placeholder="Email "
           variant="outlined"
-          prepend-inner-icon="mdi-email-outline"
           v-model="email"
         ></v-text-field>
         <div
@@ -84,7 +64,6 @@
           :type="visible ? 'text' : 'password'"
           density="compact"
           placeholder="Enter your password"
-          prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
           v-model="password"
@@ -95,7 +74,6 @@
           :type="visible ? 'text' : 'password'"
           density="compact"
           placeholder="Enter your password"
-          prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
           v-model="password"
@@ -107,7 +85,6 @@
           :type="visible ? 'text' : 'password'"
           density="compact"
           placeholder="Enter your Confirm password"
-          prepend-inner-icon="mdi-lock-outline"
           variant="outlined"
           @click:append-inner="visible = !visible"
           v-model="confirm_password"
@@ -152,7 +129,6 @@
               src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
               width="20"
             />
-            <!-- <v-icon start icon="mdi-facebook" class="icon"> </v-icon> -->
             <span>Google</span>
           </div>
           <div class="_icon">
@@ -160,19 +136,13 @@
               src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
               width="20"
             />
-            <!-- <v-icon start icon="mdi-google" class="icon"></v-icon> -->
             <span>Facebook</span>
           </div>
-          <!-- <v-icon start icon="mdi-twitter" class="icon"></v-icon> -->
         </div>
 
         <v-card-text v-if="isLogin" class="text-center">
           Don't have an account?
         </v-card-text>
-        <!-- <v-card-text v-else @click="ToggleClick" class="switch-btn text-center">
-          {{ State }}<v-icon icon="mdi-chevron-right"></v-icon>
-        </v-card-text> -->
-        <!-- <div @click="ToggleClick">{{ State }}</div> -->
       </div>
     </div>
   </v-card>
@@ -181,10 +151,12 @@
 <script>
 //import service
 import { Service } from '@/Service/service';
+import image from '../../assets/recycle.jpg';
 
 export default {
   data() {
     return {
+      img: image,
       username: '',
       email: '',
       password: '',
@@ -198,15 +170,8 @@ export default {
       State: 'Register Now',
       isActive: false,
       role: '',
-      roleOptions: ['Admin', 'User', 'Service Provider'],
+      roleOptions: ['User', 'Service Provider'],
     };
-  },
-  mounted() {
-    if (localStorage.getItem('user')) {
-      this.$router.push('/');
-    } else {
-      this.$router.push('/login');
-    }
   },
 
   methods: {
@@ -233,6 +198,7 @@ export default {
           password: this.password,
         };
         await Service.Login(UserInp);
+        this.$router.push('/');
       }
     },
     async register(e) {
