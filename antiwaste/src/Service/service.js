@@ -21,7 +21,6 @@ export const Service = {
         )
         .then((res) => {
           localStorage.setItem('message', JSON.stringify(res.data.message));
-          window.location.reload();
         });
     } catch (e) {
       this.ErrorHandler(e);
@@ -40,10 +39,12 @@ export const Service = {
         )
         .then((res) => {
           localStorage.setItem('user', JSON.stringify(res.data));
-          window.location.reload();
         });
     } catch (e) {
       this.ErrorHandler(e);
     }
+  },
+  Logout() {
+    localStorage.removeItem('user');
   },
 };
