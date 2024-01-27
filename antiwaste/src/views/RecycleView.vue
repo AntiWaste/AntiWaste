@@ -1,5 +1,5 @@
 <template>
-  <div class="recycle">
+  <div class="recycle" v-if="isAuth">
     <nav-top></nav-top>
     <body>
       <welcome-card></welcome-card>
@@ -22,9 +22,23 @@
     </body>
   </div>
 </template>
-  
-  <script>
-export default { name: "recycleView" };
+
+<script>
+export default {
+  name: 'recycleView',
+  data() {
+    return {
+      isAuth: true,
+    };
+  },
+  mounted() {
+    if (localStorage.getItem('user')) {
+      this.isAuth = true;
+    } else {
+      this.isAuth = false;
+    }
+  },
+};
 </script>
 <style scoped>
 body {
@@ -35,4 +49,3 @@ h3 {
   margin-bottom: 20px;
 }
 </style>
-  
