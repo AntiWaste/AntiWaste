@@ -1,45 +1,32 @@
 <template>
-  <div class="register-form">
-    <h1>Register</h1>
-    <div class="register">
-      <div class="register-left">
-        <img
-          src="https://img.freepik.com/free-vector/people-recycling-together_23-2148520835.jpg?w=1060&t=st=1704798340~exp=1704798940~hmac=ba277727527a9ab253f49db3ccc3b6eb2795102bd40010253f9d2ed8b0b39eff"
-          alt=""
-          width="400"
-        />
+  <div class="form">
+    <img src="" alt="">
+    <form action="">
+      <h2>Register</h2>
+      <div class="inputBox">
+        <input type="text" name="" required="">
+        <label>Username</label>
       </div>
-      <form @submit.prevent="register" class="from" width="400">
-        <div class="register-left-text">
-          <h3>Welcome</h3>
-          <p>You are 30 seconds away from earning your own money!</p>
-          <button type="submit">Login</button>
-        </div>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" id="username" v-model="username" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Phone:</label>
-          <input type="password" id="password" v-model="phone" required />
-        </div>
-        <div class="form-group">
-          <label for="role">Role:</label>
-          <select id="role" v-model="role" required>
-            <option value="">Select Role</option>
-            <option value="normal-user">Normal User</option>
-            <option value="admin">Admin</option>
-            <option value="service-provider">Service Provider</option>
-          </select>
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+      <div class="inputBox">
+        <input type="email" name="" required="">
+        <label>Email</label>
+      </div>
+      <div class="inputBox">
+        <input type="password" name="" required="">
+        <label>Password</label>
+      </div>
+      <div class="inputBox">
+        <input type="password" name="" required="">
+        <label>Confirm Password</label>
+      </div>
+      <div class="inputBox">
+        <input type="submit" name="" value="Sign Up">
+      </div>
+      <p class="signup">Already have an account? <a href="#">Sign In</a></p>
+    </form>
+    
   </div>
+ 
 </template>
 
 <script>
