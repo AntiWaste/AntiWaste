@@ -21,9 +21,10 @@
               <a href="/contact" class="nav-link">Contact</a>
             </li>
             <li class="nav-item" v-if="isAuth">
-              <a href="/login" class="nav-link">Log Out</a>
+              <a href="/login" class="nav-link" @click="Logout">Log Out</a>
             </li>
-            <li class="nav-item" v-else>
+            <li class="nav-item d-flex align-center" v-else>
+              <a href="/login" class="nav-link">Register</a>
               <a href="/login" class="nav-link">Login</a>
             </li>
           </ul>
@@ -33,6 +34,7 @@
   </div>
 </template>
 <script>
+import Service from '../Service/service';
 export default {
   name: 'NavTop',
   components: {
@@ -43,12 +45,16 @@ export default {
       isAuth: false,
     };
   },
-
+  Logout() {
+    Service.logout();
+    this.isAuth = false;
+    this.$router.push('/login');
+  },
   mounted() {
     if (localStorage.getItem('user')) {
       this.isAuth = true;
     } else {
-      this.$router.push('/login');
+      this.isAuth = false;
     }
   },
 };
