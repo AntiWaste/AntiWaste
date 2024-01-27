@@ -5,7 +5,8 @@ import LoginView from '../views/pages/LoginView.vue';
 import RegisterView from '../views/pages/RegisterView.vue';
 import RecycleView from '../views/RecycleView.vue';
 import AboutView from '../views/AboutView.vue';
-
+import FormView from '../views/pages/FormView.vue';
+import SignInView from '../views/pages/SignInView.vue';
 
 const routes = [
   {
@@ -14,10 +15,19 @@ const routes = [
     component: LoginView,
   },
   {
+    path: '/form',
+    name: 'form',
+    component: FormView,
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: SignInView,
+  },
+  {
     path: '/register',
     name: 'register',
     component: RegisterView,
-
   },
   {
     path: '/contact',
