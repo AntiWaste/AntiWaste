@@ -22,23 +22,9 @@
     </body>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'recycleView',
-  data() {
-    return {
-      isAuth: true,
-    };
-  },
-  mounted() {
-    if (localStorage.getItem('user')) {
-      this.isAuth = true;
-    } else {
-      this.isAuth = false;
-    }
-  },
-};
+  
+  <script>
+export default { name: "RecycleView" };
 </script>
 <style scoped>
 body {

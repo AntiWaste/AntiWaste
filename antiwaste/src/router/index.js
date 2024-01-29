@@ -1,13 +1,9 @@
-import CarouselCard from '@/components/HomePage/CarouselCard.vue';
+import HomePage from '@/components/Home/HomePage.vue';
+import TopBar from '@/components/HomePage/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
+import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '../views/pages/LoginView.vue';
-import RegisterView from '../views/pages/RegisterView.vue';
-import RecycleView from '../views/RecycleView.vue';
-import AboutView from '../views/AboutView.vue';
-import FormView from '../views/pages/FormView.vue';
-import SignInView from '../views/pages/SignInView.vue';
-
 const routes = [
   {
     path: '/login',
@@ -37,7 +33,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: CarouselCard,
+    component: HomePage,
   },
   {
     path: '/about',
@@ -56,6 +52,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
   },
+  {
+    path: '/trash',
+    name: 'Home',
+    component: TopBar,
+  },
+  {
+    path:'/event',
+    name: 'Event',
+    component: EventView,
+  }
 ];
 
 const router = createRouter({
