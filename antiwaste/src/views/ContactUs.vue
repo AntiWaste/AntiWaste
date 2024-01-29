@@ -1,7 +1,7 @@
 <template>
 <NavTop />
 <v-container fluid>
-    <div class="h-screen">
+    <!-- <div class="h-screen"> -->
         <v-row justify="center" align="center" class="contact-us-background">
             <v-col cols="12" md="6" class="bg">
                 <h2 class="font-weight-bold display-3">Contact Us</h2>
@@ -33,6 +33,7 @@
       </v-col>
     </v-row>
     </v-container>
+    
   </template>
   
   <script>

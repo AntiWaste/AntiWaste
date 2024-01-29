@@ -3,7 +3,13 @@ import TopBar from '@/components/HomePage/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import RecycleView from '../views/RecycleView.vue';
+import FormView from '../views/pages/FormView.vue';
 import LoginView from '../views/pages/LoginView.vue';
+import RegisterView from '../views/pages/RegisterView.vue';
+import SignInView from '../views/pages/SignInView.vue';
+
+
 const routes = [
   {
     path: '/login',
@@ -35,23 +41,19 @@ const routes = [
     name: 'home',
     component: HomePage,
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView,
-  },
+ 
   {
     path: '/recycle',
     name: 'recycle',
     component: RecycleView,
     meta: { requiresAuth: true },
   },
-  {
-    path: '/event',
-    name: 'event',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
-  },
+  // {
+  //   path: '/event',
+  //   name: 'event',
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
+  // },
   {
     path: '/trash',
     name: 'Home',
