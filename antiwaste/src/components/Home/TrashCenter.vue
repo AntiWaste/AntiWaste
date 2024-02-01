@@ -10,40 +10,40 @@
     <v-row class="d-flex">
         <v-card class="mx-auto" max-width="350">
             <v-card-title>
-                <img height="100" src="https://scontent.fpnh7-1.fna.fbcdn.net/v/t1.6435-9/57597600_351988062113053_2613640942833369088_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=be3454&_nc_eui2=AeF8Kg-mnjt8OPymiBQ8SY0HGkhU1o_9azAaSFTWj_1rMG9B8IXWaqyuaqLqhOyAtjSe_eadkrp8yI4IPl69F1ef&_nc_ohc=uXkdHhXYezEAX8mxf-U&_nc_ht=scontent.fpnh7-1.fna&oh=00_AfA9wiO1uzGKA6XWpRDMXxLeqdbK8xcSKyQkSjz0OMYBLQ&oe=65C8CAE8" alt="Cintri Cambodia">
+                <v-img height="100" src="../../assets/logos/image 46.png" alt="Cintri Cambodia"></v-img>
                 <v-spacer></v-spacer>
-                <span class="text-h6">Cintri Cambodia</span>
+                <div class="text-h6 text-center pt-5">Cintri Cambodia</div>
             </v-card-title>
 
-            <v-card-text>
+            <p class="p-3">
                 Embark on a journey with our rubbish service, a poetic odyssey into the forgotten corners of disarray. Like a broken sonnet of, we redefine the art of waste disposal with each discarded verse.
-            </v-card-text>
+            </p>
 
             <v-divider class="mx-4"></v-divider>
         </v-card>
         <v-card class="mx-auto" max-width="350">
             <v-card-title>
-                <img height="100" src="https://scontent.fpnh7-1.fna.fbcdn.net/v/t39.30808-1/271864610_109809001590403_7648240093535510383_n.jpg?stp=dst-jpg_p320x320&_nc_cat=107&ccb=1-7&_nc_sid=596444&_nc_eui2=AeG_W-xj_wxtupovPDMB6zcdJRCB9ewiHcwlEIH17CIdzH67Y3SlI6dwt4z3wy0b9UYaz8tKQtBOWSp4z3o59hP5&_nc_ohc=ELhb12EiEUUAX9CiRVo&_nc_ht=scontent.fpnh7-1.fna&oh=00_AfBXQa0OZeJ8ykxdPQpeAwSAkyGx1yI2v8wd6SqjoyEC0w&oe=65A58C9D" alt="800Super-GAEA Cambodia">
+                <v-img height="100" src="../../assets/logos/image 47.png" alt="800Super-GAEA Cambodia"></v-img>
                 <v-spacer></v-spacer>
-                <span class="text-h6">800Super-GAEA Cambodia</span>
+                <div class="text-h6 text-center pt-5">800Super-GAEA Cambodia</div>
             </v-card-title>
 
-            <v-card-text>
+            <p class="p-3">
                 In the realm of waste, our service is a symphony of inefficiency, a ballet of chaos, where every discarded item becomes a forgotten note in the cacophony of rubbish mismanagement.
-            </v-card-text>
+            </p>
 
             <v-divider class="mx-4"></v-divider>
         </v-card>
         <v-card class="mx-auto" max-width="350">
             <v-card-title>
-                <img height="100" src="https://scontent.fpnh7-1.fna.fbcdn.net/v/t39.30808-6/307342487_413318567582945_6437962610889719954_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeGWDwJtvD6hmfreVUBBSF1yK93T3YSnewIr3dPdhKd7Ar2XuQUMqdIwyyfMk9_MhLkRAOoMi-siorNyvBcWpofw&_nc_ohc=o9JWhj2JHrMAX8oPY8y&_nc_ht=scontent.fpnh7-1.fna&oh=00_AfC6L9OMPA1LVgU6mB0ofeCS4lYfphmQkXA2J-8MxNkZvA&oe=65A73A6A" alt="Mizuda Cambodia">
+                <v-img height="100" src="../../assets/logos/image 45.png" alt="Mizuda Cambodia"></v-img>
                 <v-spacer></v-spacer>
-                <span class="text-h6">Mizuda Sanitation Cambodia</span>
+                <div class="text-h6 text-center pt-5">Mizuda Sanitation Cambodia</div>
             </v-card-title>
 
-            <v-card-text>
+            <p class="p-3">
                 Our rubbish service, a masterpiece of disorder, paints a surreal canvas of discarded dreams, where chaos is the brushstroke and disarray the palette, offering an avant-garde experience in waste mismanagement.
-            </v-card-text>
+            </p>
 
             <v-divider class="mx-4"></v-divider>
         </v-card>
