@@ -1,25 +1,26 @@
 <template>
-<v-container>
-    <div class="font-weight-bold text-h4 text-center py-10">
-        Helping a local zero waste
-        A Collaborative for a Sustainable Future
-    </div>
-    <v-flex>
-        <v-row>
-            <v-col v-for="statistic in statistics" :key="statistic.label" cols="12" md="3">
-                <div class="statistic">
-                    <v-icon class="value-icon">{{ statistic.icon }}</v-icon>
-                    <div class="value">{{ statistic.value }}</div>
-                    <div class="label">{{ statistic.label }}</div>
-                </div>
-            </v-col>
-        </v-row>
-    </v-flex>
-</v-container>
+<div class="background">
+    <v-container>
+        <div class="font-weight-bold text-h4 text-center py-10">
+            Helping a local zero waste
+            A Collaborative for a Sustainable Future
+        </div>
+        <v-flex>
+            <v-row>
+                <v-col v-for="statistic in statistics" :key="statistic.label" cols="12" md="3">
+                    <div class="statistic">
+                        <v-icon class="value-icon">{{ statistic.icon }}</v-icon>
+                        <div class="value">{{ statistic.value }}</div>
+                        <div class="label">{{ statistic.label }}</div>
+                    </div>
+                </v-col>
+            </v-row>
+        </v-flex>
+    </v-container>
+</div>
 </template>
 
-  
-  
+    
 <script>
 export default {
     data() {
@@ -49,10 +50,9 @@ export default {
     },
 };
 </script>
-  
-  
-<style scoped>
 
+    
+<style scoped>
 .headline {
     font-size: 24px;
     font-weight: bold;
@@ -78,6 +78,10 @@ export default {
 .label {
     margin-top: 8px;
     color: #888;
+}
+
+.background {
+    background-color: rgb(249, 249, 249);
 }
 
 /* Add more custom styles as needed */
