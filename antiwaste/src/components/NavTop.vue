@@ -6,7 +6,7 @@
               <a class="a" href="/">Home</a>
           </li>
           <li class="li">
-              <a href="/trash" class="a">Trash</a>
+              <a href="/waste" class="a">Waste</a>
           </li>
           <li class="li">
               <a href="/recycle" class="a">Recycle</a>

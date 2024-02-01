@@ -1,6 +1,6 @@
 <template>
 <v-container>
-    <div class="font-weight-bold text-h3 text-center py-10">
+    <div class="font-weight-bold text-h4 text-center py-10">
         Helping a local zero waste
         A Collaborative for a Sustainable Future
     </div>

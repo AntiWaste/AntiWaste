@@ -20,6 +20,7 @@
 <RecycleView />
 <FounderWeb/>
 <FaqQues />
+<FooterView/>
 </template>
 
 <style scoped>
@@ -41,6 +42,7 @@
 </style>
 
 <script>
+import FooterView from '@/components/FooterView.vue';
 import AboutUs from '@/components/Home/AboutUs.vue';
 import TrashCenter from '../Home/TrashCenter.vue';
 import TrustUser from '../Home/TrustUser.vue';
@@ -57,6 +59,7 @@ export default {
         TrustUser,
         RecycleView,
         FounderWeb,
+        FooterView,
     },
     data() {
         return {
