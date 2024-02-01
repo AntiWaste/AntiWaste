@@ -55,7 +55,7 @@ const routes = [
   //     import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
   // },
   {
-    path: '/trash',
+    path: '/waste',
     name: 'Home',
     component: TopBar,
   },
