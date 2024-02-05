@@ -1,5 +1,5 @@
 import HomePage from '@/components/Home/HomePage.vue';
-import TopBar from '@/components/HomePage/TopBar.vue';
+import TopBar from '@/components/Waste/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -30,8 +30,8 @@ const routes = [
       import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
   },
   {
-    path: '/trash',
-    name: 'Home',
+    path: '/Waste',
+    name: 'Waste',
     component: TopBar,
   },
   {
