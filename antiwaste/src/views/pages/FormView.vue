@@ -29,6 +29,7 @@
             density="compact"
             placeholder="Email "
             variant="outlined"
+            type="email"
             v-model="email"
           ></v-text-field>
         </div>
@@ -42,14 +43,25 @@
             density="compact"
             placeholder="Password "
             variant="outlined"
+            type="password"
             v-model="password"
           ></v-text-field>
         </div>
-        <div class="_icon bg-green">Register</div>
-
+        <v-select
+          class="wrap-f"
+          dense
+          outlined
+          label="Role"
+          v-model="role"
+          :items="roleOptions"
+        ></v-select>
+        <v-text v-if="validated" class="error-validation-message">
+          {{ messageError }}
+        </v-text>
+        <div class="_icon bg-green" @click="register">Register</div>
         <p class="signup">
           Already have an account?
-          <a href="#" @click="this.$router.push('signin')">Sign In</a>
+          <a @click="this.$router.push('signin')">Sign In</a>
         </p>
         <div class="login-methods2 text-center">
           <div class="_icon">
@@ -78,25 +90,37 @@ export default {
   data() {
     return {
       img: Image,
-      loginForm: {
-        email: '',
-        password: '',
-      },
-      registerForm: {
-        name: '',
-        email: '',
-        password: '',
-      },
+      roleOptions: ['User', 'Service Provider'],
+      username: '',
+      email: '',
+      password: '',
+      role: '',
+
+      validated: false,
+      messageError: '',
     };
   },
   methods: {
-    login() {
-      // Implement login logic
-      console.log('Logging in...', this.loginForm);
-    },
     register() {
-      // Implement register logic
-      console.log('Registering...', this.registerForm);
+      if (
+        this.username == '' ||
+        (null && this.email == '') ||
+        (null && this.password == '') ||
+        (null && this.role == '') ||
+        null
+      ) {
+        this.validated = true;
+        this.messageError = 'Please fill all the fields';
+      } else {
+        this.validated = false;
+        this.messageError = '';
+        this.$store.dispatch('register', {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          role: this.role,
+        });
+      }
     },
   },
 };
@@ -123,5 +147,13 @@ export default {
 }
 .wrap-f {
   width: 300px;
+}
+.error-validation-message {
+  color: red;
+}
+@media screen and (max-width: 720px) {
+  .img {
+    display: none;
+  }
 }
 </style>
