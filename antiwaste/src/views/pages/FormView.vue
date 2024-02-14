@@ -16,7 +16,7 @@
             density="compact"
             placeholder="Username "
             variant="outlined"
-            v-model="registerForm.name"
+            v-model="username"
           ></v-text-field>
         </div>
         <div class="wrap-f">
