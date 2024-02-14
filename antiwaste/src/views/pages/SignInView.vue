@@ -75,13 +75,8 @@ export default {
   },
   methods: {
     login() {
-      const payload = {
-        email: this.LoginForm.email,
-        password: this.LoginForm.password,
-      };
-
-      // Implement login logic
-      console.log('Logging in...', payload);
+      
+      console.log('Logging in...', this.loginForm);
     },
   },
 };
