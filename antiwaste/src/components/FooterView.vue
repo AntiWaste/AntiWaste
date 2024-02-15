@@ -1,61 +1,63 @@
 <template>
-  <div color="primary">
-    <v-row justify="center">
-      <v-col cols="12" md="3">
-        <a href="#" class="navbar-brand">AntiWaste</a>
-      </v-col>
+  <div class="custom-app">
+    <v-app>
+      <v-footer class="bg-indigo-lighten-1 text-center d-flex flex-column">
+        <div>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4"
+            :icon="icon"
+            variant="text"
+          ></v-btn>
+        </div>
 
-      <v-col cols="12" md="6" class="text-center">
-        <v-row>
-          <v-col class="py-10" v-for="link in footerLinks" :key="link.id" cols="12" md="4">
-            <v-text text color="white" @click="this.$router.push(link.route)">{{
-              link.label
-            }}</v-text>
+        <div class="pt-0">
+          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
+          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
+          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
+          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
+          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
+          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
+          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
+          parturient montes, nascetur ridiculus mus.
+        </div>
+        <v-row justify="center" no-gutters>
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            color="white"
+            variant="text"
+            class="mx-2"
+            rounded="xl"
+          >
+            {{ link }}
+          </v-btn>
+          <v-col class="text-center mt-4" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
           </v-col>
         </v-row>
-      </v-col>
-
-      <v-col cols="12" md="3" class="text-right">
-        <v-icon v-for="icon in socialIcons" :key="icon" class="mr-2">{{
-          icon
-        }}</v-icon>
-      </v-col>
-    </v-row>
-
-    <v-row justify="center">
-      <v-col cols="12" class="text-center white--text">
-        &copy; 2024 Your Company. All rights reserved.
-      </v-col>
-    </v-row>
+      </v-footer>
+    </v-app>
   </div>
 </template>
-
 <script>
 export default {
-  data() {
-    return {
-      footerLinks: [
-        { id: 1, label: 'Home', route: '/' },
-        { id: 2, label: 'Event', route: '/product' },
-        { id: 3, label: 'Trash', route: '/contact' },
-        { id: 4, label: 'Recycle', route: '/product' },
-        { id: 5, label: 'FAQs', route: '/contact' },
-        { id: 6, label: 'Contact', route: '/product' },
-      ],
-      socialIcons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin'],
-    };
-  },
-  // methods: {
-  //   navigate() {
-  //     // Add logic to navigate to the specified URL
-  //   },
-  // },
+  data: () => ({
+    icons: [
+      "fab fa-facebook",
+      "fab fa-twitter",
+      "fab fa-linkedin",
+      "fab fa-instagram",
+    ],
+    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
+  }),
 };
 </script>
-
 <style scoped>
-/* Add your custom styles here */
-.footer-logo {
-  width: 100px; /* Adjust the size as needed */
+.custom-app {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

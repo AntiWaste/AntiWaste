@@ -1,5 +1,5 @@
 <template>
-  <div class="recycle" v-if="isAuth">
+  <div class="recycle" >
     <nav-top></nav-top>
     <body>
       <welcome-card></welcome-card>

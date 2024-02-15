@@ -17,7 +17,7 @@
             density="compact"
             placeholder="Email "
             variant="outlined"
-            v-model="LoginForm.email"
+            v-model="email"
           ></v-text-field>
         </div>
         <div class="wrap-f">
@@ -30,10 +30,13 @@
             density="compact"
             placeholder="Password "
             variant="outlined"
-            v-model="LoginForm.password"
+            v-model="password"
           ></v-text-field>
         </div>
-        <div class="_icon bg-green" @click="login">Login</div>
+        <v-text v-if="validated" class="error-validation-message">
+          {{ messageError }}
+        </v-text>
+        <button class="_icon bg-green" @click="login">Login</button>
 
         <p class="signup">
           don't you have account?
@@ -61,24 +64,53 @@
 </template>
 
 <script>
+// import { Service } from '@/Service/service';
 import Image from '../../assets/recycle.jpg';
+import axios from 'axios'
 export default {
   data() {
     return {
       img: Image,
-
-      LoginForm: {
-        email: '',
-        password: '',
-      },
+      email: '',
+      password: '',
+      validated: false,
+      messageError: '',
+      user:null
     };
   },
   methods: {
-    login() {
+    async login() {
+
+      if (
+        this.email == '' ||
+        this.password == ''
+      ) {
+        this.validated = true;
+        this.messageError = 'Please fill all the fields';
+      } else {
+        const data = {
+        email: this.email,
+        password: this.password
+      };
+      await axios.post('login', data).then((res)=>{
+        this.validated = false;
+        this.messageError = ''
+        this.user = res.data
+        localStorage.setItem('token', res.data.token)
+        this.$router.push('/')
       
-      console.log('Logging in...', this.loginForm);
+      }).catch((err)=>{
+        this.validated = true;
+        this.messageError = err.response.data.message
+        console.log(this.messageError)
+        console.log(err)
+      })
+      
+      
+      }
     },
   },
+  
 };
 </script>
 

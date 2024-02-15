@@ -4,32 +4,20 @@ import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import RecycleView from '../views/RecycleView.vue';
-import FormView from '../views/pages/FormView.vue';
-import LoginView from '../views/pages/LoginView.vue';
-import RegisterView from '../views/pages/RegisterView.vue';
+import SignupView from '../views/pages/SignupView.vue';
 import SignInView from '../views/pages/SignInView.vue';
 
 
 const routes = [
   {
-    path: '/login',
-    name: 'login',
-    component: LoginView,
-  },
-  {
-    path: '/form',
+    path: '/register',
     name: 'form',
-    component: FormView,
+    component: SignupView,
   },
   {
     path: '/signin',
     name: 'signin',
     component: SignInView,
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterView,
   },
   {
     path: '/contact',
@@ -46,7 +34,6 @@ const routes = [
     path: '/recycle',
     name: 'recycle',
     component: RecycleView,
-    meta: { requiresAuth: true },
   },
   // {
   //   path: '/event',

@@ -1,9 +1,13 @@
-import { createApp } from "vue";
 import App from "./App.vue";
+import { createApp} from "vue";
+import "vuetify/dist/vuetify.min.css";
 import router from "./router";
 import { createVuetify } from "vuetify";
-import "@fortawesome/fontawesome-free/css/all.css"; // Ensure your project is capable of handling css files
+import "@fortawesome/fontawesome-free/css/all.css"; 
 import { aliases, fa } from "vuetify/iconsets/fa";
+import './axios'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
 // import { Cloudinary } from "cloudinary-vue";
 
 // import "vuetify/styles";

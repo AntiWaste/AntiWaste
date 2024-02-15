@@ -1,6 +1,6 @@
 <template>
   <div class="nav d-flex justify-space-between pa-4">
-      <div class="justify-center text-black font-weight-bold "> Anti Waste</div>
+      <div  class="justify-center text-black font-weight-bold "> Anti Waste </div>
       <ul class="ul">
           <li class="li">
               <a class="a" href="/">Home</a>
@@ -17,9 +17,13 @@
           <li class="li">
               <a href="/contact" class="a">Contact</a>
           </li>
-          <li class="li">
-              <a href="/login" class="a">Sign up</a>
+          <li class="li" v-if="user" >
+              <a href ='/' @click="handleLogout" class="a">Logout</a>
           </li>
+          <li class="li" v-if="!user" >
+              <a href ="/signin" class="a">Sign In</a>
+          </li>
+        
       </ul>
   </div>
   </template>
@@ -31,6 +35,14 @@
       components: {
           // NavTop,
       },
+      props:['user'],
+
+      methods: {
+          handleLogout() {
+                localStorage.removeItem('token')
+                this.$router.push('/')
+          }
+      }
   };
   </script>
   

@@ -85,6 +85,8 @@
 </template>
 
 <script>
+// import { Service } from '@/Service/service';
+import axios from 'axios'
 import Image from '../../assets/recycle.jpg';
 export default {
   data() {
@@ -95,31 +97,37 @@ export default {
       email: '',
       password: '',
       role: '',
-
       validated: false,
       messageError: '',
     };
   },
   methods: {
-    register() {
+    async register() {
       if (
         this.username == '' ||
-        (null && this.email == '') ||
-        (null && this.password == '') ||
-        (null && this.role == '') ||
-        null
+        this.email == '' ||
+        this.password == '' ||
+        this.role == ''
       ) {
         this.validated = true;
         this.messageError = 'Please fill all the fields';
       } else {
-        this.validated = false;
-        this.messageError = '';
-        this.$store.dispatch('register', {
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          role: this.role,
-        });
+        const data = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        role: this.role
+      };
+      await axios.post('register',data).then((res)=>{
+        this.$router.push('signin')
+        console.log(res.data)
+      }).catch((err)=>{
+        this.validated = true;
+        this.messageError = err.response.data.message
+        console.log(this.messageError)
+        console.log(err)
+      })
+      
       }
     },
   },

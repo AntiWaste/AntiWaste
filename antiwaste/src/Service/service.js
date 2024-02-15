@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Service = {
   ErrorHandler(err) {
-    console.log(err);
+    return err
   },
 
   async SignUp(newUser) {
@@ -14,7 +14,6 @@ export const Service = {
             username: newUser.username,
             email: newUser.email,
             password: newUser.password,
-            phone: newUser.phone,
             role: newUser.role,
           },
           { headers: { 'Content-Type': 'application/json' } }
@@ -32,13 +31,14 @@ export const Service = {
         .post(
           'http://localhost:5000/api/auth/login',
           {
-            username: newUser.username,
+            email: newUser.email,
             password: newUser.password,
           },
           { headers: { 'Content-Type': 'application/json' } }
         )
         .then((res) => {
           localStorage.setItem('user', JSON.stringify(res.data));
+          
         });
     } catch (e) {
       this.ErrorHandler(e);
