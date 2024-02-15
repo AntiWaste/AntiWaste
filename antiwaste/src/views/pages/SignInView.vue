@@ -89,7 +89,7 @@ export default {
           password: this.password,
         };
         await axios
-          .post("login", data)
+          .post("http://localhost:5000/api/auth/login", data)
           .then((res) => {
             this.validated = false;
             this.messageError = "";

@@ -9,45 +9,38 @@ const { check, validationResult } = require('express-validator');
 //@route   POST /api/auth/register
 //@access  Public
 const JWT_SECRET = 'sncacnoqwdwqibqwkq';
-router.post(
-  '/register',
-  [
-    check('username', 'Please enter a valid username').not().isEmpty(),
-    check('email', 'Please enter a valid email').isEmail(),
-    check('password', 'Please enter a valid password').isLength({ min: 6 }),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-        message: 'Incorrect registration data',
-      });
-    }
-    const { username, email, password, role } = req.body;
+router.post('/register',[
+    check('username', 'Username must be at least 3 characters').isLength({ min: 3 }),
+    check('email', 'Incorrect email').isEmail(),
+    check('password', 'Password must be at least 6 characters').isLength({ min: 6 }),
+  
+],async (req, res) => {
     try {
-      console.log(username, password,role);
-      const candidate = await User.findOne({ username });
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ message: 'Invalid registration data' });
+      }
+      const {username, email, password,role } = req.body;
+      const candidate = await User.findOne( { username });
       if (candidate) {
         return res.status(400).json({ message: 'This user already exists' });
       }
-      const hashedPassword = await bcrypt.hash(password, 12);
-      const saveUser = new User({
+      const hashPassword = await bcrypt.hash(password, 8);
+      const user = new User({
         username,
         email,
-        password: hashedPassword,
-        role,
+        password: hashPassword,
+        role
       });
-      await saveUser.save();
-      const token = await jwt.sign({ saveUser }, JWT_SECRET, {
-        expiresIn: '1h',
-      });
-      res.status(201).json({ token, user: saveUser, message: 'User created' });
+      await user.save();
+      res.status(201).json({ message: 'User created' });
     } catch (e) {
-      console.log(e);
+      console.log(e)
       res.status(500).json({ message: 'Something went wrong, try again' });
     }
   }
+  
+  
 );
 //@desc    Login a user
 //@route   POST /api/auth/login

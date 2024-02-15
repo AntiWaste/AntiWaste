@@ -11,7 +11,7 @@ import SignInView from '../views/pages/SignInView.vue';
 const routes = [
   {
     path: '/register',
-    name: 'form',
+    name: 'register',
     component: SignupView,
   },
   {
