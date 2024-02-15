@@ -40,7 +40,7 @@
 
         <p class="signup">
           don't you have account?
-          <a href="#" @click="this.$router.push('form')">Sign Up</a>
+          <a href="#" @click="this.$router.push('register')">Sign Up</a>
         </p>
         <div class="login-methods2 text-center">
           <div class="_icon">
@@ -65,52 +65,47 @@
 
 <script>
 // import { Service } from '@/Service/service';
-import Image from '../../assets/recycle.jpg';
-import axios from 'axios'
+import Image from "../../assets/recycle.jpg";
+import axios from "axios";
 export default {
   data() {
     return {
       img: Image,
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       validated: false,
-      messageError: '',
-      user:null
+      messageError: "",
+      user: null,
     };
   },
   methods: {
     async login() {
-
-      if (
-        this.email == '' ||
-        this.password == ''
-      ) {
+      if (this.email == "" || this.password == "") {
         this.validated = true;
-        this.messageError = 'Please fill all the fields';
+        this.messageError = "Please fill all the fields";
       } else {
         const data = {
-        email: this.email,
-        password: this.password
-      };
-      await axios.post('login', data).then((res)=>{
-        this.validated = false;
-        this.messageError = ''
-        this.user = res.data
-        localStorage.setItem('token', res.data.token)
-        this.$router.push('/')
-      
-      }).catch((err)=>{
-        this.validated = true;
-        this.messageError = err.response.data.message
-        console.log(this.messageError)
-        console.log(err)
-      })
-      
-      
+          email: this.email,
+          password: this.password,
+        };
+        await axios
+          .post("login", data)
+          .then((res) => {
+            this.validated = false;
+            this.messageError = "";
+            this.user = res.data;
+            localStorage.setItem("token", res.data.token);
+            this.$router.push("/");
+          })
+          .catch((err) => {
+            this.validated = true;
+            this.messageError = err.response.data.message;
+            console.log(this.messageError);
+            console.log(err);
+          });
       }
     },
   },
-  
 };
 </script>
 
