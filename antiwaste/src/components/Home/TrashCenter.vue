@@ -16,7 +16,7 @@
                 height="100"
                 src="../../assets/logos/image 46.png"
                 alt="Cintri Cambodia"
-              ></v-img>
+              />
               <v-spacer></v-spacer>
               <div class="text-h6 text-center pt-5">Cintri Cambodia</div>
             </v-card-title>
