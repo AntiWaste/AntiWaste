@@ -1,6 +1,6 @@
 <template>
   <v-row align="center" justify="center">
-    <v-col cols="auto" max-width="344">
+    <v-col cols="auto" class="custom-card">
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
@@ -53,7 +53,7 @@
         </v-btn>
       </v-card-actions>
     </v-col>
-    <v-col cols="auto">
+    <v-col cols="auto" class="custom-card">
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
@@ -66,11 +66,11 @@
       <v-img
         cover
         height="250"
-        src="../../assets/recycledproduct/image 33.png"
+        src="../../assets/recycledproduct/image 34.png"
       ></v-img>
 
       <v-card-item>
-        <v-card-title>Toothbrush Holder</v-card-title>
+        <v-card-title>Pen holder</v-card-title>
 
         <v-card-subtitle>
           <span class="me-1">Hannah's Store</span>
@@ -106,7 +106,7 @@
         </v-btn>
       </v-card-actions>
     </v-col>
-    <v-col cols="auto">
+    <v-col cols="auto" class="custom-card">
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
@@ -119,11 +119,11 @@
       <v-img
         cover
         height="250"
-        src="../../assets/recycledproduct/image 33.png"
+        src="../../assets/recycledproduct/image 36.png"
       ></v-img>
 
       <v-card-item>
-        <v-card-title>Toothbrush Holder</v-card-title>
+        <v-card-title>Flower Plots</v-card-title>
 
         <v-card-subtitle>
           <span class="me-1">Hannah's Store</span>
@@ -171,9 +171,16 @@ export default {
   methods: {
     reserve() {
       this.loading = true;
-
       setTimeout(() => (this.loading = false), 2000);
     },
   },
+  
 };
 </script>
+<style scoped>
+.custom-card {
+  /* max-width: 1000px; */
+  width: 425px;
+  /* height: 117px; Adjust the height to maintain the aspect ratio */
+}
+</style>

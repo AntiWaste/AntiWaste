@@ -30,6 +30,16 @@ export default {
           class: "mr-2",
           description: "Glass",
         },
+        {
+          icon: "fa:fas fa-lightbulb",
+          class: "mr-2",
+          description: "E-Waste",
+        },
+        {
+          icon: "fa:fas fa-leaf",
+          class: "mr-2",
+          description: "Organic",
+        },
 
         // Add more icons with descriptions as needed
       ],
@@ -41,6 +51,12 @@ export default {
   <style scoped>
 .icon-container {
   text-align: center;
+  width: 145px; /* Adjusted width to fit 725px within 5 items with equal spacing */
+  height: 75.14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .description {

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-card class="mx-auto" max-width="1247.62" max-height="437.28">
+    <v-card class="mx-auto" max-height="437.28">
       <v-img
         class="align-end text-white"
         height="437.28"

@@ -3,12 +3,21 @@ import TopBar from '@/components/Waste/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import LoginView from '../views/pages/LoginView.vue';
+import RecycleView from '../views/RecycleView.vue';
+import SignupView from '../views/pages/SignupView.vue';
+import SignInView from '../views/pages/SignInView.vue';
+
+
 const routes = [
   {
-    path: '/login',
-    name: 'login',
-    component: LoginView,
+    path: '/register',
+    name: 'register',
+    component: SignupView,
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: SignInView,
   },
   {
     path: '/contact',
@@ -20,18 +29,21 @@ const routes = [
     name: 'home',
     component: HomePage,
   },
+ 
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/recycle',
+    name: 'recycle',
+    component: RecycleView,
   },
+  // {
+  //   path: '/event',
+  //   name: 'event',
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
+  // },
   {
-    path: '/Waste',
-    name: 'Waste',
+    path: '/waste',
+    name: 'Home',
     component: TopBar,
   },
   {
@@ -45,5 +57,22 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!isAuthenticated()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
+function isAuthenticated() {
+  return localStorage.getItem('user');
+}
 
 export default router;

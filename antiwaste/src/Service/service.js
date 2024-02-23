@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 export const Service = {
+  ErrorHandler(err) {
+    return err
+  },
+
   async SignUp(newUser) {
     try {
       await axios
@@ -10,16 +14,15 @@ export const Service = {
             username: newUser.username,
             email: newUser.email,
             password: newUser.password,
-            phone: newUser.phone,
             role: newUser.role,
           },
           { headers: { 'Content-Type': 'application/json' } }
         )
         .then((res) => {
-          console.log(res.data);
+          localStorage.setItem('message', JSON.stringify(res.data.message));
         });
     } catch (e) {
-      console.log(e);
+      this.ErrorHandler(e);
     }
   },
   async Login(newUser) {
@@ -28,16 +31,20 @@ export const Service = {
         .post(
           'http://localhost:5000/api/auth/login',
           {
-            username: newUser.username,
+            email: newUser.email,
             password: newUser.password,
           },
           { headers: { 'Content-Type': 'application/json' } }
         )
         .then((res) => {
-          console.log(res.data);
+          localStorage.setItem('user', JSON.stringify(res.data));
+          
         });
     } catch (e) {
-      console.log(e);
+      this.ErrorHandler(e);
     }
+  },
+  Logout() {
+    localStorage.removeItem('user');
   },
 };
