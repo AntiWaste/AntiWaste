@@ -13,12 +13,13 @@
     <b-carousel-slide>
         <!-- v-for="(logo, index) in logos" :key="index" -->
         <div class="d-flex">
+            <v-img src="../../assets/event/image 39 (2).png" alt="Logo" class="logo-image"></v-img>
+            <v-img src="../../assets/event/image 40 (2).png" alt="Logo" class="logo-image"></v-img>
             <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
-            <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
-            <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
-            <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
-            <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
-            <v-img src="../../assets/logos/image 38 (1).png" alt="Logo" class="logo-image"></v-img>
+            <v-img src="../../assets/event/image 41 (2).png" alt="Logo" class="logo-image"></v-img>
+            <v-img src="../../assets/event/image 42 (2).png" alt="Logo" class="logo-image"></v-img>
+            <v-img src="../../assets/event/image 43 (2).png" alt="Logo" class="logo-image"></v-img>
+            <!-- <v-img src="../../assets/event/image 44 (1).png" alt="Logo" class="logo-image"></v-img> -->
         </div>
     </b-carousel-slide>
 </div>

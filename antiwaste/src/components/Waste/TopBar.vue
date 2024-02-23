@@ -13,6 +13,7 @@
 </v-carousel>
 <TopCate />
 <DeTail />
+<WastePost />
 </template>
 
 <style scoped>
@@ -25,13 +26,15 @@
 </style>
 <script>
 import NavTop from '../NavTop.vue';
-import TopCate from './TopCate.vue';
 import DeTail from './DeTail.vue';
+import TopCate from './TopCate.vue';
+import WastePost from './WastePost.vue';
 export default {
     components: {
         NavTop,
         TopCate,
         DeTail,
+        WastePost,
     },
     data() {
         return {
@@ -40,16 +43,13 @@ export default {
                 src: require('../../assets/event/image 2.png')
                 },
                 {
-                src:require('../../assets/event/image 2.png')
+                src:require('../../assets/event/waste.png')
                 },
                 {
-                src:require('../../assets/event/image 2.png')
+                src:require('../../assets/event/WasteManagement.jpg')
                 },
                 {
-                src:require('../../assets/event/image 2.png')
-                },
-                {
-                src:require('../../assets/event/image 2.png')
+                src:require('../../assets/event/waste.jpg')
                 },
             ],
 
