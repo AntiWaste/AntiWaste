@@ -1,19 +1,38 @@
 <template>
+  <NavTop :user="user" />
   <div id="app">
-    <router-view />
-
+    <router-view :user="user" />
   </div>
-  <FooterView/>
 </template>
 <script>
-import FooterView from "./components/FooterView.vue";
+import NavTop from "./components/NavTop.vue";
+import axios from "axios";
 export default {
   name: "App",
   components: {
-    FooterView
-  }
- 
+    NavTop,
+  },
+  data() {
+    return {
+      user: null,
+    };
+  },
+  async created() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      await axios
+        .get("user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          this.user = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  },
 };
-
-
 </script>

@@ -29,18 +29,11 @@ const routes = [
     name: 'home',
     component: HomePage,
   },
- 
   {
     path: '/recycle',
     name: 'recycle',
     component: RecycleView,
   },
-  // {
-  //   path: '/event',
-  //   name: 'event',
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ '../views/404Page.vue'),
-  // },
   {
     path: '/waste',
     name: 'Home',
