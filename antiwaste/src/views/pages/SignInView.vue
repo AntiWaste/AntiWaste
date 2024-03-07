@@ -39,7 +39,7 @@
         <button class="_icon bg-green" @click="login">Login</button>
 
         <p class="signup">
-          don't you have account?
+          Don't you have account?
           <a href="#" @click="this.$router.push('register')">Sign Up</a>
         </p>
         <div class="login-methods2 text-center">

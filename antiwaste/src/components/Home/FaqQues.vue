@@ -11,9 +11,12 @@
       class="mb-2"
       @click="toggleAnswer(index)"
     >
-      <v-card-title>
+      <v-card-title class="card-title">
         <v-icon class="mr-2">{{ question.icon }}</v-icon>
         {{ question.questionText }}
+        <span>
+          <i class="fa-solid fa-caret-down ml-auto mr-3"></i>
+        </span>
       </v-card-title>
       <v-expand-transition>
         <v-card-text v-show="activeQuestion === index">
@@ -85,4 +88,11 @@ export default {
 }
 
 /* Add more custom styles as needed */
+.card-title {
+  position: relative;
+}
+.card-title span {
+  position: absolute;
+  right: 0;
+}
 </style>
