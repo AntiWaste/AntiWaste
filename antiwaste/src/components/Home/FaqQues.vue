@@ -14,6 +14,7 @@
       <v-card-title>
         <v-icon class="mr-2">{{ question.icon }}</v-icon>
         {{ question.questionText }}
+        <i class="fa-solid fa-caret-down ml-auto mr-3"></i>
       </v-card-title>
       <v-expand-transition>
         <v-card-text v-show="activeQuestion === index">
