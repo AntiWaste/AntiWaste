@@ -1,6 +1,5 @@
 <template>
-  <div class="recycle" >
-    <nav-top></nav-top>
+  <div class="recycle">
     <body>
       <welcome-card></welcome-card>
       <v-card-title class="text-lg-h5">
@@ -21,10 +20,25 @@
       </div>
     </body>
   </div>
+  <FooterVeiw />
 </template>
-  
-  <script>
-export default { name: "RecycleView" };
+
+<script>
+import FooterVeiw from "@/components/FooterView.vue";
+
+export default {
+  name: "RecycleView",
+  components: {
+    FooterVeiw,
+  },
+
+  methods: {
+    submitForm() {
+      // Add logic to handle form submission
+      console.log("Form submitted!", this.name, this.email, this.message);
+    },
+  },
+};
 </script>
 <style scoped>
 body {

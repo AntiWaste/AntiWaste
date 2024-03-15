@@ -1,5 +1,4 @@
 <template>
-  <NavTop :user="user" />
   <div>
     <v-img
       class="img"
@@ -86,6 +85,7 @@
   <RecycleView />
   <FounderWeb />
   <FaqQues />
+  <FooterVeiw />
 </template>
 
 <style scoped>
@@ -111,42 +111,20 @@
 import AboutUs from "@/components/Home/AboutUs.vue";
 import TrashCenter from "../Home/TrashCenter.vue";
 import TrustUser from "../Home/TrustUser.vue";
-import NavTop from "../NavTop.vue";
 import FaqQues from "./FaqQues.vue";
 import FounderWeb from "./FounderWeb.vue";
 import RecycleView from "./RecycleView.vue";
-import axios from "axios";
+// import axios from "axios";
+import FooterVeiw from "../FooterView.vue";
 export default {
   components: {
     TrashCenter,
-    NavTop,
     FaqQues,
     AboutUs,
     TrustUser,
     RecycleView,
     FounderWeb,
-  },
-  data() {
-    return {
-      user: null,
-    };
-  },
-  async created() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      await axios
-        .get("user", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          this.user = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    FooterVeiw,
   },
 };
 </script>

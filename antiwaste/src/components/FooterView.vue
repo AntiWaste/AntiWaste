@@ -1,7 +1,7 @@
 <template>
   <div class="custom-app">
     <v-app>
-      <v-footer class="bg-indigo-lighten-1 text-center d-flex flex-column">
+      <v-footer class="text-center d-flex flex-column">
         <div>
           <v-btn
             v-for="icon in icons"
@@ -34,7 +34,7 @@
             {{ link }}
           </v-btn>
           <v-col class="text-center mt-4" cols="12">
-            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+            {{ new Date().getFullYear() }} — <strong>AntiWaste</strong>
           </v-col>
         </v-row>
       </v-footer>
@@ -59,5 +59,6 @@ export default {
   height: 50%;
   display: flex;
   flex-direction: column;
+  background-color: black;
 }
 </style>
