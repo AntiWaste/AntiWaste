@@ -15,21 +15,33 @@
     <b-carousel-slide>
       <!-- v-for="(logo, index) in logos" :key="index" -->
       <div class="d-flex">
-        <v-img
-          src="../../assets/event/image 39 (2).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
-        <v-img
-          src="../../assets/event/image 40 (2).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
-        <v-img
-          src="../../assets/logos/image 38 (1).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
+        <a
+          href="https://www.bing.com/search?q=ecobatt+engery&cvid=57a09854e068478eac570fdb42407067&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQABhAMgYIAhAAGEAyBggDEAAYQNIBCDMzMTRqMGo0qAIAsAIA&FORM=ANAB01&PC=U531"
+          target="_blank"
+        >
+          <v-img
+            src="../../assets/logos/image 38 (1).png"
+            alt="Logo"
+            class="logo-image"
+          ></v-img>
+        </a>
+        <a
+          href="https://www.bing.com/search?q=clean+green+cambodia&qs=n&form=QBRE&sp=-1&ghc=1&lq=0&pq=clean+green+cambod&sc=10-18&sk=&cvid=735EA628329C4D7BAD7D56026AB2D785&ghsh=0&ghacc=0&ghpl="
+          target="_blank"
+        >
+          <v-img
+            src="../../assets/logos/image 39 (1).png"
+            alt="Logo"
+            class="logo-image"
+          ></v-img>
+        </a>
+        <a href="http://www.gogreen.org/">
+          <v-img
+            src="../../assets/event/image 40 (2).png"
+            alt="Logo"
+            class="logo-image"
+          ></v-img>
+        </a>
         <v-img
           src="../../assets/event/image 41 (2).png"
           alt="Logo"
@@ -47,32 +59,17 @@
         ></v-img>
         <!-- <v-img src="../../assets/event/image 44 (1).png" alt="Logo" class="logo-image"></v-img> -->
         <v-img
-          src="../../assets/logos/image 38 (1).png"
+          src="../../assets/logos/image 45.png"
           alt="Logo"
           class="logo-image"
         ></v-img>
         <v-img
-          src="../../assets/logos/image 38 (1).png"
+          src="../../assets/logos/image 46.png"
           alt="Logo"
           class="logo-image"
         ></v-img>
         <v-img
-          src="../../assets/logos/image 38 (1).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
-        <v-img
-          src="../../assets/logos/image 38 (1).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
-        <v-img
-          src="../../assets/logos/image 38 (1).png"
-          alt="Logo"
-          class="logo-image"
-        ></v-img>
-        <v-img
-          src="../../assets/logos/image 38 (1).png"
+          src="../../assets/logos/image 47.png"
           alt="Logo"
           class="logo-image"
         ></v-img>
