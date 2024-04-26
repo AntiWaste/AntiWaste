@@ -127,7 +127,8 @@ export default {
           img: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/7.png',
         },
       ],
-    };
+      }
+
   },
   // async created() {
   //   const token = localStorage.getItem('token');

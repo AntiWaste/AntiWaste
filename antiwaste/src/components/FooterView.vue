@@ -36,7 +36,7 @@
               <div class="row">
                 <div class="col-6 col-lg-6 col-md-6 col-sm-6">
                   <div class="widget footer_widget">
-                    <h5 class="footer-title">Recent News</h5>
+                    <h5 class="footer-title">Useful Links</h5>
                     <ul class="posts styled">
                       <li class="clearfix gem-pp-posts">
                         <div class="gem-pp-posts-text">
@@ -222,11 +222,11 @@
           <div class="row">
             <div class="col-md-3">
               <div class="footer-site-info">
-                2020 ©
+                ©2020
                 <a
                   href="https://www.youtube.com/watch?v=pdr4IzBpacI&t=34s"
                   target="_blank"
-                  >anti-waste
+                  >copyright:anti-waste.com
                 </a>
               </div>
             </div>
@@ -333,7 +333,10 @@ export default {};
   z-index: 11111;
   top: 35px;
 } */
-
+a{
+  text-decoration: none;
+  color:#fff;
+}
 footer p,
 footer strong,
 footer b,

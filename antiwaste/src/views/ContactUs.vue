@@ -770,7 +770,7 @@
       <input
         type="email"
         class="form-control form-control-lg thick"
-        placeholder="E-mail"
+        placeholder="Email"
       />
 
       <!-- Message -->
@@ -778,7 +778,7 @@
         <textarea
           class="form-control form-control-lg"
           rows="7"
-          placeholder="Mensagem"
+          placeholder="Message"
         ></textarea>
       </div>
 
