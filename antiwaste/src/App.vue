@@ -1,19 +1,17 @@
 <template>
-  <div id="app">
-    <router-view />
-
-  </div>
-  <FooterView/>
+  <v-app>
+    <NavTop />
+    <div id="app">
+      <router-view />
+    </div>
+  </v-app>
 </template>
 <script>
-import FooterView from "./components/FooterView.vue";
+import NavTop from './components/NavTop.vue';
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    FooterView
-  }
- 
+    NavTop,
+  },
 };
-
-
 </script>
