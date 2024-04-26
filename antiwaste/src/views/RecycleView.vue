@@ -1,44 +1,27 @@
 <template>
   <div class="recycle">
-    <body>
-      <welcome-card></welcome-card>
-      <v-card-title class="text-lg-h5">
-        <h3>Top categories</h3>
-      </v-card-title>
-      <categories-icon> </categories-icon>
-      <div>
-        <h3>Popular product that recycle from plastics</h3>
-        <product-recyle-card></product-recyle-card>
-      </div>
-      <br />
-      <div>
-        <carousel-card></carousel-card>
-      </div>
-      <div>
-        <h3>Recenty Viewed</h3>
-        <product-recyle-card></product-recyle-card>
-      </div>
-    </body>
+    <welcome-card></welcome-card>
+    <v-card-title class="text-lg-h5">
+      <h3>Top categories</h3>
+    </v-card-title>
+    <categories-icon> </categories-icon>
+    <div>
+      <h3>Popular product that recycle from plastics</h3>
+      <product-recyle-card></product-recyle-card>
+    </div>
+    <br />
+    <div>
+      <carousel-card></carousel-card>
+    </div>
+    <div>
+      <h3>Recenty Viewed</h3>
+      <product-recyle-card></product-recyle-card>
+    </div>
   </div>
-  <FooterVeiw />
 </template>
 
 <script>
-import FooterVeiw from "@/components/FooterView.vue";
-
-export default {
-  name: "RecycleView",
-  components: {
-    FooterVeiw,
-  },
-
-  methods: {
-    submitForm() {
-      // Add logic to handle form submission
-      console.log("Form submitted!", this.name, this.email, this.message);
-    },
-  },
-};
+export default { name: 'RecycleView' };
 </script>
 <style scoped>
 body {

@@ -85,32 +85,31 @@
 </template>
 
 <script>
-// import { Service } from '@/Service/service';
-import axios from "axios";
-import Image from "../../assets/recycle.jpg";
+import axios from 'axios';
+import Image from '../../assets/recycle.jpg';
 export default {
   data() {
     return {
       img: Image,
-      roleOptions: ["User", "Service Provider"],
-      username: "",
-      email: "",
-      password: "",
-      role: "",
+      roleOptions: ['User', 'Service Provider'],
+      username: '',
+      email: '',
+      password: '',
+      role: '',
       validated: false,
-      messageError: "",
+      messageError: '',
     };
   },
   methods: {
     async register() {
       if (
-        this.username == "" ||
-        this.email == "" ||
-        this.password == "" ||
-        this.role == ""
+        this.username == '' ||
+        this.email == '' ||
+        this.password == '' ||
+        this.role == ''
       ) {
         this.validated = true;
-        this.messageError = "Please fill all the fields";
+        this.messageError = 'Please fill all the fields';
       } else {
         // const data = {
         //   username: this.username,
@@ -119,7 +118,7 @@ export default {
         //   role: this.role,
         // };
         await axios
-          .post("http://localhost:5000/api/auth/register", {
+          .post('http://localhost:5000/api/auth/register', {
             username: this.username,
             email: this.email,
             password: this.password,
@@ -127,8 +126,8 @@ export default {
           })
           .then((res) => {
             this.validated = false;
-            this.messageError = "";
-            this.$router.push("signin");
+            this.messageError = '';
+            this.$router.push('signin');
             console.log(res.data);
           })
           .catch((err) => {

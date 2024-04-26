@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import UpEvent from "@/components/Event/UpEvent.vue";
-import PostEvent from "@/components/Event/PostEvent.vue";
+import UpEvent from '@/components/Event/UpEvent.vue';
+import PostEvent from '@/components/Event/PostEvent.vue';
 export default {
   components: {
     UpEvent,

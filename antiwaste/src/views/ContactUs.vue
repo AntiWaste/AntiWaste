@@ -42,16 +42,11 @@
         </v-card>
       </v-col>
     </v-row>
-    <FooterVeiw />
   </v-container>
 </template>
 
 <script>
-import FooterVeiw from "@/components/FooterView.vue";
 export default {
-  components: {
-    FooterVeiw,
-  },
   data() {
     return {
       name: "",

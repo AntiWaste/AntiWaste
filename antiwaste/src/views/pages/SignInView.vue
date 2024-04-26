@@ -6,7 +6,6 @@
       </div>
       <v-container class="d-flex flex-column align-center m-15">
         <h2>Sign In</h2>
-
         <div class="wrap-f">
           <div
             class="text-subtitle-1 text-medium-emphasis d-flex text-align-start"
@@ -36,8 +35,7 @@
         <v-text v-if="validated" class="error-validation-message">
           {{ messageError }}
         </v-text>
-        <button class="_icon bg-green" @click="login">Login</button>
-
+        <v-btn class="_icon bg-green" @click="login">Login</v-btn>
         <p class="signup">
           Don't you have account?
           <a href="#" @click="this.$router.push('register')">Sign Up</a>
@@ -64,38 +62,37 @@
 </template>
 
 <script>
-// import { Service } from '@/Service/service';
-import Image from "../../assets/recycle.jpg";
-import axios from "axios";
+import Image from '../../assets/recycle.jpg';
+import axios from 'axios';
 export default {
   data() {
     return {
       img: Image,
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       validated: false,
-      messageError: "",
+      messageError: '',
       user: null,
     };
   },
   methods: {
     async login() {
-      if (this.email == "" || this.password == "") {
+      if (this.email == '' || this.password == '') {
         this.validated = true;
-        this.messageError = "Please fill all the fields";
+        this.messageError = 'Please fill all the fields';
       } else {
         const data = {
           email: this.email,
           password: this.password,
         };
         await axios
-          .post("http://localhost:5000/api/auth/login", data)
+          .post('http://localhost:5000/api/auth/login', data)
           .then((res) => {
             this.validated = false;
-            this.messageError = "";
+            this.messageError = '';
             this.user = res.data;
-            localStorage.setItem("token", res.data.token);
-            this.$router.push("/");
+            localStorage.setItem('token', res.data.token);
+            this.$router.push('/');
           })
           .catch((err) => {
             this.validated = true;

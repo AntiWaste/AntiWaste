@@ -1,12 +1,11 @@
 import HomePage from '@/components/Home/HomePage.vue';
-import TopBar from '@/components/Waste/TopBar.vue';
+import TopBar from '../components/Waste/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import RecycleView from '../views/RecycleView.vue';
 import SignupView from '../views/pages/SignupView.vue';
 import SignInView from '../views/pages/SignInView.vue';
-
 
 const routes = [
   {
@@ -36,14 +35,14 @@ const routes = [
   },
   {
     path: '/waste',
-    name: 'Home',
+    name: 'waste',
     component: TopBar,
   },
   {
-    path:'/event',
+    path: '/event',
     name: 'Event',
     component: EventView,
-  }
+  },
 ];
 
 const router = createRouter({
