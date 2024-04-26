@@ -7,21 +7,21 @@
     <categories-icon> </categories-icon>
     <div>
       <h3>Popular product that recycle from plastics</h3>
-      <product-recyle-card></product-recyle-card>
+      <product-recycle-card></product-recycle-card>
     </div>
     <br />
     <div>
       <carousel-card></carousel-card>
     </div>
     <div>
-      <h3>Recenty Viewed</h3>
-      <product-recyle-card></product-recyle-card>
+      <h3>Recently Viewed</h3>
+      <product-recycle-card></product-recycle-card>
     </div>
   </div>
 </template>
 
 <script>
-export default { name: 'RecycleView' };
+export default {};
 </script>
 <style scoped>
 body {

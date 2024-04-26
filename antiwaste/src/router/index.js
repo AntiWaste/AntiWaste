@@ -1,11 +1,12 @@
-import HomePage from '@/components/Home/HomePage.vue';
+import HomeLayout from '../views/HomeLayout.vue';
+import HomePage from '../components/Home/HomePage.vue';
 import TopBar from '../components/Waste/TopBar.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import RecycleView from '../views/RecycleView.vue';
-import SignupView from '../views/pages/SignupView.vue';
-import SignInView from '../views/pages/SignInView.vue';
+import SignupView from '../views/auth/SignupView.vue';
+import SignInView from '../views/auth/SignInView.vue';
 
 const routes = [
   {
@@ -14,34 +15,43 @@ const routes = [
     component: SignupView,
   },
   {
-    path: '/signin',
-    name: 'signin',
+    path: '/login',
+    name: 'login',
     component: SignInView,
   },
-  {
-    path: '/contact',
-    name: 'contactus',
-    component: ContactUs,
-  },
+
   {
     path: '/',
     name: 'home',
-    component: HomePage,
-  },
-  {
-    path: '/recycle',
-    name: 'recycle',
-    component: RecycleView,
-  },
-  {
-    path: '/waste',
-    name: 'waste',
-    component: TopBar,
-  },
-  {
-    path: '/event',
-    name: 'Event',
-    component: EventView,
+    redirect: '/home',
+    component: HomeLayout,
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: HomePage,
+      },
+      {
+        path: 'recycle',
+        name: 'recycle',
+        component: RecycleView,
+      },
+      {
+        path: 'waste',
+        name: 'waste',
+        component: TopBar,
+      },
+      {
+        path: 'event',
+        name: 'Event',
+        component: EventView,
+      },
+      {
+        path: 'contact',
+        name: 'contact-us',
+        component: ContactUs,
+      },
+    ],
   },
 ];
 

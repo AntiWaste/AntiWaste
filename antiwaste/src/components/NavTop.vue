@@ -25,17 +25,15 @@
 <script>
 export default {
   name: 'NavTop',
-  components: {
-    // NavTop,
-  },
-  props: ['user'],
 
-  methods: {
-    handleLogout() {
-      localStorage.removeItem('token');
-      this.$router.push('/');
-    },
-  },
+  // props: ['user'],
+
+  // methods: {
+  //   handleLogout() {
+  //     localStorage.removeItem('token');
+  //     this.$router.push('/');
+  //   },
+  // },
   data() {
     return {
       dialog: false,
@@ -149,20 +147,14 @@ ul {
   padding: 0;
 }
 
-li a {
+li > a {
   color: grey;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 li a:hover {
   color: lightgreen;
 }
-
-/* .nav-link:hover{
-    font-size: large;
-    font-weight: 500;
-  
-  } */
+</style>
