@@ -1,222 +1,99 @@
 <template>
   <div class="page-wrapper">
-    <div id="waterdrop"></div>
-    <footer>
-      <div class="footer-top">
-        <div class="pt-exebar"></div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-12 col-sm-12 footer-col-3">
-              <div class="widget footer_widget">
-                <h5 class="footer-title">Address</h5>
-                <div class="gem-contacts">
-                  <div class="gem-contacts-item gem-contacts-address">
-                    Corporate Office :<br />
-                    Doon House, B-275(A), First floor Sector-57, Shushant Lok 3
-                    Near Hong Kong Bazzar, Gurugram Pin 122001, Haryana.
-                  </div>
-                  <div class="gem-contacts-item gem-contacts-phone">
-                    <i class="fa fa-phone" aria-hidden="true"></i> Phone:
-                    <a href="">+91-9122588799</a>
-                  </div>
-
-                  <div class="gem-contacts-item gem-contacts-address mt-2">
-                    Reg. Office :<br />
-                    Doon House, D2/3, 4th Floor, Chandra Tower, IDBI Bank
-                    Building Dimna Road, Mango, Jamshedpur-831012, Jharkhand.
-                  </div>
-                  <div class="gem-contacts-item gem-contacts-phone">
-                    <i class="fa fa-phone" aria-hidden="true"></i> Phone:
-                    <a>+91 9122588799</a>
+    <div class="row py-5">
+      <div class="col">
+        <div class="card border-0">
+          <div class="card-body text-center">
+            <h2><b>Let `s have a chat !</b></h2>
+            <p class="pl-0 ml-0 mb-5">
+              Find out what we can do for your business or home.
+            </p>
+            <div class="row text-center justify-content-center">
+              <div class="col-auto d-flex align-items-center">
+                <div class="input-group-lg input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your e-mail address"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                  <div class="input-group-append mx-2">
+                    <button
+                      class="btn btn-success"
+                      type="button"
+                      id="button-addon2"
+                    >
+                      <b class="text-white">Submit</b>
+                    </button>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
-              <div class="row">
-                <div class="col-6 col-lg-6 col-md-6 col-sm-6">
-                  <div class="widget footer_widget">
-                    <h5 class="footer-title">Useful Links</h5>
-                    <ul class="posts styled">
-                      <li class="clearfix gem-pp-posts">
-                        <div class="gem-pp-posts-text">
-                          <div class="gem-pp-posts-item">
-                            <a href="#">Want to start Your Own Play School. </a>
-                          </div>
-                          <div class="gem-pp-posts-date">
-                            Call +91-9122588799
-                          </div>
-                        </div>
-                      </li>
-                      <li class="clearfix gem-pp-posts">
-                        <div class="gem-pp-posts-text">
-                          <div class="gem-pp-posts-item">
-                            <a href="#"
-                              >Now we are in Faridabad,Now we are in DaudNagar.
-                            </a>
-                          </div>
-                          <div class="gem-pp-posts-date">
-                            Call +91-9122588799, +91-9122588799
-                          </div>
-                        </div>
-                      </li>
-                      <li class="clearfix gem-pp-posts">
-                        <div class="gem-pp-posts-text">
-                          <div class="gem-pp-posts-item">
-                            <a href="">Now we are in Ranchi, Admission open </a>
-                          </div>
-                          <div class="gem-pp-posts-date">
-                            Call +91-9122588799, +91-9122588799
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-6 col-md-6 col-sm-6">
-                  <div class="widget">
-                    <h5 class="footer-title">Email Us</h5>
-                    <div class="textwidget">
-                      <div
-                        role="form"
-                        class="wpcf7"
-                        id="wpcf7-f4-o1"
-                        lang="en-US"
-                        dir="ltr"
-                      >
-                        <form
-                          method="post"
-                          class="wpcf7-form"
-                          novalidate="novalidate"
-                        >
-                          <div class="contact-form-footer">
-                            <p>
-                              <span
-                                class="wpcf7-form-control-wrap your-first-name"
-                                ><input
-                                  type="text"
-                                  name="your-first-name"
-                                  value=""
-                                  size="40"
-                                  class="wpcf7-form-control wpcf7-text"
-                                  aria-invalid="false"
-                                  placeholder="Your name"
-                              /></span>
-                            </p>
-                            <p>
-                              <span class="wpcf7-form-control-wrap your-email_1"
-                                ><input
-                                  type="email"
-                                  name="your-email_1"
-                                  value=""
-                                  size="40"
-                                  class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email"
-                                  aria-invalid="false"
-                                  placeholder="Your email"
-                              /></span>
-                            </p>
-                            <p>
-                              <span
-                                class="wpcf7-form-control-wrap your-message"
-                              >
-                                <textarea
-                                  name="your-message"
-                                  cols="40"
-                                  rows="10"
-                                  class="wpcf7-form-control wpcf7-textarea"
-                                  aria-invalid="false"
-                                  placeholder="Your message"
-                                ></textarea>
-                              </span>
-                            </p>
-                            <div>
-                              <input
-                                type="submit"
-                                value="Send"
-                                class="wpcf7-form-control wpcf7-submit"
-                              /><span class="ajax-loader"></span>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-3 col-md-5 col-sm-12 footer-col-4">
-              <div class="widget widget_gallery gallery-grid-4">
-                <h5 class="footer-title">Our Gallery</h5>
-                <ul class="magnific-image">
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                  <li>
-                    <a class="magnific-anchor"
-                      ><img
-                        src="https://images.unsplash.com/photo-1477239439998-839196943351?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=414&q=80"
-                        alt=""
-                    /></a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <hr class="mx-0 px-0" />
+    <footer>
+      <div class="row justify-content-around mb-0 pt-5 pb-0">
+        <div class="col-11">
+          <div class="row justify-content-center">
+            <div
+              class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4"
+            >
+              <h5>
+                <span>
+                  <img
+                    src="https://extendthemes.com/wp-content/uploads/2018/06/xbox-green-min.png"
+                    class="img-fluid mb-1" /></span
+                ><b class="text-dark">
+                  Key<span class="text-muted"> Pass</span></b
+                >
+              </h5>
+              <p class="social mt-md-3 mt-2">
+                <span><i class="fa fa-facebook" aria-hidden="true"></i></span>
+                <span><i class="fa fa-linkedin" aria-hidden="true"></i></span>
+                <span><i class="fa fa-twitter" aria-hidden="true"></i></span>
+              </p>
+              <small class="copy-rights cursor-pointer"
+                >&#9400; 2019 EasyGo Digital Technologies</small
+              ><br />
+              <small>Copyright.All Rights Resered. </small>
+            </div>
+            <div class="col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                <li class="mt-md-3 mt-4">Our Solution</li>
+                <li>Intergrated Security Platform</li>
+                <li>Core Features</li>
+                <li>Product Features</li>
+                <li>Pricing</li>
+              </ul>
+            </div>
+            <div class="col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                <li class="mt-md-3 mt-4">Your needs</li>
+                <li>Intergrated Security Platform</li>
+                <li>Core Features</li>
+                <li>Product Features</li>
+                <li>Pricing</li>
+              </ul>
+            </div>
+            <div class="col-xl-auto col-md-3 col-12 my-sm-0 mt-5">
+              <ul class="list-unstyled">
+                <li class="mt-md-3 mt-4">Offer</li>
+                <li>Intergrated Security Platform</li>
+                <li>Core Features</li>
+                <li>Product Features</li>
+                <li>Pricing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <div id="waterdrop"></div>
+    <footer>
       <div class="footer-bottom">
         <div class="container">
           <div class="row">
@@ -326,16 +203,9 @@
 export default {};
 </script>
 <style scoped>
-/* .page-wrapper {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  z-index: 11111;
-  top: 35px;
-} */
-a{
+a {
   text-decoration: none;
-  color:#fff;
+  color: #fff;
 }
 footer p,
 footer strong,
@@ -746,5 +616,138 @@ footer .widget ul {
 
 .footer-site-info {
   padding-top: 10px;
+}
+/* new */
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+body {
+  font-family: 'Muli', sans-serif;
+  height: 100% !important;
+  background-color: #fff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.container-fluid {
+  margin-top: 101px;
+  color: #000 !important;
+}
+
+.card {
+  color: #757575 !important;
+  background-color: #fff !important;
+  align-items: center !important;
+  background: url('https://i.imgur.com/9djv5sH.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right
+    calc(110px + (150 - 110) * ((100vw - 360px) / (1600 - 360))) bottom !important;
+}
+
+h2 {
+  font-size: calc(
+    25px + (45 - 25) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+}
+
+h5 {
+  font-size: calc(
+    20px + (28 - 20) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+}
+
+.fa {
+  cursor: pointer;
+  font-size: 21px;
+  margin: 5px 10px 5px 10px !important;
+}
+
+button {
+  font-size: calc(
+    12px + (13 - 12) * ((100vw - 360px) / (1600 - 320))
+  ) !important;
+  padding-left: calc(
+    20px + (28 - 20) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+  padding-right: calc(
+    20px + (28 - 20) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+  padding-top: calc(
+    10px + (12 - 10) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+  padding-bottom: calc(
+    10px + (12 - 10) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+}
+
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input {
+  border: 2px solid green !important;
+}
+
+.input-group-lg > .custom-select,
+.input-group-lg > .form-control:not(textarea) {
+  height: calc(40px + (48 - 40) * ((100vw - 360px) / (1600 - 360))) !important;
+}
+
+input::-webkit-input-placeholder {
+  padding-left: 5px !important;
+  transform: translate3d(0, -4px, 0);
+}
+
+input::placeholder {
+  vertical-align: middle !important;
+  font-size: calc(
+    12px + (14 - 12) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+}
+
+input:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
+
+img {
+  vertical-align: middle !important;
+  width: 100%;
+  height: auto;
+  width: calc(17px + 6 * ((100vw - 320px) / 680));
+}
+
+li:first-child {
+  font-size: 21px !important;
+  font-weight: bold;
+  margin-bottom: calc(
+    40px + (48 - 40) * ((100vw - 360px) / (1600 - 360))
+  ) !important;
+  color: #757575 !important;
+}
+
+footer {
+  color: #757575 !important;
+}
+
+.social {
+  position: relative;
+  left: -10px;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+  color: green;
+  font-weight: bold;
 }
 </style>
