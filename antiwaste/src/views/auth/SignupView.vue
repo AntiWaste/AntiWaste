@@ -61,7 +61,7 @@
         <div class="_icon bg-green" @click="register">Register</div>
         <p class="signup">
           Already have an account?
-          <a @click="this.$router.push('signin')">Sign In</a>
+          <a @click="this.$router.push('login')">Sign In</a>
         </p>
         <div class="login-methods2 text-center">
           <div class="_icon">
@@ -85,31 +85,31 @@
 </template>
 
 <script>
-import axios from 'axios';
-import Image from '../../assets/recycle.jpg';
+import axios from "axios";
+import Image from "../../assets/recycle.jpg";
 export default {
   data() {
     return {
       img: Image,
-      roleOptions: ['User', 'Service Provider'],
-      username: '',
-      email: '',
-      password: '',
-      role: '',
+      roleOptions: ["User", "Service Provider"],
+      username: "",
+      email: "",
+      password: "",
+      role: "",
       validated: false,
-      messageError: '',
+      messageError: "",
     };
   },
   methods: {
     async register() {
       if (
-        this.username == '' ||
-        this.email == '' ||
-        this.password == '' ||
-        this.role == ''
+        this.username == "" ||
+        this.email == "" ||
+        this.password == "" ||
+        this.role == ""
       ) {
         this.validated = true;
-        this.messageError = 'Please fill all the fields';
+        this.messageError = "Please fill all the fields";
       } else {
         // const data = {
         //   username: this.username,
@@ -118,7 +118,7 @@ export default {
         //   role: this.role,
         // };
         await axios
-          .post('http://localhost:5000/api/auth/register', {
+          .post("http://localhost:5000/api/auth/register", {
             username: this.username,
             email: this.email,
             password: this.password,
@@ -126,8 +126,8 @@ export default {
           })
           .then((res) => {
             this.validated = false;
-            this.messageError = '';
-            this.$router.push('signin');
+            this.messageError = "";
+            this.$router.push("login");
             console.log(res.data);
           })
           .catch((err) => {
