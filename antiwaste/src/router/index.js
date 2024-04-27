@@ -1,13 +1,14 @@
-import HomeLayout from '../views/HomeLayout.vue';
-import HomePage from '../components/Home/HomePage.vue';
+import HomeLayout from "../views/HomeLayout.vue";
+import HomePage from "../components/Home/HomePage.vue";
 // import TopBar from '../components/Waste/TopBar.vue';
-import WasteView from '@/views/WasteView.vue';
-import ContactUs from '@/views/ContactUs.vue';
-import EventView from '@/views/EventView.vue';
-import { createRouter, createWebHistory } from 'vue-router';
-import RecycleView from '../views/RecycleView.vue';
-import SignupView from '../views/auth/SignupView.vue';
-import SignInView from '../views/auth/SignInView.vue';
+import WasteView from "@/views/WasteView.vue";
+import ContactUs from "@/views/ContactUs.vue";
+import EventView from "@/views/EventView.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import RecycleView from "../views/RecycleView.vue";
+import SignupView from "../views/auth/SignupView.vue";
+import SignInView from "../views/auth/SignInView.vue";
+import EventForm from "@/components/Event/EventForm.vue";
 
 const routes = [
   {
@@ -37,22 +38,27 @@ const routes = [
         component: RecycleView
       },
       {
-        path: 'waste',
-        name: 'waste',
-        component: WasteView,
+        path: "waste",
+        name: "waste",
+        component: WasteView
       },
       {
-        path: 'event',
-        name: 'Event',
-        component: EventView,
+        path: "event",
+        name: "Event",
+        component: EventView
       },
       {
-        path: 'contact',
-        name: 'contact-us',
-        component: ContactUs,
+        path: "create-event",
+        name: "CreateEvent",
+        component: EventForm
       },
-    ],
-  },
+      {
+        path: "contact",
+        name: "contact-us",
+        component: ContactUs
+      }
+    ]
+  }
 ];
 
 const router = createRouter({

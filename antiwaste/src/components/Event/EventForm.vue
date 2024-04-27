@@ -83,7 +83,7 @@ export default {
         label="Your Name"
         required
       ></v-text-field>
-      <v-btn type="submit" color="primary">Create Event</v-btn>
+      <v-btn type="submit" color="success">Create Event</v-btn>
     </v-form>
   </v-container>
 </template>
