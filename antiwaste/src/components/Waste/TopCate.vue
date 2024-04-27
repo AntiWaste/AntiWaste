@@ -1,95 +1,73 @@
 <template>
-<div class="font-weight-bold text-h4 text-center pt-10">
-    Top categories of Recycling
-</div>
-<p class="text-center pt-5 pb-5 ">Click the block below to find where you can sell your trash follow categories that can use for recycling
-</p>
-<v-container class="pa-6 text-center">
-    <v-row
-      class="fill-height"
-      align="center"
-      justify="center"
+  <v-app>
+    <v-carousel
+      cycle
+      height="600"
+      hide-delimiter-background
+      show-arrows="hover"
     >
-      <template v-for="(item, i) in items" :key="i">
-        <v-col
-          cols="12"
-          md="4"
-        >
-          <v-hover v-slot="{ isHovering, props }">
-            <v-card
-              :elevation="isHovering ? 12 : 2"
-              :class="{ 'on-hover': isHovering }"
-              v-bind="props"
-            >
-              <v-img
-                :src="item.img"
-                height="300px"
-                cover
-              >
-                <v-card-title class="text-h6 text-black d-flex flex-column">
-                  <h2 class="mt-4">
-                    {{ item.title }}
-                  </h2>
-
-                  <!-- <div>
-                    <p class="ma-0 text-body-1 font-weight-bold">
-                      {{ item.text }}
-                    </p>
-                    <p class="text-caption font-weight-medium">
-                      {{ item.subtext }}
-                    </p>
-                  </div> -->
-                </v-card-title>
-                <!-- <div class="align-center w-auto">
-                  <v-btn>see more</v-btn>
-                </div> -->
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </template>
-    </v-row>
-  </v-container>
+      <v-carousel-item v-for="(slide, i) in slides" :key="i">
+        <v-img cover :src="colors[i]" height="100%">
+          <div
+            class="d-flex fill-height justify-center align-center text-shades-white"
+          >
+            <div class="font-weight-bold text-h2">
+              {{ slide }}
+            </div>
+          </div>
+        </v-img>
+      </v-carousel-item>
+    </v-carousel>
+  </v-app>
 </template>
-<style scoped>
-  .v-card {
-    transition: opacity .4s ease-in-out;
-  }
 
-  .v-card:not(.on-hover) {
-    opacity: 0.6;
-  }
-</style>
 <script>
-  export default {
-    data: () => ({
-      items: [
-        {
-          title: 'Glasses',
-          img: require('../../assets/event/glass.png'),
-        },
-        {
-          title: 'Plastics',
-          img: require('../../assets/event/plastic.png'),
-        },
-        {
-          title: 'Metals',
-          img: require('../../assets/event/mental.png'),
-        },
-        {
-          title: 'Papers',
-          img: require('../../assets/event/paper.png'),
-        },
-        {
-          title: 'E-Waste',
-          img: require('../../assets/event/E-waste.png'),
-        },
-        {
-          title: 'Textiles',
-          img: require('../../assets/event/textile.png'),
-        },
+export default {
+  data() {
+    return {
+      colors: [
+        'https://www.russellkennedy.com.au/Images/UserUploadedImages/262/Pollution%20at%20beach%201900x500.jpg',
+        'https://png.pngtree.com/background/20211215/original/pngtree-world-environment-day-green-city-minimalist-environment-day-poster-background-picture-image_1478287.jpg',
+        'https://png.pngtree.com/background/20210710/original/pngtree-world-environment-day-background-june-5-picture-image_1003798.jpg',
+        // 'https://img.freepik.com/premium-vector/set-recycle-bins-trash-flat-design_115464-688.jpg?w=2000',
+        'https://www.ptecologicalservices.com/assets/images/products/organicwasteconvertor.gif',
       ],
-      transparent: 'rgba(255, 255, 255, 0)',
-    }),
-  }
+      slides: [
+        'Zero-Waste Lifestyle in Cambodia',
+        '',
+        'Zero-Waste Lifestyle in Cambodia',
+        '',
+      ],
+      slide: 0,
+    };
+  },
+};
 </script>
+
+<style scoped>
+span {
+  font-size: 15px;
+}
+a {
+  text-decoration: none;
+  color: #0062cc;
+  border-bottom: 2px solid #0062cc;
+}
+.box {
+  padding: 60px 0px;
+}
+
+.box-part {
+  background: #fff;
+  border-radius: 0;
+  padding: 60px 10px;
+  margin: 30px 0px;
+}
+.text {
+  margin: 20px 0px;
+}
+
+.fa {
+  color: #4183d7;
+}
+</style>

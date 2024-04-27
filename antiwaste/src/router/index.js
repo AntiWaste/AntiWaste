@@ -1,6 +1,7 @@
 import HomeLayout from '../views/HomeLayout.vue';
 import HomePage from '../components/Home/HomePage.vue';
-import TopBar from '../components/Waste/TopBar.vue';
+// import TopBar from '../components/Waste/TopBar.vue';
+import WasteView from '@/views/WasteView.vue';
 import ContactUs from '@/views/ContactUs.vue';
 import EventView from '@/views/EventView.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -39,7 +40,7 @@ const routes = [
       {
         path: 'waste',
         name: 'waste',
-        component: TopBar,
+        component: WasteView,
       },
       {
         path: 'event',
