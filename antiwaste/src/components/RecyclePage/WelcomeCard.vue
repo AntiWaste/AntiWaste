@@ -7,13 +7,15 @@
         src="../../assets/image 20.png"
         cover
       >
-        <v-card-title max-width="1053" max-height="156" class="text-md-h4"
-          >Welcome to KompongCham Recycling’s Store</v-card-title
-        >
-        <v-card-title class="text-h6">
-          Please enjoy buying our product, feel free to delivery to other
-          province too.
-        </v-card-title>
+        <div id="welcomeText">
+          <v-card-title max-width="1053" max-height="156" class="text-md-h4"
+            >Welcome to KompongCham Recycling’s Store</v-card-title
+          >
+          <v-card-title class="text-h6">
+            Please enjoy buying our product, feel free to delivery to other
+            province too.
+          </v-card-title>
+        </div>
       </v-img>
     </v-card>
   </div>
@@ -25,3 +27,8 @@ export default {
   components: {},
 };
 </script>
+<style scoped>
+/* #welcomeText {
+  text-align: center;
+} */
+</style>

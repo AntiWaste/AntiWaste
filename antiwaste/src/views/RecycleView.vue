@@ -6,11 +6,12 @@
     </v-card-title>
     <categories-icon> </categories-icon>
     <div>
-      <h3>Popular product that recycle from plastics</h3>
+      <h3>Popular product</h3>
       <product-recycle-card></product-recycle-card>
     </div>
     <br />
-    <div>
+    <div class="carousel">
+      <h3>On Promotion Product</h3>
       <carousel-card></carousel-card>
     </div>
     <div>
@@ -30,5 +31,10 @@ body {
 h3 {
   margin-top: 10px;
   margin-bottom: 20px;
+  text-align: center;
+}
+.carousel {
+  max-width: 1000px;
+  margin-left: 300px;
 }
 </style>
