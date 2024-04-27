@@ -43,12 +43,8 @@
               class="col-md-3 col-12 font-italic align-items-center mt-md-3 mt-4"
             >
               <h5>
-                <span>
-                  <img
-                    src="https://extendthemes.com/wp-content/uploads/2018/06/xbox-green-min.png"
-                    class="img-fluid mb-1" /></span
-                ><b class="text-dark">
-                  Key<span class="text-muted"> Pass</span></b
+                <b class="text-dark">
+                  Anti<span class="text-muted"> Waste</span></b
                 >
               </h5>
               <p class="social mt-md-3 mt-2">
@@ -57,7 +53,7 @@
                 <span><i class="fa fa-twitter" aria-hidden="true"></i></span>
               </p>
               <small class="copy-rights cursor-pointer"
-                >&#9400; 2019 EasyGo Digital Technologies</small
+                >&#9400; 2024 EasyGo Digital Technologies</small
               ><br />
               <small>Copyright.All Rights Resered. </small>
             </div>
@@ -200,7 +196,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      logo: [require('../assets/anti-waste-logo.png')],
+    };
+  },
+};
 </script>
 <style scoped>
 a {

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const Service = {
   ErrorHandler(err) {
-    return err
+    return err;
   },
 
   async SignUp(newUser) {
@@ -38,7 +38,6 @@ export const Service = {
         )
         .then((res) => {
           localStorage.setItem('user', JSON.stringify(res.data));
-          
         });
     } catch (e) {
       this.ErrorHandler(e);
