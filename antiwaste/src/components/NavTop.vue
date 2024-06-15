@@ -4,12 +4,14 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="bg-white">
       <router-link
-        style="text-decoration: none; color: inherit"
+        style="text-decoration: none;"
         class="text-center d-flex justify-center align-center px-5"
         v-for="item in nav"
         :key="item.icon"
         :to="item.link"
         :title="item.title"
+        :class="{ active: activeLink === item.link }"
+        @click="handleClick(item.link)"
         >{{ item.text }}
       </router-link>
     </v-toolbar-items>
@@ -25,19 +27,11 @@
 <script>
 export default {
   name: 'NavTop',
-
-  // props: ['user'],
-
-  // methods: {
-  //   handleLogout() {
-  //     localStorage.removeItem('token');
-  //     this.$router.push('/');
-  //   },
-  // },
   data() {
     return {
       dialog: false,
-      logo: [require('../assets/anti-waste-logo.png')],
+      logo: require('../assets/anti-waste-logo.png'),
+      activeLink: '/',
       nav: [
         {
           icon: 'home',
@@ -77,10 +71,20 @@ export default {
       ],
     };
   },
+  methods: {
+    handleClick(link) {
+      this.activeLink = link;
+    }
+  }
 };
 </script>
 
 <style scoped>
+.active {
+  color: #34d937;
+  font-family: Arial;
+}
+
 .btn-login {
   background: #34d937;
   background-image: -webkit-linear-gradient(top, #34d937, #00ba09);
@@ -88,8 +92,8 @@ export default {
   background-image: -ms-linear-gradient(top, #34d937, #00ba09);
   background-image: -o-linear-gradient(top, #34d937, #00ba09);
   background-image: linear-gradient(to bottom, #34d937, #00ba09);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
   border-radius: 28px;
   text-shadow: 1px 4px 14px #666666;
   font-family: Arial;
@@ -110,8 +114,8 @@ export default {
 }
 
 .btn-register {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
+  -webkit-border-radius: 28px;
+  -moz-border-radius: 28px;
   border-radius: 28px;
   font-family: Arial;
   color: #307d00;
@@ -133,7 +137,8 @@ export default {
 
 .a {
   text-decoration: none;
-  color: black;
+  color:#ffffff;
+  
 }
 nav {
   position: sticky;
