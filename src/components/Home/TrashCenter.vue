@@ -1,54 +1,49 @@
 <template>
-  <v-container>
-    <div class="pa-5">
-      <div class="font-weight-bold text-h4 text-center pt-10">
+  <div>
+    <div class=" p-20 bg-gradient-to-r from-gray-100 via-green-100 to-gray-200 shadow-lg rounded-lg">
+      <div class="flex items-center justify-between">
+    <!-- Left section with text content -->
+    <div class="flex flex-col items-center justify-center mx-auto">
+      <div class="font-bold text-4xl text-center mb-5">
         Rubbish Services
       </div>
-      <p class="text-center pt-5 pb-5">
-        Three private companies that manage trash collection in PhnomPenh under
-        the supervision of the PhnomPenh Municipal Administration
+      <p class="text-center text-gray-700 mb-10">
+        Discover three private companies that manage trash collection in Phnom Penh under the supervision of the Phnom Penh Municipal Administration.
       </p>
-      <v-item-group class="py-10 d-flex flex-column">
-        <v-row class="d-flex">
-          <div v-for="(item, index) in items" :key="index">
-            <div class="d-flex justify-space-between pa-5">
-              <div
-                class="images-logo d-flex align-center justify-center bg-white rounded-2"
-              >
-                <img :width="item.width" :src="item.image" alt="" />
+    </div>
+
+    <!-- Right section with button -->
+    <div>
+      <v-btn @click="toggleExpansion()" class="w-32 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full">
+        {{ isExpanded ? 'See Less' : 'See More' }}
+      </v-btn>
+    </div>
+    </div>
+      <v-row>
+        <template v-for="item in displayedItems" :key="item.id">
+          <v-col cols="12" md="4">
+            <div class="flex flex-col items-center justify-between p-5">
+              <div class="w-full h-48 overflow-hidden">
+                <img :src="requireImage(item.image)" :alt="item.altText" class="w-full h-auto object-cover" />
               </div>
-              <div class="d-flex flex-column pl-10">
-                <div class="font-weight-bold text-h4 pb-4">
-                  {{ item.title }}
-                </div>
-                <p>{{ item.description }}</p>
-                <v-btn class="bg-green text-white w-25">Learn More</v-btn>
+              <div class="text-center mt-4">
+                <div class="font-bold text-xl mb-2">{{ item.title }}</div>
+                <p class="text-gray-700">{{ item.description }}</p>
+                <v-btn class="mt-4 px-6 py-2 rounded-lg hover:bg-green-700">
+                  Learn More
+                </v-btn>
               </div>
             </div>
-          </div>
-        </v-row>
-      </v-item-group>
-      <div class="d-flex justify-end text-white mt-5" @click="SeeMore()">
-        <v-btn v-if="!isExpanded" class="w-15 align-center">See More </v-btn>
-        <v-btn v-else class="w-15 align-center">See Less </v-btn>
-      </div>
+          </v-col>
+        </template>
+      </v-row>
+     
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    SeeMore() {
-      this.$data.isExpanded = !this.$data.isExpanded;
-      if (this.$data.isExpanded) {
-        this.items.push(...this.expandItems);
-      } else {
-        this.items.splice(3, this.items.length - 3);
-      }
-    },
-  },
-
   data() {
     return {
       isExpanded: false,
@@ -56,34 +51,26 @@ export default {
         {
           id: 4,
           title: 'Mizuda Sanitation Cambodia',
-          image: [require('../../assets/Sticker_icon/mizuda-logo.jpg')],
-          altText: ' Mizuda Sanitation Cambodia',
+          image: 'mizuda-logo.jpg',
+          altText: 'Mizuda Sanitation Cambodia',
           description:
-            'In the realm of waste, our service is a symphony of inefficiency, a ballet of chaos, where every discarded item becomes a forgotten note in the cacophony of rubbish mismanagement.',
-          width: 300,
-          height: 17,
+            'Explore efficient waste management solutions that aim to minimize environmental impact and improve community health.',
         },
         {
           id: 5,
           title: 'Open Development Cambodia',
-          image: [require('../../assets/Sticker_icon/ODC-New-logo.png')],
-          altText: 'Cintri Cambodia',
+          image: 'ODC-New-logo.png',
+          altText: 'Open Development Cambodia',
           description:
-            'CINTRI is committed delivering excellence throughout all of its operations. These include continual improving our service through upgrading the equipment and staff training and maintraining customer satisfaction.',
-          width: 300,
-          height: 17,
+            'Discover innovative approaches to waste collection and recycling initiatives that promote sustainability.',
         },
         {
           id: 2,
           title: 'Waste Summit Cambodia',
-          image: [
-            require('../../assets/Sticker_icon/waste-summit-cambodia-logo.png'),
-          ],
+          image: 'waste-summit-cambodia-logo.png',
           altText: 'Waste Summit Cambodia',
           description:
-            'In the realm of waste, our service is a symphony of inefficiency, a ballet of chaos, where every discarded item becomes a forgotten note in the cacophony of rubbish mismanagement.',
-          width: 300,
-          height: 17,
+            'Join the movement towards a cleaner city with comprehensive waste management strategies and eco-friendly practices.',
         },
       ],
 
@@ -91,49 +78,45 @@ export default {
         {
           id: 1,
           title: 'Cintri Cambodia',
-          image: [
-            require('../../assets/Sticker_icon/Cintri-cambodia-logo.png'),
-          ],
+          image: 'Cintri-cambodia-logo.png',
           altText: 'Cintri Cambodia',
           description:
-            'CINTRI is committed delivering excellence throughout all of its operations. These include continual improving our service through upgrading the equipment and staff training and maintraining customer satisfaction.',
-          width: 300,
+            'Discover how Cintri Cambodia ensures cleaner streets and better waste management services for Phnom Penh residents.',
         },
         {
           id: 2,
           title: '800Super-GAEA Cambodia',
-          image: [require('../../assets/Sticker_icon/800-super-Gaea-logo.png')],
+          image: '800-super-Gaea-logo.png',
           altText: '800Super-GAEA Cambodia',
           description:
-            'In the realm of waste, our service is a symphony of inefficiency, a ballet of chaos, where every discarded item becomes a forgotten note in the cacophony of rubbish mismanagement.',
-          width: 300,
+            'Learn about 800Super-GAEA Cambodia’s commitment to environmental sustainability through efficient waste solutions.',
         },
         {
           id: 3,
           title: 'Clear Cambodia',
-          image: [require('../../assets/Sticker_icon/ClearCambodiaLogo.jpg')],
+          image: 'ClearCambodiaLogo.jpg',
           altText: 'Clear Cambodia',
           description:
-            'CINTRI is committed delivering excellence throughout all of its operations. These include continual improving our service through upgrading the equipment and staff training and maintraining customer satisfaction.',
-          width: 300,
+            'Explore Clear Cambodia’s mission to provide reliable and eco-friendly waste management services across the city.',
         },
       ],
     };
   },
 
+  computed: {
+    displayedItems() {
+      return this.isExpanded ? this.items.concat(this.expandItems) : this.items.slice(0, 3);
+    }
+  },
+
+  methods: {
+    toggleExpansion() {
+      this.isExpanded = !this.isExpanded;
+    },
+
+    requireImage(imagePath) {
+      return require(`@/assets/Sticker_icon/${imagePath}`);
+    },
+  },
 };
 </script>
-
-<style scoped>
-.background {
-  padding: 15px;
-  /* background-color: rgb(249, 249, 249);s */
-  background-color: #f7f2f2;
-  background-image: linear-gradient(
-    62deg,
-    #f7f2f2 0%,
-    #ebfff0 50%,
-    #f5f3f3 100%
-  );
-}
-</style>

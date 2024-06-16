@@ -1,25 +1,27 @@
 <template>
-  <v-toolbar app class="hidden-xs-and-down px-15 pa-5 bg-white">
-    <img :src="logo" alt="" width="200" />
+  <v-toolbar app class="hidden lg:flex px-4 py-2 bg-white shadow-md">
+    <img :src="logo" alt="Logo" class="w-48" />
     <v-spacer></v-spacer>
     <v-toolbar-items class="bg-white">
       <router-link
-        style="text-decoration: none;"
-        class="text-center d-flex justify-center align-center px-5"
         v-for="item in nav"
         :key="item.icon"
         :to="item.link"
         :title="item.title"
-        :class="{ active: activeLink === item.link }"
+        class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
+        :class="{ 'text-green-500 font-bold': activeLink === item.link }"
         @click="handleClick(item.link)"
-        >{{ item.text }}
+      >
+        {{ item.text }}
       </router-link>
     </v-toolbar-items>
-    <div class="log-in-out d-flex">
-      <router-link to="/login" class="btn-login bg-green mr-5"
-        >Login</router-link
-      >
-      <router-link to="/register" class="btn-register">Register</router-link>
+    <div class="flex space-x-2">
+      <router-link to="/login" class="btn-login">
+        Login
+      </router-link>
+      <router-link to="/register" class="btn-register">
+        Register
+      </router-link>
     </div>
   </v-toolbar>
 </template>
@@ -33,133 +35,28 @@ export default {
       logo: require('../assets/anti-waste-logo.png'),
       activeLink: '/',
       nav: [
-        {
-          icon: 'home',
-          text: 'Home',
-          link: '/',
-          title: 'Go back home page',
-          active: true,
-        },
-        {
-          icon: 'info',
-          text: 'Waste',
-          link: '/waste',
-          title: 'Learn more about waste and recycling',
-          active: false,
-        },
-        {
-          icon: 'assignment_turned_in',
-          text: 'Recycle',
-          link: '/recycle',
-          title: 'Some stuff that needs doing',
-          active: false,
-        },
-        {
-          icon: 'email',
-          text: 'Event',
-          link: '/event',
-          title: 'Subscribe to our newsletter',
-          active: false,
-        },
-        {
-          icon: 'email',
-          text: 'Contact',
-          link: '/contact',
-          title: 'Get in touch with us!',
-          active: false,
-        },
+        { icon: 'home', text: 'Home', link: '/', title: 'Go back home page' },
+        { icon: 'info', text: 'Waste', link: '/waste', title: 'Learn more about waste and recycling' },
+        { icon: 'assignment_turned_in', text: 'Recycle', link: '/recycle', title: 'Some stuff that needs doing' },
+        { icon: 'email', text: 'Event', link: '/event', title: 'Subscribe to our newsletter' },
+        { icon: 'email', text: 'Contact', link: '/contact', title: 'Get in touch with us!' },
       ],
     };
   },
   methods: {
     handleClick(link) {
       this.activeLink = link;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.active {
-  color: #34d937;
-  font-family: Arial;
-}
-
 .btn-login {
-  background: #34d937;
-  background-image: -webkit-linear-gradient(top, #34d937, #00ba09);
-  background-image: -moz-linear-gradient(top, #34d937, #00ba09);
-  background-image: -ms-linear-gradient(top, #34d937, #00ba09);
-  background-image: -o-linear-gradient(top, #34d937, #00ba09);
-  background-image: linear-gradient(to bottom, #34d937, #00ba09);
-  -webkit-border-radius: 28px;
-  -moz-border-radius: 28px;
-  border-radius: 28px;
-  text-shadow: 1px 4px 14px #666666;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 12px;
-  padding: 8px 25px 8px 25px;
-  text-decoration: none;
-}
-
-.btn-login:hover {
-  background: #25e310;
-  background-image: -webkit-linear-gradient(top, #25e310, #13d487);
-  background-image: -moz-linear-gradient(top, #25e310, #13d487);
-  background-image: -ms-linear-gradient(top, #25e310, #13d487);
-  background-image: -o-linear-gradient(top, #25e310, #13d487);
-  background-image: linear-gradient(to bottom, #25e310, #13d487);
-  text-decoration: none;
+  @apply bg-green-500 text-white rounded-full px-5 py-2 text-sm font-semibold shadow hover:bg-green-600;
 }
 
 .btn-register {
-  -webkit-border-radius: 28px;
-  -moz-border-radius: 28px;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #307d00;
-  font-size: 12px;
-  padding: 8px 25px 8px 25px;
-  border: solid #0b9d32 2px;
-  text-decoration: none;
-}
-
-.btn-register:hover {
-  background: #25e310;
-  background-image: -webkit-linear-gradient(top, #25e310, #13d487);
-  background-image: -moz-linear-gradient(top, #25e310, #13d487);
-  background-image: -ms-linear-gradient(top, #25e310, #13d487);
-  background-image: -o-linear-gradient(top, #25e310, #13d487);
-  background-image: linear-gradient(to bottom, #25e310, #13d487);
-  text-decoration: none;
-}
-
-.a {
-  text-decoration: none;
-  color:#ffffff;
-  
-}
-nav {
-  position: sticky;
-  width: 100%;
-}
-
-ul {
-  display: flex;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li > a {
-  color: grey;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  color: lightgreen;
+  @apply border border-green-500 text-green-700 rounded-full px-5 py-2 text-sm font-semibold shadow hover:bg-green-100;
 }
 </style>

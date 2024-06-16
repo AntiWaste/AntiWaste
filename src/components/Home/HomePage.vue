@@ -32,6 +32,7 @@
     <how-to />
     <founder-web />
     <faq-ques />
+    <let-chat />
   </v-app>
 </template>
 

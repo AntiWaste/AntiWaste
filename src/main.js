@@ -1,11 +1,12 @@
-import App from './App.vue';
-import { createApp } from 'vue';
-import 'vuetify/dist/vuetify.min.css';
-import router from './router';
-import { createVuetify } from 'vuetify';
 import '@fortawesome/fontawesome-free/css/all.css';
+import { createApp } from 'vue';
+import { createVuetify } from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 import { aliases, fa } from 'vuetify/iconsets/fa';
+import App from './App.vue';
+import './assets/tailwind.css';
 import './axios';
+import router from './router';
 // import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // import { Cloudinary } from "cloudinary-vue";
@@ -13,21 +14,21 @@ import './axios';
 // import "vuetify/styles";
 
 
+import FooterView from '@/components/FooterView.vue';
 import AboutUs from '@/components/Home/AboutUs.vue';
-import TrashCenter from '@/components/Home/TrashCenter.vue';
-import TrustUser from '@/components/Home/TrustUser.vue';
 import FaqQues from '@/components/Home/FaqQues.vue';
 import FounderWeb from '@/components/Home/FounderWeb.vue';
 import HowTo from '@/components/Home/HowTo.vue';
-import FooterView from '@/components/FooterView.vue';
+import TrashCenter from '@/components/Home/TrashCenter.vue';
+import TrustUser from '@/components/Home/TrustUser.vue';
 
 
 //import component
 import NavTop from '@/components/NavTop.vue';
-import WelcomeCard from './components/RecyclePage/WelcomeCard.vue';
-import CategoriesIcon from './components/RecyclePage/CategoriesIcon.vue';
 import CarouselCard from './components/RecyclePage/CarouselCard.vue';
+import CategoriesIcon from './components/RecyclePage/CategoriesIcon.vue';
 import ProductRecycleCard from './components/RecyclePage/ProductRecycleCard';
+import WelcomeCard from './components/RecyclePage/WelcomeCard.vue';
 
 
 
@@ -35,6 +36,7 @@ import ProductRecycleCard from './components/RecyclePage/ProductRecycleCard';
 // Import Vuetify components and directives if needed
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
+import LetChat from './components/LetChat.vue';
 const app = createApp(App);
 
 const vuetify = createVuetify({
@@ -71,6 +73,7 @@ app.component('welcome-card', WelcomeCard);
 app.component('categories-icon', CategoriesIcon);
 app.component('carousel-card', CarouselCard);
 app.component('product-recycle-card', ProductRecycleCard);
+app.component('let-chat', LetChat);
 
 
 //home components
