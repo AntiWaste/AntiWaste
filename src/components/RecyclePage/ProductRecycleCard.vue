@@ -1,186 +1,164 @@
 <template>
-  <v-row align="center" justify="center">
-    <v-col cols="auto" class="custom-card">
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear
-          :active="isActive"
-          color="deep-purple"
-          height="4"
-          indeterminate
-        ></v-progress-linear>
-      </template>
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-20 py-5">
+    <!-- Replace this section with a v-for loop based on items or IDs -->
+    <div v-for="item in items" :key="item.id" class="w-auto overflow-hidden rounded-xl border">
+      <!-- <template v-if="loading">
+        <div class="w-full h-4 bg-green-500 animate-pulse"></div>
+      </template> -->
 
-      <v-img
-        cover
-        height="250"
-        src="../../assets/recycledproduct/image 33.png"
-      ></v-img>
+      <img
+        class="object-cover h-64 w-full"
+        :src="require(`../../assets/recycledproduct/${item.image}`)"
+        alt="Product Image"
+      />
 
-      <v-card-item>
-        <v-card-title>Toothbrush Holder</v-card-title>
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ item.title }}</h3>
 
-        <v-card-subtitle>
-          <span class="me-1">Hannah's Store</span>
+        <div class="flex items-center text-sm text-gray-600">
+          <span class="me-1">{{ item.store }}</span>
+          <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
+        </div>
 
-          <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
-        </v-card-subtitle>
-      </v-card-item>
-
-      <v-card-text>
-        <v-row align="center" class="mx-0">
+        <div class="flex items-center mt-2">
           <v-rating
-            :model-value="4.5"
+            :model-value="item.rating"
             color="amber"
             density="compact"
             half-increments
             readonly
             size="small"
           ></v-rating>
+          <div class="text-gray-600 ms-4">{{ item.rating }} ({{ item.reviews }})</div>
+        </div>
 
-          <div class="text-grey ms-4">4.5 (413)</div>
-        </v-row>
-      </v-card-text>
-      <v-text> Location: Preah Vihear </v-text><br />
-      <v-text>Contact Number: 012207047</v-text>
+        <p class="text-sm text-gray-600 mt-2">Location: {{ item.location }}</p>
+        <p class="text-sm text-gray-600">Contact Number: {{ item.contact }}</p>
 
-      <v-divider class="mx-4 mb-1"></v-divider>
+        <hr class="my-4">
 
-      <v-card-title><b>$4.5</b></v-card-title>
+        <div class="text-lg font-semibold">${{ item.price }}</div>
 
-      <v-card-actions>
-        <v-btn color="deep-purple-lighten-2" variant="text" @click="reserve">
-          Contact Owner
-        </v-btn>
-      </v-card-actions>
-    </v-col>
-    <v-col cols="auto" class="custom-card">
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear
-          :active="isActive"
-          color="deep-purple"
-          height="4"
-          indeterminate
-        ></v-progress-linear>
-      </template>
-
-      <v-img
-        cover
-        height="250"
-        src="../../assets/recycledproduct/image 34.png"
-      ></v-img>
-
-      <v-card-item>
-        <v-card-title>Pen holder</v-card-title>
-
-        <v-card-subtitle>
-          <span class="me-1">Hannah's Store</span>
-
-          <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
-        </v-card-subtitle>
-      </v-card-item>
-
-      <v-card-text>
-        <v-row align="center" class="mx-0">
-          <v-rating
-            :model-value="4.5"
-            color="amber"
-            density="compact"
-            half-increments
-            readonly
-            size="small"
-          ></v-rating>
-
-          <div class="text-grey ms-4">4.5 (413)</div>
-        </v-row>
-      </v-card-text>
-      <v-text> Location: Preah Vihear </v-text><br />
-      <v-text>Contact Number: 012207047</v-text>
-
-      <v-divider class="mx-4 mb-1"></v-divider>
-
-      <v-card-title><b>$4.5</b></v-card-title>
-
-      <v-card-actions>
-        <v-btn color="deep-purple-lighten-2" variant="text" @click="reserve">
-          Contact Owner
-        </v-btn>
-      </v-card-actions>
-    </v-col>
-    <v-col cols="auto" class="custom-card">
-      <template v-slot:loader="{ isActive }">
-        <v-progress-linear
-          :active="isActive"
-          color="deep-purple"
-          height="4"
-          indeterminate
-        ></v-progress-linear>
-      </template>
-
-      <v-img
-        cover
-        height="250"
-        src="../../assets/recycledproduct/image 36.png"
-      ></v-img>
-
-      <v-card-item>
-        <v-card-title>Flower Plots</v-card-title>
-
-        <v-card-subtitle>
-          <span class="me-1">Hannah's Store</span>
-
-          <v-icon color="error" icon="mdi-fire-circle" size="small"></v-icon>
-        </v-card-subtitle>
-      </v-card-item>
-
-      <v-card-text>
-        <v-row align="center" class="mx-0">
-          <v-rating
-            :model-value="4.5"
-            color="amber"
-            density="compact"
-            half-increments
-            readonly
-            size="small"
-          ></v-rating>
-
-          <div class="text-grey ms-4">4.5 (413)</div>
-        </v-row>
-      </v-card-text>
-      <v-text> Location: Preah Vihear </v-text><br />
-      <v-text>Contact Number: 012207047</v-text>
-
-      <v-divider class="mx-4 mb-1"></v-divider>
-
-      <v-card-title><b>$4.5</b></v-card-title>
-
-      <v-card-actions>
-        <v-btn color="deep-purple-lighten-2" variant="text" @click="reserve">
-          Contact Owner
-        </v-btn>
-      </v-card-actions>
-    </v-col>
-  </v-row>
+        <div>
+          <!-- <button
+            class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none"
+            @click="reserve(item.id)"
+            :disabled="loading"
+          >
+            {{ loading ? 'Reserving...' : 'Contact Owner' }}
+          </button> -->
+          <router-link :to="'/details/' + item.id">
+            <button class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none">View Detail</button>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <!-- End of v-for loop -->
+  </div>
 </template>
+
 <script>
 export default {
-  data: () => ({
-    loading: false,
-    selection: 1,
-  }),
-
-  methods: {
-    reserve() {
-      this.loading = true;
-      setTimeout(() => (this.loading = false), 2000);
-    },
+  data() {
+    return {
+      loading: false,
+      items: [
+        {
+          id: 1,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        {
+          id: 2,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        {
+          id: 3,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        {
+          id: 4,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        {
+          id: 5,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        {
+          id: 6,
+          title: "Toothbrush Holder",
+          store: "Hannah's Store",
+          rating: 4.5,
+          reviews: 413,
+          location: "Preah Vihear",
+          contact: "012207047",
+          price: 4.5,
+          image: "image 34.png",
+        },
+        // Add more items as needed
+      ],
+    };
   },
-  
+  // methods: {
+  //   reserve(itemId) {
+  //     // Placeholder method for handling reservation
+  //     console.log("Contact owner for item ID:", itemId);
+      
+  //     // Simulate loading state for 2 seconds
+  //     this.loading = true;
+  //     setTimeout(() => {
+  //       this.loading = false;
+  //       // Add logic to handle successful reservation
+  //       console.log("Reservation completed for item ID:", itemId);
+  //     }, 2000);
+  //   },
+  // },
 };
 </script>
+
 <style scoped>
-.custom-card {
-  /* max-width: 1000px; */
-  width: 425px;
-  /* height: 117px; Adjust the height to maintain the aspect ratio */
+/* .custom-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
 }
+
+.custom-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+} */
 </style>

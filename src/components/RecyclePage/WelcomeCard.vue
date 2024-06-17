@@ -1,34 +1,25 @@
 <template>
   <div id="app">
-    <v-card class="mx-auto" max-height="437.28">
-      <v-img
-        class="align-end text-white"
-        height="437.28"
-        src="../../assets/image 20.png"
-        cover
-      >
-        <div id="welcomeText">
-          <v-card-title max-width="1053" max-height="156" class="text-md-h4"
-            >Welcome to KompongCham Recycling’s Store</v-card-title
-          >
-          <v-card-title class="text-h6">
-            Please enjoy buying our product, feel free to delivery to other
-            province too.
-          </v-card-title>
+    <v-card class="mx-auto" max-height="435">
+    <v-img
+      class=" text-white flex justify-center items-center"
+      height="435"
+      src="../../assets/recycledproduct/image_cover.jpg"
+      cover
+    >
+      <div id="welcomeText" class="flex flex-col justify-center items-center">
+        <div class="text-4xl font-bold mb-3">Welcome to AntiWaste Recycling’s Store</div>
+        <div class="text-h6">
+          Please enjoy buying our product, feel free to deliver to other provinces too.
         </div>
-      </v-img>
-    </v-card>
+      </div>
+    </v-img>
+  </v-card>
   </div>
 </template>
 
 <script>
 export default {
   name: "WelcomeCard",
-  components: {},
 };
 </script>
-<style scoped>
-/* #welcomeText {
-  text-align: center;
-} */
-</style>
