@@ -1,28 +1,40 @@
 <template>
-  <div class="h-screen align-center bg-green-lighten-4">
-    <div class="d-flex justify-space-between align-center p-4 h-screen">
-      <v-img
-        cover
-        class="p-6"
-        width="auto"
-        height="auto"
-        src="../../assets/event/image 3 (1).png"
-      ></v-img>
-      <div class="d-flex flex-column">
-        <h2 class="pa-md-2 display-6 font-weight-bold">Make you own event</h2>
-        <p class="pa-md-2 mx-lg-auto">
-          By create events to inspire people to take action and make changes in
-          their own lives.And also educate people about the diffirent types of
-          waste and how to manage them
+  <div class="h-screen flex items-center bg-gradient-to-r from-gray-100 via-green-100 to-gray-200">
+    <div class="flex flex-col md:flex-row items-center justify-between p-4 w-full h-full">
+      <img
+        class="w-full md:w-1/2 p-6 object-cover"
+        :src="require('@/assets/event/image 3 (1).png')"
+        alt="Event Image"
+      />
+      <div class="flex flex-col items-center md:items-start justify-center mb-8 md:text-left w-full md:w-1/2">
+        <h2 class="text-4xl font-bold mb-4">Make your own event</h2>
+        <p class="flex flex-wrap mb-4 ">
+          Create events to inspire people to take action and make changes in
+          their own lives. Educate people about the different types of waste and
+          how to manage them.
         </p>
         <div>
-          <v-btn class="text-white bg-green rounded-lg"
-            ><a @click="this.$router.push('create-event')"
-              >Create Event</a
-            ></v-btn
+          <router-link to="/"
+            class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
           >
+            Create Event
+          </router-link>
+          <router-link to="/" class="bg-gray-50 ml-4 px-4 py-2 rounded-lg text-green-500 hover:bg-gray-500 hover:text-green-600">
+            See More
+          </router-link>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    navigateToCreateEvent() {
+      this.$router.push({ name: 'CreateEvent' });
+    },
+  },
+};
+</script>
+

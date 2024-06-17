@@ -1,95 +1,69 @@
-<!-- <template>
-  <v-sheet class="mx-auto" max-width="300">
-    <v-form validate-on="submit lazy" @submit.prevent="submit">
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        label="title"
-      ></v-text-field>
-      <v-text-field
-        v-model="title"
-        :rules="rules"
-        label="title"
-      ></v-text-field>
-
-      <v-btn
-        :loading="loading"
-        class="mt-2"
-        text="Submit"
-        type="submit"
-        block
-      ></v-btn>
-    </v-form>
-  </v-sheet>
-</template>
-  
-  <script>
-export default {
-  data: (vm) => ({
-    loading: false,
-    rules: [(value) => vm.checkApi(value)],
-    timeout: null,
-    title: "",
-  }),
-
-  methods: {
-    async submit(event) {
-      this.loading = true;
-
-      const results = await event;
-
-      this.loading = false;
-
-      alert(JSON.stringify(results, null, 2));
-    },
-    async checkApi(title) {
-      return new Promise((resolve) => {
-        clearTimeout(this.timeout);
-
-        this.timeout = setTimeout(() => {
-          if (!title) return resolve("Please enter title.");
-        }, 1000);
-      });
-    },
-  },
-};
-</script> -->
 <template>
-  <v-container>
-    <v-form @submit.prevent="submitEvent">
-      <v-text-field
-        v-model="event.title"
-        label="Event Title"
-        required
-      ></v-text-field>
-      <v-date-picker
-        v-model="event.date"
-        label="Event Date"
-        required
-      ></v-date-picker>
-      <v-text-field
-        v-model="event.maxParticipants"
-        label="Max Number of Participants"
-        type="number"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="event.location"
-        label="Location"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="creatorName"
-        label="Your Name"
-        required
-      ></v-text-field>
-      <v-btn type="submit" color="success">Create Event</v-btn>
-    </v-form>
-  </v-container>
+  <div class="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg">
+    <form @submit.prevent="submitEvent" class="space-y-4">
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Event Title</label>
+        <input
+          id="title"
+          v-model="event.title"
+          type="text"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="date">Event Date</label>
+        <input
+          id="date"
+          v-model="event.date"
+          type="date"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="maxParticipants">Max Number of Participants</label>
+        <input
+          id="maxParticipants"
+          v-model="event.maxParticipants"
+          type="number"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Location</label>
+        <input
+          id="location"
+          v-model="event.location"
+          type="text"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="creatorName">Your Name</label>
+        <input
+          id="creatorName"
+          v-model="creatorName"
+          type="text"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <button
+          type="submit"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Create Event
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
 
-  
-  <script>
+<script>
 export default {
   data() {
     return {
@@ -111,3 +85,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* Add any additional scoped styles here */
+</style>
