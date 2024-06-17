@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class="container mx-auto p-6">
+    <div class="container mx-auto p-6 px-10">
       <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-10">
         <img
           class="w-[350px]"
@@ -18,7 +18,7 @@
             preserve wildlife and habitats. In addition, effective waste
             management can also help to create jobs.
           </p>
-          <h6 class="text-green-600 font-semibold">Mey Nana</h6>
+          <h6 class="text-green-600 text-xl font-semibold">Mey Nana</h6>
           <p class="text-gray-500">Co-Founder of AntiWaste</p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gradient-to-r from-gray-100 via-green-100 to-gray-200">
-    <div class="container mx-auto p-6">
-      <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-10">
+    <div class="container mx-auto p-6 max-sm:flex px-10">
+      <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-10 ">
         <img
           class="w-[350px] h-[400px] object-cover"
           :src="require('../../assets/Sticker_icon/how-to-recycle.png')"
@@ -21,7 +21,7 @@
             bundling products, offering free shipping, or providing incentives for
             referrals.
           </p>
-          <button @click="learnMore" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 w-1/4">
+          <button @click="learnMore" class="bg-green-500 text-white py-2 px-5 rounded hover:bg-green-600 w-1/4 ">
             Learn More
           </button>
         </div>

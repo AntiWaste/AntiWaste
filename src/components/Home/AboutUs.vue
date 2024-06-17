@@ -1,5 +1,5 @@
 <template>
-  <div class="background">
+  <div class="bg-white">
     <v-container>
       <!-- Main content section -->
       <div class="flex flex-col md:flex-row items-center justify-between py-16">
@@ -29,10 +29,10 @@
       </div>
 
       <!-- Cards section -->
-      <div class="flex flex-wrap -mx-4">
+      <div class="flex flex-wrap -mx-4 ">
         <div class="w-full md:w-1/3 px-4 mb-8">
-          <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="text-xl font-bold mb-4">Our Mission</div>
+          <div class=" rounded-lg shadow-lg bg-gradient-to-r from-gray-100 via-green-100 to-gray-200 p-6">
+            <div class="text-xl font-bold mb-4 text-green-500">Our Mission</div>
             <p class="text-gray-700">
               At AntiWaste, we are on a mission to create a sustainable future
               by reducing waste and promoting responsible consumption. We
@@ -43,8 +43,8 @@
         </div>
 
         <div class="w-full md:w-1/3 px-4 mb-8">
-          <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="text-xl font-bold mb-4">Who We Are?</div>
+          <div class="bg-gradient-to-r from-gray-100 via-green-100 to-gray-200 rounded-lg shadow-lg p-6">
+            <div class="text-xl font-bold mb-4 text-green-500">Who We Are?</div>
             <p class="text-gray-700">
               AntiWaste is a team of passionate individuals dedicated to
               building a community that values and practices environmental
@@ -56,8 +56,8 @@
         </div>
 
         <div class="w-full md:w-1/3 px-4 mb-8">
-          <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="text-xl font-bold mb-4">Our Vision</div>
+          <div class="bg-gradient-to-r from-gray-100 via-green-100 to-gray-200 rounded-lg shadow-lg p-6">
+            <div class="text-xl font-bold mb-4 text-green-500">Our Vision</div>
             <p class="text-gray-700">
               Our vision is to create a world where waste is minimized, and
               resources are utilized responsibly. We envision a community that
@@ -75,9 +75,4 @@
 export default {};
 </script>
 
-<style scoped>
-.background {
-  background-color: #f7f2f2;
-  background-image: linear-gradient(62deg, #f7f2f2 0%, #ebfff0 50%, #f5f3f3 100%);
-}
-</style>
+

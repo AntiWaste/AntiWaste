@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class=" p-20 bg-gradient-to-r from-gray-100 via-green-100 to-gray-200 shadow-lg rounded-lg">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between max-sm:flex max-sm:flex-col">
     <!-- Left section with text content -->
     <div class="flex flex-col items-center justify-center mx-auto">
       <div class="font-bold text-4xl text-center mb-5">
@@ -26,7 +26,7 @@
               <div class="w-full h-48 overflow-hidden">
                 <img :src="requireImage(item.image)" :alt="item.altText" class="w-full h-auto object-cover" />
               </div>
-              <div class="text-center mt-4">
+              <div class="text-center mt-4 ">
                 <div class="font-bold text-xl mb-2">{{ item.title }}</div>
                 <p class="text-gray-700">{{ item.description }}</p>
                 <v-btn class="mt-4 px-6 py-2 rounded-lg hover:bg-green-700">
