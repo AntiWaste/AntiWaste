@@ -4,7 +4,7 @@
       <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0 lg:space-x-10">
         <img
           class="w-[350px]"
-         ('../. :src="require./assets/event/image 9.png')"
+         :src="require('../../assets/event/image 9.png')"
           alt="Waste Management Image"
         />
         <div class="flex flex-col justify-center space-y-4">
