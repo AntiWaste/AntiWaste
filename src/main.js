@@ -13,7 +13,6 @@ import router from './router';
 
 // import "vuetify/styles";
 
-
 import FooterView from '@/components/FooterView.vue';
 import AboutUs from '@/components/Home/AboutUs.vue';
 import FaqQues from '@/components/Home/FaqQues.vue';
@@ -29,7 +28,6 @@ import CarouselCard from './components/RecyclePage/CarouselCard.vue';
 import CategoriesIcon from './components/RecyclePage/CategoriesIcon.vue';
 import ProductRecycleCard from './components/RecyclePage/ProductRecycleCard';
 import WelcomeCard from './components/RecyclePage/WelcomeCard.vue';
-
 
 
 
@@ -72,7 +70,6 @@ app.component('nav-top', NavTop);
 app.component('welcome-card', WelcomeCard);
 app.component('categories-icon', CategoriesIcon);
 app.component('carousel-card', CarouselCard);
-app.component('product-recycle-card', ProductRecycleCard);
 app.component('let-chat', LetChat);
 
 
@@ -88,10 +85,15 @@ app.component('footer-view', FooterView);
 
 
 
-
 // Register components
 app.component('v-app', components.VApp);
 app.component('v-main', components.VMain);
 app.component('v-container', components.VContainer);
+
+
+
+// Register ProductDetails and ProductRecycle globally
+app.component('product-recycle-card', ProductRecycleCard);
+
 
 app.use(router).use(vuetify).mount('#app');

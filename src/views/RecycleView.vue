@@ -18,9 +18,10 @@
 
     <!-- Right section with button -->
     <div class="pr-20">
-      <v-btn class="w-32 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full">
-        {{ isExpanded ? 'See Less' : 'See More' }}
-      </v-btn>
+   
+      <button @click="navigateToListingProduct" class="w-32 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full">
+        See More
+      </button>
     </div>
     </div>
       
@@ -43,9 +44,10 @@
 
     <!-- Right section with button -->
     <div class="pr-20">
-      <v-btn class="w-32 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full">
-        {{ isExpanded ? 'See Less' : 'See More' }}
-      </v-btn>
+     
+      <button  @click="navigateToListingProduct" class="w-32 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full">
+        See More
+      </button>
     </div>
     </div>
       <product-recycle-card></product-recycle-card>
@@ -54,5 +56,15 @@
 </template>
 
 <script>
-export default {};
+// import NavTop from '@/components/NavTop.vue';
+export default {
+  methods: {
+    navigateToListingProduct() {
+      // Programmatically navigate to /listing-product route
+      this.$router.push('/listing-product');
+    },
+  },
+ 
+};
 </script>
+

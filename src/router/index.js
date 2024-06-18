@@ -9,6 +9,8 @@ import RecycleView from "../views/RecycleView.vue";
 import SignupView from "../views/auth/SignupView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import EventForm from "@/components/Event/EventForm.vue";
+import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
+import ProductDetails from "../components/RecyclePage/ProductDetails.vue"
 
 const routes = [
   {
@@ -56,6 +58,16 @@ const routes = [
         path: "contact",
         name: "contact-us",
         component: ContactUs
+      },
+      {
+        path: "listing-product",
+        name: "listing-product",
+        component: ListingProduct
+      },
+      {
+        path: "product-detail/:id",
+        name: "product-detail",
+        component: ProductDetails
       }
     ]
   }
