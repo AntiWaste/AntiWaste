@@ -965,13 +965,13 @@ form .icon {
   padding: 0 3rem;
   border: 0;
   border-radius: 3rem;
-  background-image: linear-gradient(131deg, #ffd340, #ff923c, #ff923c, #ff923c);
+  background-image: linear-gradient(131deg, #3acb3c, #3acb3c, #3acb3c, #3acb3c);
   background-size: 300% 100%;
   transition: all 0.3s ease-in-out;
 }
 
 .btn.btn-primary:hover:enabled {
-  box-shadow: 0 0.5em 0.5em -0.4em #ff923cba;
+  box-shadow: 0 0.5em 0.5em -0.4em #3acb3cba;
   background-size: 100% 100%;
   transform: translateY(-0.15em);
 }

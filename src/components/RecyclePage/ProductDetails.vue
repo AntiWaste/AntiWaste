@@ -75,6 +75,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -83,24 +85,21 @@ export default {
   },
   computed: {
     productImage() {
+      // Handle null case to avoid errors
+      if (!this.product) return null;
       return require(`../../assets/recycledproduct/${this.product.image}`);
     },
   },
   mounted() {
     const productId = this.$route.params.id;
-    // Fetch product data by ID (here, we'll use a static example)
-    this.product = {
-      id: productId,
-      title: "Toothbrush Holder",
-      store: "Hannah's Store",
-      rating: 4.5,
-      reviews: 413,
-      location: "Preah Vihear",
-      contact: "012207047",
-      price: 4.5,
-      image: "image 34.png",
-      description: "This is a detailed description of the product.",
-    };
+    // Replace with your actual API endpoint
+    axios.get(`https://backend.antiwaste.shop/api/products/${productId}`)
+      .then(response => {
+        this.product = response.data; // Assuming your API response contains product data
+      })
+      .catch(error => {
+        console.error('Error fetching product:', error);
+      });
   },
   methods: {
     navigateBack() {

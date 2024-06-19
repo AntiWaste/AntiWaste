@@ -42,95 +42,25 @@
 
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       loading: false,
-      items: [
-        {
-          id: 1,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        {
-          id: 2,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        {
-          id: 3,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        {
-          id: 4,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        {
-          id: 5,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        {
-          id: 6,
-          title: "Toothbrush Holder",
-          store: "Hannah's Store",
-          rating: 4.5,
-          reviews: 413,
-          location: "Preah Vihear",
-          contact: "012207047",
-          price: 4.5,
-          image: "image 34.png",
-        },
-        // Add more items as needed
-      ],
+      items: [],
     };
   },
-  // methods: {
-  //   reserve(itemId) {
-  //     // Placeholder method for handling reservation
-  //     console.log("Contact owner for item ID:", itemId);
-      
-  //     // Simulate loading state for 2 seconds
-  //     this.loading = true;
-  //     setTimeout(() => {
-  //       this.loading = false;
-  //       // Add logic to handle successful reservation
-  //       console.log("Reservation completed for item ID:", itemId);
-  //     }, 2000);
-  //   },
-  // },
+  mounted() {
+    // Replace with your actual API endpoint
+    axios.get('https://backend.antiwaste.shop/api/products')
+      .then(response => {
+        this.items = response.data; // Assuming your API returns an array of products
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  },
 };
 </script>
 
