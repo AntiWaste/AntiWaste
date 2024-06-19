@@ -1,92 +1,101 @@
 <template>
-  <div class="container">
-    <div class="d-flex">
-      <div class="img">
-        <img :src="img" alt="recycle" width="450" />
+  <div class="container flex flex-col lg:flex-row items-center justify-center min-h-screen">
+    <div class="hidden lg:block">
+      <img :src="img" alt="recycle" class="w-full max-w-md" />
+    </div>
+    <div class="flex flex-col items-center lg:ml-10 px-10 py-5 w-full max-w-lg">
+      <h2 class="text-2xl font-semibold mb-4 font-mono">Create New Account</h2>
+      <div class="w-full">
+        <label class="block text-sm font-medium text-gray-700">Account</label>
+        <v-text-field
+          density="compact"
+          placeholder="Username"
+          variant="outlined"
+          v-model="username"
+          class="w-full"
+        ></v-text-field>
       </div>
-      <v-container class="d-flex flex-column align-center m-15">
-        <h2>Register</h2>
-        <div class="wrap-f">
-          <div
-            class="text-subtitle-1 text-medium-emphasis d-flex text-align-start"
-          >
-            Account
-          </div>
-          <v-text-field
-            density="compact"
-            placeholder="Username "
-            variant="outlined"
-            v-model="username"
-          ></v-text-field>
+      <div class="w-full ">
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <v-text-field
+          density="compact"
+          placeholder="Email"
+          variant="outlined"
+          type="email"
+          v-model="email"
+          class="w-full"
+        ></v-text-field>
+      </div>
+      <div class="w-full ">
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <v-text-field
+          density="compact"
+          placeholder="Password"
+          variant="outlined"
+          type="password"
+          v-model="password"
+          class="w-full"
+        ></v-text-field>
+      </div>
+      <div class="w-full ">
+        <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+        <v-text-field
+          density="compact"
+          placeholder="Confirm Password"
+          variant="outlined"
+          type="password"
+          v-model="confirmPassword"
+          class="w-full"
+        ></v-text-field>
+      </div>
+      <v-select
+        class="w-full "
+        dense
+        outlined
+        label="Role"
+        v-model="role"
+        :items="roleOptions"
+      ></v-select>
+      <v-text v-if="validated" class="text-red-500 mb-2">
+        {{ messageError }}
+      </v-text>
+      <div
+        class="bg-green-500 text-white py-2 px-4 rounded cursor-pointer mb-4"
+        @click="register"
+      >
+        Register
+      </div>
+      <p class="text-gray-700">
+        Already have an account?
+        <a @click="this.$router.push('login')" class="text-red-500 hover:text-green-500 cursor-pointer">Sign In</a>
+      </p>
+      <div class="flex space-x-4 mt-4">
+        <div class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+          <img
+            src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
+            width="20"
+            alt="Google"
+          />
+          <span>Google</span>
         </div>
-        <div class="wrap-f">
-          <div
-            class="text-subtitle-1 text-medium-emphasis d-flex text-align-start"
-          >
-            Email
-          </div>
-          <v-text-field
-            density="compact"
-            placeholder="Email "
-            variant="outlined"
-            type="email"
-            v-model="email"
-          ></v-text-field>
+        <div class="flex items-center space-x-2 bg-gray-100  hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+          <img
+            src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
+            width="20"
+            alt="Facebook"
+          />
+          <span>Facebook</span>
         </div>
-        <div class="wrap-f">
-          <div
-            class="text-subtitle-1 text-medium-emphasis d-flex text-align-start"
-          >
-            Password
-          </div>
-          <v-text-field
-            density="compact"
-            placeholder="Password "
-            variant="outlined"
-            type="password"
-            v-model="password"
-          ></v-text-field>
-        </div>
-        <v-select
-          class="wrap-f"
-          dense
-          outlined
-          label="Role"
-          v-model="role"
-          :items="roleOptions"
-        ></v-select>
-        <v-text v-if="validated" class="error-validation-message">
-          {{ messageError }}
-        </v-text>
-        <div class="_icon bg-green" @click="register">Register</div>
-        <p class="signup">
-          Already have an account?
-          <a @click="this.$router.push('login')">Sign In</a>
-        </p>
-        <div class="login-methods2 text-center">
-          <div class="_icon">
-            <img
-              src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
-              width="20"
-            />
-            <span>Google</span>
-          </div>
-          <div class="_icon">
-            <img
-              src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
-              width="20"
-            />
-            <span>Facebook</span>
-          </div>
-        </div>
-      </v-container>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { useToast } from "vue-toastification";
 import Image from "../../assets/recycle.jpg";
+
 export default {
   data() {
     return {
@@ -95,6 +104,7 @@ export default {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
       role: "",
       validated: false,
       messageError: "",
@@ -102,40 +112,46 @@ export default {
   },
   methods: {
     async register() {
+      const toast = useToast();
       if (
-        this.username == "" ||
-        this.email == "" ||
-        this.password == "" ||
-        this.role == ""
+        this.username === "" ||
+        this.email === "" ||
+        this.password === "" ||
+        this.confirmPassword === "" ||
+        this.role === ""
       ) {
         this.validated = true;
         this.messageError = "Please fill all the fields";
+        toast.error(this.messageError);
+      } else if (this.password !== this.confirmPassword) {
+        this.validated = true;
+        this.messageError = "Passwords do not match";
+        toast.error(this.messageError);
       } else {
-        // const data = {
-        //   username: this.username,
-        //   email: this.email,
-        //   password: this.password,
-        //   role: this.role,
-        // };
-        await axios
-          .post("http://localhost:5000/api/auth/register", {
+        try {
+          const response = await axios.post("http://localhost:5000/api/register", {
             username: this.username,
             email: this.email,
             password: this.password,
             role: this.role,
-          })
-          .then((res) => {
-            this.validated = false;
-            this.messageError = "";
-            this.$router.push("login");
-            console.log(res.data);
-          })
-          .catch((err) => {
-            this.validated = true;
-            this.messageError = err.response.data.message;
-            console.log(this.messageError);
-            console.log(err);
           });
+          this.validated = false;
+          this.messageError = "";
+          toast.success("Registration successful");
+          this.$router.push("login");
+          console.log(response.data);
+        } catch (error) {
+          this.validated = true;
+          if (error.response) {
+            this.messageError = error.response.data.message || "Registration failed";
+          } else if (error.request) {
+            this.messageError = "No response received from server";
+          } else {
+            this.messageError = "Error in making request: " + error.message;
+          }
+          toast.error(this.messageError);
+          console.error("Error details:", error);
+        }
       }
     },
   },
@@ -143,31 +159,10 @@ export default {
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  @apply flex justify-center items-center min-h-screen;
 }
-._icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  border: 1px solid gray;
-  width: 300px;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.wrap-f {
-  width: 300px;
-}
-.error-validation-message {
-  color: red;
-}
-@media screen and (max-width: 720px) {
+@media (max-width: 1024px) {
   .img {
     display: none;
   }

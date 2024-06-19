@@ -7,6 +7,8 @@ import App from './App.vue';
 import './assets/tailwind.css';
 import './axios';
 import router from './router';
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
 // import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // import { Cloudinary } from "cloudinary-vue";
@@ -95,5 +97,5 @@ app.component('v-container', components.VContainer);
 // Register ProductDetails and ProductRecycle globally
 app.component('product-recycle-card', ProductRecycleCard);
 
-
+app.use(Toast);
 app.use(router).use(vuetify).mount('#app');
