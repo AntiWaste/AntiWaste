@@ -11,7 +11,7 @@ import SignInView from "../views/auth/SignInView.vue";
 import EventForm from "@/components/Event/EventForm.vue";
 import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
 import ProductDetails from "../components/RecyclePage/ProductDetails.vue"
-
+import store from '../store';
 const routes = [
   {
     path: "/register",
@@ -78,21 +78,14 @@ const router = createRouter({
   routes
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!isAuthenticated()) {
-      next({
-        path: "/login",
-        query: { redirect: to.fullPath }
-      });
-    } else {
-      next();
-    }
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthenticated = store.getters.isAuthenticated;
+
+  if (requiresAuth && !isAuthenticated) {
+    next('/login');
   } else {
     next();
   }
 });
-function isAuthenticated() {
-  return localStorage.getItem("user");
-}
 
 export default router;

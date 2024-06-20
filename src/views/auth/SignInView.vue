@@ -30,12 +30,13 @@
       <v-text v-if="validated" class="error-validation-message">
         {{ messageError }}
       </v-text>
-      <div
-        class="bg-green-500 text-white py-2 px-4 rounded cursor-pointer mb-4"
-        @click="login"
+      <v-btn 
+        color="green"
+        class="text-white py-2 px-4 rounded cursor-pointer mb-4"
+        @click="handleLogin"
       >
         Login
-      </div>
+    </v-btn>
       <p class="text-gray-700">
         Don't you have an account?
         <a @click="this.$router.push('register')" class="text-red-500 hover:text-green-500 cursor-pointer">Sign Up</a>
@@ -63,23 +64,24 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import Image from '../../assets/recycle.jpg';
-
+// import axios from 'axios';
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
       img: Image,
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       validated: false,
       messageError: '',
       user: null,
     };
   },
   methods: {
-    async login() {
+    ...mapActions(['login']),
+    async handleLogin() {
       const toast = useToast();
       if (this.email === '' || this.password === '') {
         this.validated = true;
@@ -91,11 +93,11 @@ export default {
           password: this.password,
         };
         try {
-          const res = await axios.post('http://localhost:5000/api/auth/login', data);
+          await this.login(data);
           this.validated = false;
           this.messageError = '';
-          this.user = res.data;
-          localStorage.setItem('token', res.data.token);
+          //  this.user = res.data;
+          // localStorage.setItem('token', res.data.token);
           toast.success('Login successful');
           this.$router.push('/');
         } catch (err) {

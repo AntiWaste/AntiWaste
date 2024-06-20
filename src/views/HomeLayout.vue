@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <nav-top />
+    <nav-top :user="user"/>
     <router-view />
     <footer-view />
   </v-app>
@@ -12,9 +12,10 @@
 export default {
   data() {
     return {
-      user: null,
+      user: "",
     };
   },
+  
   // async created() {
   //   const token = localStorage.getItem('token');
   //   if (token) {

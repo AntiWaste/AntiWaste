@@ -7,8 +7,8 @@ import App from './App.vue';
 import './assets/tailwind.css';
 import './axios';
 import router from './router';
-import Toast from "vue-toastification";
-import "vue-toastification/dist/index.css";
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 // import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // import { Cloudinary } from "cloudinary-vue";
@@ -23,7 +23,6 @@ import HowTo from '@/components/Home/HowTo.vue';
 import TrashCenter from '@/components/Home/TrashCenter.vue';
 import TrustUser from '@/components/Home/TrustUser.vue';
 
-
 //import component
 import NavTop from '@/components/NavTop.vue';
 import CarouselCard from './components/RecyclePage/CarouselCard.vue';
@@ -31,13 +30,26 @@ import CategoriesIcon from './components/RecyclePage/CategoriesIcon.vue';
 import ProductRecycleCard from './components/RecyclePage/ProductRecycleCard';
 import WelcomeCard from './components/RecyclePage/WelcomeCard.vue';
 
-
-
 // Import Vuetify components and directives if needed
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import LetChat from './components/LetChat.vue';
+import store from '@/store/index';
+// import axios from 'axios';
+
+// axios.defaults.baseURL = 'http://localhost:8000/api';
+import axiosInstance from './axios'; // Import the Axios instance
 const app = createApp(App);
+
+// Composables
+
+// Make the Axios instance available globally
+app.config.globalProperties.$axios = axiosInstance;
+
+// const token = localStorage.getItem('token');
+// if (token) {
+//   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+// }
 
 const vuetify = createVuetify({
   components,
@@ -74,7 +86,6 @@ app.component('categories-icon', CategoriesIcon);
 app.component('carousel-card', CarouselCard);
 app.component('let-chat', LetChat);
 
-
 //home components
 
 app.component('about-us', AboutUs);
@@ -85,17 +96,13 @@ app.component('founder-web', FounderWeb);
 app.component('how-to', HowTo);
 app.component('footer-view', FooterView);
 
-
-
 // Register components
 app.component('v-app', components.VApp);
 app.component('v-main', components.VMain);
 app.component('v-container', components.VContainer);
 
-
-
 // Register ProductDetails and ProductRecycle globally
 app.component('product-recycle-card', ProductRecycleCard);
 
 app.use(Toast);
-app.use(router).use(vuetify).mount('#app');
+app.use(router).use(store).use(vuetify).mount('#app');
