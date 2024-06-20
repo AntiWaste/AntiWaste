@@ -15,6 +15,8 @@ import PostingForm from "../components/RecyclePage/PostingForm.vue";
 import ThankYou from "../components/RecyclePage/ThankYou.vue";
 import WasteListing from '../components/Waste/WasteListing.vue'
 import SellWaste from '../components/Waste/SellWaste.vue'
+import DetailPage from '../components/Event/DetailPage.vue';
+import EventPost from '../components/Event/EventPost.vue'
 
 const routes = [
   {
@@ -97,6 +99,16 @@ const routes = [
         path: "waste-form",
         name: "waste-form",
         component: SellWaste 
+      },
+      {
+        path: "event-detail",
+        name: "event-detail",
+        component: DetailPage
+      },
+      {
+        path: "event-post",
+        name: "event-post",
+        component: EventPost
       }
     ]
   }

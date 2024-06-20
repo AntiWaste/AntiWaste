@@ -14,9 +14,11 @@
               <div
                 class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity"
               >
-                <button class="text-white bg-red-500 px-4 py-2 rounded">
-                  See more info
-                </button>
+                <router-link to="/event-detail">
+                  <button class="text-white bg-red-500 px-4 py-2 rounded">
+                    See more info
+                  </button>
+                </router-link>
               </div>
             </div>
             <div class="mt-4">
@@ -28,20 +30,6 @@
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat.
               </p>
-              <div class="flex justify-center mt-4">
-                <div class="flex items-center">
-                  <svg
-                    v-for="star in 5"
-                    :key="star"
-                    :class="{'text-pink-500': star <= 4, 'text-gray-300': star > 4}"
-                    class="w-4 h-4 fill-current"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M10 15l-5.4 3.3 1-6-4.4-4.3 6.1-.9L10 0l2.7 5.1 6.1.9-4.4 4.3 1 6z"/>
-                  </svg>
-                </div>
-              </div>
             </div>
           </div>
         </div>
