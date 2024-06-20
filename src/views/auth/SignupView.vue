@@ -1,5 +1,7 @@
 <template>
-  <div class="container flex flex-col lg:flex-row items-center justify-center min-h-screen">
+  <div
+    class="container flex flex-col lg:flex-row items-center justify-center min-h-screen"
+  >
     <div class="hidden lg:block">
       <img :src="img" alt="recycle" class="w-full max-w-md" />
     </div>
@@ -15,7 +17,7 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <div class="w-full ">
+      <div class="w-full">
         <label class="block text-sm font-medium text-gray-700">Email</label>
         <v-text-field
           density="compact"
@@ -26,7 +28,7 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <div class="w-full ">
+      <div class="w-full">
         <label class="block text-sm font-medium text-gray-700">Password</label>
         <v-text-field
           density="compact"
@@ -37,8 +39,10 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <div class="w-full ">
-        <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+      <div class="w-full">
+        <label class="block text-sm font-medium text-gray-700"
+          >Confirm Password</label
+        >
         <v-text-field
           density="compact"
           placeholder="Confirm Password"
@@ -49,12 +53,13 @@
         ></v-text-field>
       </div>
       <v-select
-        class="w-full "
-        dense
-        outlined
-        label="Role"
         v-model="role"
         :items="roleOptions"
+        label="Role"
+        dense
+        outlined
+        placeholder="Select Role"
+        class="w-full mt-4"
       ></v-select>
       <v-text v-if="validated" class="text-red-500 mb-2">
         {{ messageError }}
@@ -67,10 +72,16 @@
       </div>
       <p class="text-gray-700">
         Already have an account?
-        <a @click="this.$router.push('login')" class="text-red-500 hover:text-green-500 cursor-pointer">Sign In</a>
+        <a
+          @click="this.$router.push('login')"
+          class="text-red-500 hover:text-green-500 cursor-pointer"
+          >Sign In</a
+        >
       </p>
       <div class="flex space-x-4 mt-4">
-        <div class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+        <div
+          class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer"
+        >
           <img
             src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
             width="20"
@@ -78,7 +89,9 @@
           />
           <span>Google</span>
         </div>
-        <div class="flex items-center space-x-2 bg-gray-100  hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+        <div
+          class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer"
+        >
           <img
             src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
             width="20"
@@ -92,65 +105,70 @@
 </template>
 
 <script>
-import axios from "axios";
-import { useToast } from "vue-toastification";
-import Image from "../../assets/recycle.jpg";
+// import this.$axios from 'this.$axios';
+import { useToast } from 'vue-toastification';
+import Image from '../../assets/recycle.jpg';
 
 export default {
   data() {
     return {
       img: Image,
-      roleOptions: ["User", "Service Provider"],
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      role: "",
+      roleOptions: [
+        { value: 'user', title: 'User' },
+        { value: 'service_provider', title: 'Service Provider' },
+      ],
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      role: '',
       validated: false,
-      messageError: "",
+      messageError: '',
     };
   },
   methods: {
     async register() {
       const toast = useToast();
       if (
-        this.username === "" ||
-        this.email === "" ||
-        this.password === "" ||
-        this.confirmPassword === "" ||
-        this.role === ""
+        this.username === '' ||
+        this.email === '' ||
+        this.password === '' ||
+        this.confirmPassword === '' ||
+        this.role === ''
       ) {
         this.validated = true;
-        this.messageError = "Please fill all the fields";
+        this.messageError = 'Please fill all the fields';
         toast.error(this.messageError);
       } else if (this.password !== this.confirmPassword) {
         this.validated = true;
-        this.messageError = "Passwords do not match";
+        this.messageError = 'Passwords do not match';
         toast.error(this.messageError);
       } else {
+        console.log(this.username, this.email, this.password, this.role);
         try {
-          const response = await axios.post("http://localhost:5000/api/register", {
-            username: this.username,
+          const response = await this.$axios.post('/register', {
+            name: this.username,
             email: this.email,
             password: this.password,
             role: this.role,
           });
           this.validated = false;
-          this.messageError = "";
-          toast.success("Registration successful");
-          this.$router.push("login");
+          this.messageError = '';
+          toast.success('Registration successful');
+          this.$router.push('login');
           console.log(response.data);
         } catch (error) {
           this.validated = true;
           if (error.response) {
-            this.messageError = error.response.data.message || "Registration failed";
+            this.messageError =
+              error.response.data.message || 'Registration failed';
           } else if (error.request) {
-            this.messageError = "No response received from server";
+            this.messageError = 'No response received from server';
           } else {
-            this.messageError = "Error in making request: " + error.message;
+            this.messageError = 'Error in making request: ' + error.message;
           }
           toast.error(this.messageError);
-          console.error("Error details:", error);
+          console.error('Error details:', error);
         }
       }
     },

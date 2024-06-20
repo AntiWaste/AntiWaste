@@ -10,7 +10,8 @@ import SignupView from "../views/auth/SignupView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import EventForm from "@/components/Event/EventForm.vue";
 import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
-import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
+import ProductDetails from "../components/RecyclePage/ProductDetails.vue"
+import store from '../store';
 import PostingForm from "../components/RecyclePage/PostingForm.vue";
 import ThankYou from "../components/RecyclePage/ThankYou.vue";
 import WasteListing from '../components/Waste/WasteListing.vue'
@@ -29,11 +30,11 @@ const routes = [
     name: "login",
     component: SignInView,
   },
-  {
-    path: "/post-product",
-    name: "productform",
-    component: PostingForm,
-  },
+  // {
+  //   path: "/post-product",
+  //   name: "productform",
+  //   component: PostingForm,
+  // },
   {
     path: "/",
     name: "home",
@@ -119,21 +120,14 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!isAuthenticated()) {
-      next({
-        path: "/login",
-        query: { redirect: to.fullPath },
-      });
-    } else {
-      next();
-    }
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthenticated = store.getters.isAuthenticated;
+
+  if (requiresAuth && !isAuthenticated) {
+    next('/login');
   } else {
     next();
   }
 });
-function isAuthenticated() {
-  return localStorage.getItem("user");
-}
 
 export default router;

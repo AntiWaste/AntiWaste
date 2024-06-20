@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    
     <div id="app">
       <router-view />
     </div>
@@ -9,5 +8,6 @@
 <script>
 export default {
   name: 'App',
+  
 };
 </script>

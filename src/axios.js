@@ -1,12 +1,11 @@
-
-// axios.js
+// src/axios.js
 import axios from 'axios';
 
-// Set base URL for API requests
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api/auth/';
+const instance = axios.create({
+  baseURL: 'http://localhost:8000/api', // Adjust as per your backend API URL
+});
 
-// Add a request interceptor to include Authorization header with JWT token from localStorage
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -19,13 +18,4 @@ axios.interceptors.request.use(
   }
 );
 
-export default axios;
-
-// import axios from 'axios';
-
-// const instance = axios.create({
-//     baseURL: 'https://backend.antiwaste.shop:8000',
-//     withCredentials: true,
-// });
-
-// export default instance;
+export default instance;
