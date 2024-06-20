@@ -2,7 +2,7 @@
     <div class="bg-white border rounded-lg shadow relative m-10">
       <div class="flex items-start justify-between p-5 border-b rounded-t">
         <h3 class="text-2xl font-semibold">
-          Post Your Product now!
+          Post Your Waste now!
         </h3>
         <!-- Back Button -->
         <div class="px-5 pb-2">
@@ -19,14 +19,14 @@
         <form @submit.prevent="saveProduct">
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
-              <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Product Name</label>
+              <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Waste Categories</label>
               <input
                 v-model="formData.productName"
                 type="text"
                 name="product-name"
                 id="product-name"
                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
-                placeholder="Kromar Khmer"
+                placeholder="Paper"
                 required
               />
             </div>
@@ -67,7 +67,7 @@
               />
             </div>
             <div class="col-span-6">
-              <label for="product-image" class="text-sm font-medium text-gray-900 block mb-2">Product Image</label>
+              <label for="product-image" class="text-sm font-medium text-gray-900 block mb-2">Waste Image</label>
               <input
                 type="file"
                 name="product-image"
@@ -78,7 +78,7 @@
               />
             </div>
             <div class="col-span-6">
-              <label for="product-description" class="text-sm font-medium text-gray-900 block mb-2">Product Description</label>
+              <label for="product-description" class="text-sm font-medium text-gray-900 block mb-2">Waste Description</label>
               <textarea
                 v-model="formData.productDescription"
                 id="product-description"

@@ -13,6 +13,8 @@ import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
 import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
 import PostingForm from "../components/RecyclePage/PostingForm.vue";
 import ThankYou from "../components/RecyclePage/ThankYou.vue";
+import WasteListing from '../components/Waste/WasteListing.vue'
+import SellWaste from '../components/Waste/SellWaste.vue'
 
 const routes = [
   {
@@ -80,9 +82,18 @@ const routes = [
       {
         path: "thank-you",
         name: "thank-you",
-        component: ThankYou
-      
-    }
+        component: ThankYou  
+      },
+      {
+        path: "waste-listing",
+        name: "waste-listing",
+        component: WasteListing  
+      },
+      {
+        path: "waste-form",
+        name: "waste-form",
+        component: SellWaste 
+      }
     ]
   }
 ];
