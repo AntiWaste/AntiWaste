@@ -20,12 +20,17 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    component: SignupView
+    component: SignupView,
   },
   {
     path: "/login",
     name: "login",
-    component: SignInView
+    component: SignInView,
+  },
+  {
+    path: "/post-product",
+    name: "productform",
+    component: PostingForm,
   },
   {
     path: "/",
@@ -36,48 +41,47 @@ const routes = [
       {
         path: "home",
         name: "home",
-        component: HomePage
+        component: HomePage,
       },
       {
         path: "recycle",
         name: "recycle",
-        component: RecycleView
+        component: RecycleView,
       },
       {
         path: "waste",
         name: "waste",
-        component: WasteView
+        component: WasteView,
       },
       {
         path: "event",
         name: "Event",
-        component: EventView
+        component: EventView,
       },
       {
         path: "create-event",
         name: "CreateEvent",
-        component: EventForm
+        component: EventForm,
       },
       {
         path: "contact",
         name: "contact-us",
-        component: ContactUs
+        component: ContactUs,
       },
       {
         path: "listing-product",
         name: "listing-product",
-        component: ListingProduct
+        component: ListingProduct,
       },
       {
         path: "product-detail/:id",
         name: "product-detail",
-        component: ProductDetails
+        component: ProductDetails,
       },
       {
-          path: "product-post",
-          name: "product-post",
-          component: PostingForm
-        
+        path: "product-post",
+        name: "product-post",
+        component: PostingForm,
       },
       {
         path: "thank-you",
@@ -100,14 +104,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!isAuthenticated()) {
       next({
         path: "/login",
-        query: { redirect: to.fullPath }
+        query: { redirect: to.fullPath },
       });
     } else {
       next();
