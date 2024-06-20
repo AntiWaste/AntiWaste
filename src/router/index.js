@@ -10,7 +10,9 @@ import SignupView from "../views/auth/SignupView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import EventForm from "@/components/Event/EventForm.vue";
 import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
-import ProductDetails from "../components/RecyclePage/ProductDetails.vue"
+import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
+import PostingForm from "../components/RecyclePage/PostingForm.vue";
+import ThankYou from "../components/RecyclePage/ThankYou.vue";
 
 const routes = [
   {
@@ -68,7 +70,19 @@ const routes = [
         path: "product-detail/:id",
         name: "product-detail",
         component: ProductDetails
-      }
+      },
+      {
+          path: "product-post",
+          name: "product-post",
+          component: PostingForm
+        
+      },
+      {
+        path: "thank-you",
+        name: "thank-you",
+        component: ThankYou
+      
+    }
     ]
   }
 ];
