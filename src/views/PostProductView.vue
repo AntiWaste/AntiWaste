@@ -1,0 +1,3 @@
+<template>
+  <posting-form />
+</template>
