@@ -30,7 +30,7 @@ export default new Vuex.Store({
     actions:{
         async register({commit}, user){
             try{
-                const res = await axios.post('https://backend.antiwaste.shop/api/auth/register', user)
+                const res = await axios.post('https://backend.antiwaste.shop:8000/api/auth/register', user)
                 commit('setUser', res.data.user)
                 localStorage.setItem('token', res.data.token)
                 router.push('/')
@@ -40,7 +40,7 @@ export default new Vuex.Store({
         },
         async login({commit}, user){
             try{
-                const res = await axios.post('https://backend.antiwaste.shop/api/auth/login', user)
+                const res = await axios.post('https://backend.antiwaste.shop:8000/api/auth/login', user)
                 commit('setUser', res.data.user)
                 localStorage.setItem('token', res.data.token)
                 router.push('/')
@@ -50,7 +50,7 @@ export default new Vuex.Store({
         },
         async getUser({commit}){
             try{
-                const res = await axios.get('https://backend.antiwaste.shop/api/auth/user', {
+                const res = await axios.get('https://backend.antiwaste.shop:8000/api/auth/user', {
                     headers: {
                         Authorization: 'Bearer ' + localStorage.getItem('token')
                     }

@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://backend.antiwaste.shop/api', // Adjust as per your backend API URL
+  baseURL: 'https://backend.antiwaste.shop:8000/api', // Adjust as per your backend API URL
 });
 
 instance.interceptors.request.use(

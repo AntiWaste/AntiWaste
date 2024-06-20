@@ -93,7 +93,7 @@ export default {
   mounted() {
     const productId = this.$route.params.id;
     // Replace with your actual API endpoint
-    axios.get(`https://backend.antiwaste.shop/api/products/${productId}`)
+    axios.get(`https://backend.antiwaste.shop:8000/api/products/${productId}`)
       .then(response => {
         this.product = response.data; // Assuming your API response contains product data
       })

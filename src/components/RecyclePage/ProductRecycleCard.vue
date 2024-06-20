@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     // Replace with your actual API endpoint
-    axios.get('https://backend.antiwaste.shop/api/products')
+    axios.get('https://backend.antiwaste.shop:8000/api/products')
       .then(response => {
         this.items = response.data; // Assuming your API returns an array of products
       })
