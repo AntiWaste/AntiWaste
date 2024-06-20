@@ -30,11 +30,11 @@ const routes = [
     name: "login",
     component: SignInView,
   },
-  {
-    path: "/post-product",
-    name: "productform",
-    component: PostingForm,
-  },
+  // {
+  //   path: "/post-product",
+  //   name: "productform",
+  //   component: PostingForm,
+  // },
   {
     path: "/",
     name: "home",
