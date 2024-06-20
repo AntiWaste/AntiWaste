@@ -9,21 +9,14 @@
         />
         <div class="flex flex-col justify-center lg:pl-10 space-y-4">
           <div class="font-bold text-2xl lg:text-3xl pb-4">
-            How to post recycling product and reach customer?
+            Post Your Recycling Product Now!
           </div>
           <p class="text-base sm:text-lg lg:text-xl leading-relaxed">
-            Highlight the Eco-friendly and sustainable aspects of your recycling
-            products. Emphasize their role in reducing waste, conserving
-            resources, and promoting a circular economy. Use vivid language and
-            captivating images to showcase the products' unique features and
-            benefits. Attract new customers and encourage repeat purchases by
-            offering discounts, loyalty programs, and special promotions. Consider
-            bundling products, offering free shipping, or providing incentives for
-            referrals.
+            Are you ready to reach more customers and earn money from your recycling products? Post your products on AntiWaste today and showcase them to a community dedicated to sustainability.
           </p>
-          <button @click="learnMore" class="bg-green-500 text-white py-2 px-5 rounded hover:bg-green-600 w-1/4 ">
-            Learn More
-          </button>
+          <router-link to="/listing-product"><button class="bg-green-500 text-white py-2 px-5 rounded hover:bg-green-600 w-1/4 ">
+            Post Your Product Now
+          </button></router-link>
         </div>
       </div>
     </div>

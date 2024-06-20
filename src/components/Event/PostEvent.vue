@@ -14,14 +14,14 @@
           how to manage them.
         </p>
         <div>
-          <router-link to="/"
+          <router-link to="/event-post"
             class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
           >
             Create Event
           </router-link>
-          <router-link to="/" class="bg-gray-50 ml-4 px-4 py-2 rounded-lg text-green-500 hover:bg-gray-500 hover:text-green-600">
+          <!-- <router-link to="/" class="bg-gray-50 ml-4 px-4 py-2 rounded-lg text-green-500 hover:bg-gray-500 hover:text-green-600">
             See More
-          </router-link>
+          </router-link> -->
         </div>
       </div>
     </div>

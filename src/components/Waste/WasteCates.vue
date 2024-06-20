@@ -19,7 +19,7 @@
             <h3 class="text-xl font-semibold mb-2">{{ item.title }}</h3>
             <p class="text-gray-600">{{ item.description }}</p>
             <div class="flex justify-between mt-4">
-              <router-link :to="'/detail/' + item.id" class="text-green-500 hover:underline">See More</router-link>
+              <router-link to="/waste-listing" class="text-green-500 hover:underline">See More</router-link>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
             bundling products, offering free shipping, or providing incentives
             for referrals.
           </p>
-          <v-btn color="green" @click="postnow">Post Now</v-btn>
+          <router-link to="/waste-form"><v-btn color="green">Post Now</v-btn></router-link>
         </div>
       </div>
     </div>
