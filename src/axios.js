@@ -1,4 +1,22 @@
-import axios from 'axios'
+// axios.js
 
-axios.defaults.baseURL = 'http://localhost:5000/api/auth/';
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+import axios from 'axios';
+
+// Set base URL for API requests
+axios.defaults.baseURL = 'http://127.0.0.1:8000/api/auth/';
+
+// Add a request interceptor to include Authorization header with JWT token from localStorage
+axios.interceptors.request.use(
+  config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
+export default axios;
