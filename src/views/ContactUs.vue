@@ -48,7 +48,7 @@ export default {
     async submitForm() {
       try {
         // Example API endpoint for form submission
-        const response = await fetch('http://127.0.0.1:8000/api/contacts', {
+        const response = await fetch('https://backend.antiwaste.shop/api/contacts', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
