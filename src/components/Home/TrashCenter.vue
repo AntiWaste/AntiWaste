@@ -29,9 +29,11 @@
               <div class="text-center mt-4 ">
                 <div class="font-bold text-xl mb-2">{{ item.title }}</div>
                 <p class="text-gray-700">{{ item.description }}</p>
-                <v-btn class="mt-4 px-6 py-2 rounded-lg hover:bg-green-700">
+                <a href="https://www.facebook.com/p/Cintri-Cambodia-100057361273204/">
+                  <v-btn class="mt-4 px-6 py-2 rounded-lg hover:bg-green-700">
                   Learn More
                 </v-btn>
+                </a>
               </div>
             </div>
           </v-col>

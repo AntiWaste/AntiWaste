@@ -22,9 +22,9 @@
             principles, embarking on a journey towards a more sustainable and
             environmentally conscious future.
           </p>
-          <button class="mt-4 bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-700 focus:outline-none">
+          <!-- <button class="mt-4 bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-700 focus:outline-none">
             Learn More
-          </button>
+          </button> -->
         </div>
       </div>
 
