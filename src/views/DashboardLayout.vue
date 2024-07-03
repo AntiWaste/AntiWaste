@@ -31,6 +31,10 @@
             <ShoppingCartIcon class="h-6 w-6 mr-2"/>
             Recycle
           </router-link>
+          <router-link to="/contact-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
+            <ShoppingCartIcon class="h-6 w-6 mr-2"/>
+            Contact
+          </router-link>
           <router-link to="/" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
             <ChevronDoubleLeftIcon class="h-6 w-6 mr-2"/>
             Back to Homepage

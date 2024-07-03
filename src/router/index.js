@@ -2,6 +2,7 @@ import HomePage from "../components/Home/HomePage.vue";
 import UsersInfo from '../components/Dashboard/UsersInfo.vue';
 import HomeLayout from "../views/HomeLayout.vue";
 import ProductInfo from "../components/Dashboard/DashboardProduct.vue"
+import ContactInfo from "../components/Dashboard/DashboardContact.vue"
 // import TopBar from '../components/Waste/TopBar.vue';
 import DashboardLayout from "@/views/DashboardLayout.vue";
 import EventForm from "@/components/Event/EventForm.vue";
@@ -43,6 +44,7 @@ const routes = [
   //   name: "productform",
   //   component: PostingForm,
   // },
+  //Dashboard Layout have children,
   {
     path: "/",
     name: "dashboard",
@@ -59,8 +61,14 @@ const routes = [
     name: 'product-info',
     component: ProductInfo,
   },
+  {
+    path: 'contact-info',
+    name: 'contact-info',
+    component: ContactInfo,
+  },
 ],
   },
+  //Home Layout have children,
   {
     path: "/",
     name: "home",

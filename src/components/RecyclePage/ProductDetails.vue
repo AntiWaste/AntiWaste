@@ -18,8 +18,9 @@
               />
             </div>
             <div class="flex -mx-2 mb-4">
-              <!-- <div class="w-1/2 px-2">
+              <div class="w-1/2 px-2">
                 <button
+                  @click="addToCart(product)"
                   class="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
                 >
                   Add to Cart
@@ -27,11 +28,12 @@
               </div>
               <div class="w-1/2 px-2">
                 <button
-                  class="w-full bg-gray-200 text-gray-800  py-2 px-4 rounded-full font-bold hover:bg-gray-300 "
+                  @click="contactOwner(product)"
+                  class="w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-full font-bold hover:bg-gray-300"
                 >
-                  Contact to Owner
+                  Contact Owner
                 </button>
-              </div> -->
+              </div>
             </div>
           </div>
           <div class="md:flex-1 px-4">
@@ -76,6 +78,7 @@
 
 <script>
 import axios from 'axios';
+import { API_BASE_URL } from '@/config'; // Adjust the path as per your project structure
 
 export default {
   data() {
@@ -91,19 +94,29 @@ export default {
     },
   },
   mounted() {
-    const productId = this.$route.params.id;
-    // Replace with your actual API endpoint
-    axios.get(`https://backend.antiwaste.shop:8000/api/products/${productId}`)
-      .then(response => {
-        this.product = response.data; // Assuming your API response contains product data
-      })
-      .catch(error => {
-        console.error('Error fetching product:', error);
-      });
+    this.fetchProduct();
   },
   methods: {
+    fetchProduct() {
+      const productId = this.$route.params.id;
+      axios.get(`${API_BASE_URL}products/${productId}`)
+        .then(response => {
+          this.product = response.data; // Assuming your API response contains product data
+        })
+        .catch(error => {
+          console.error('Error fetching product:', error);
+        });
+    },
     navigateBack() {
       this.$router.go(-1);
+    },
+    addToCart(product) {
+      // Replace with your cart logic
+      console.log('Adding to cart:', product);
+    },
+    contactOwner(product) {
+      // Replace with your contact owner logic
+      console.log('Contacting owner:', product);
     },
   },
 };

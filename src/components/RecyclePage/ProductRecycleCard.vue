@@ -40,10 +40,9 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios';
-
+import { API_BASE_URL } from '@/config'; // Adjust the path as per your project structure
 export default {
   data() {
     return {
@@ -53,7 +52,7 @@ export default {
   },
   mounted() {
     // Replace with your actual API endpoint
-    axios.get('https://backend.antiwaste.shop:8000/api/products')
+    axios.get(`${API_BASE_URL}products`)
       .then(response => {
         this.items = response.data; // Assuming your API returns an array of products
       })
@@ -65,14 +64,5 @@ export default {
 </script>
 
 <style scoped>
-/* .custom-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: box-shadow 0.3s;
-}
-
-.custom-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-} */
+/* Scoped styles for this component */
 </style>
