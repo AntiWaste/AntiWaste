@@ -1,8 +1,8 @@
 // store/index.js
 import { createStore } from 'vuex';
-// import { register } from '../auth';
 import axios from '@/axios';
 import router from '../router';
+
 export default createStore({
   state: {
     user: null,
@@ -29,29 +29,29 @@ export default createStore({
         }
       }
     },
-    async logout({commit}) {
+    async logout({ commit }) {
       await axios.post('/logout');
       delete axios.defaults.headers.common['Authorization'];
       localStorage.removeItem('token');
-      commit('setUser', '');
+      commit('setUser', null);
       router.push('/home');
     },
+    // Uncomment and use fetchUser if you need to fetch user details after page reload
     // async fetchUser({ commit }) {
-    //   const user = await axios.get('/user', {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   commit('setUser', user);
-    // },
-    // async register({ commit }, credentials) {
-    //   const data = await register(credentials);
-    //   commit('setUser', data.user);
-    //   return data;
+    //   const token = localStorage.getItem('token');
+    //   if (token) {
+    //     const { data } = await axios.get('/user', {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     });
+    //     commit('setUser', data);
+    //   }
     // },
   },
   getters: {
     isAuthenticated: (state) => !!state.user,
     user: (state) => state.user,
+    isAdmin: (state) => state.user && state.user.role === 'admin',
   },
 });

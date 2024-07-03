@@ -1,5 +1,7 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import { createApp } from 'vue';
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 import { createVuetify } from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import { aliases, fa } from 'vuetify/iconsets/fa';
@@ -7,8 +9,6 @@ import App from './App.vue';
 import './assets/tailwind.css';
 import './axios';
 import router from './router';
-import Toast from 'vue-toastification';
-import 'vue-toastification/dist/index.css';
 // import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // import { Cloudinary } from "cloudinary-vue";
@@ -31,10 +31,10 @@ import ProductRecycleCard from './components/RecyclePage/ProductRecycleCard';
 import WelcomeCard from './components/RecyclePage/WelcomeCard.vue';
 
 // Import Vuetify components and directives if needed
+import store from '@/store/index';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import LetChat from './components/LetChat.vue';
-import store from '@/store/index';
 // import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://localhost:8000/api';

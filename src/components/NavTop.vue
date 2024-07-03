@@ -17,6 +17,16 @@
           >
             {{ item.text }}
           </router-link>
+          <router-link
+            v-if="isAdmin"
+            to="/dashboard"
+            title="Admin Dashboard"
+            class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
+            :class="{ 'text-green-500 font-bold': activeLink === '/dashboard' }"
+            @click="handleClick('/dashboard')"
+          >
+            Dashboard
+          </router-link>
         </v-toolbar-items>
         <div class="flex space-x-2">
           <v-btn
@@ -104,6 +114,23 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item
+          v-if="isAdmin"
+          class="flex justify-center"
+          to="/dashboard"
+          @click="handleClick('/dashboard'); drawer = false"
+        >
+          <v-list-item-icon>
+            <v-icon>dashboard</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              :class="{ 'text-green-500 font-bold': activeLink === '/dashboard' }"
+            >
+              Dashboard
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -125,11 +152,12 @@ export default {
         { icon: 'assignment_turned_in', text: 'Recycle', link: '/recycle', title: 'Some stuff that needs doing' },
         { icon: 'event', text: 'Event', link: '/event', title: 'Subscribe to our newsletter' },
         { icon: 'contact_mail', text: 'Contact', link: '/contact', title: 'Get in touch with us!' },
+        { icon: 'dashboard', text: 'Dashboard', link: '/dashboard-layout', title: 'Manage your user' },
       ],
     };
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'user']),
+    ...mapGetters(['isAuthenticated', 'user', 'isAdmin']),
   },
   methods: {
     ...mapActions(['logout']),
@@ -140,6 +168,9 @@ export default {
       this.logout();
     },
   },
-  
 };
 </script>
+
+<style scoped>
+/* Add any scoped styles here */
+</style>

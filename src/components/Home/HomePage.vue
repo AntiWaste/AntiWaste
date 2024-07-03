@@ -33,11 +33,14 @@
     <faq-ques />
     <let-chat />
   </div>
+  
 </template>
 
 <script>
+
 export default {
   data() {
+    
     return {
       user: null,
       clients: [
