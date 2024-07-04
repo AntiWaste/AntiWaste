@@ -106,7 +106,10 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { useToast } from 'vue-toastification';
+
+import { API_BASE_URL } from '@/config';
 
 export default {
   data() {
@@ -138,26 +141,39 @@ export default {
     removeImage(index) {
       this.selectedImages.splice(index, 1);  // Remove image from selectedImages array
     },
-    saveevent() {
-      // Perform form validation
-      if (
-        !this.formData.eventName ||
-        !this.formData.eventDescription ||
-        !this.formData.eventDate ||
-        !this.formData.eventLocation ||
-        this.selectedImages.length === 0 
-      ) {
-        const toast = useToast();
-        toast.error('Please fill in all required fields and select at least one image.');
-        return;
-      }
+    async saveevent() {
+  try {
+    const formData = new FormData();
+    formData.append('event_name', this.formData.eventName);
+    formData.append('event_description', this.formData.eventDescription);
+    formData.append('event_date', this.formData.eventDate); // Ensure correct date format 'YYYY-MM-DD'
+    formData.append('event_location', this.formData.eventLocation);
+    
+    // Append selected images
+    this.selectedImages.forEach((image, index) => {
+      formData.append(`photos[${index}]`, image.file);
+    });
 
-      // Handle save event logic
-      console.log('Saving event:', this.formData);
-      const toast = useToast();
-      toast.success('event saved successfully!');
-      this.$router.push('/thank-you'); // Navigate to the Thank You page
+    const response = await axios.post(`${API_BASE_URL}events`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('Event saved successfully:', response.data);
+    const toast = useToast();
+    toast.success('Event saved successfully!');
+    this.$router.push('/thank-you'); // Navigate to Thank You page
+  } catch (error) {
+    console.error('Error saving event:', error);
+    const toast = useToast();
+    toast.error('Error saving event. Please try again later.');
+
+    if (error.response) {
+      console.error('Server error details:', error.response.data);
     }
+  }
+}
   }
 };
 </script>
