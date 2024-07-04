@@ -1,13 +1,16 @@
-import HomePage from "../components/Home/HomePage.vue";
+import ContactInfo from "../components/Dashboard/DashboardContact.vue";
+import EventInfo from "../components/Dashboard/DashboardEvent.vue";
+import ProductInfo from "../components/Dashboard/DashboardProduct.vue";
+import RecycleInfo from "../components/Dashboard/DashboardRecycle.vue";
+import WasteInfo from "../components/Dashboard/DashboardWaste.vue";
 import UsersInfo from '../components/Dashboard/UsersInfo.vue';
+import HomePage from "../components/Home/HomePage.vue";
 import HomeLayout from "../views/HomeLayout.vue";
-import ProductInfo from "../components/Dashboard/DashboardProduct.vue"
-import ContactInfo from "../components/Dashboard/DashboardContact.vue"
 // import TopBar from '../components/Waste/TopBar.vue';
-import DashboardLayout from "@/views/DashboardLayout.vue";
 import EventForm from "@/components/Event/EventForm.vue";
 import ListingProduct from "@/components/RecyclePage/ListingProduct.vue";
 import ContactUs from "@/views/ContactUs.vue";
+import DashboardLayout from "@/views/DashboardLayout.vue";
 import EventView from "@/views/EventView.vue";
 import WasteView from "@/views/WasteView.vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -65,6 +68,21 @@ const routes = [
     path: 'contact-info',
     name: 'contact-info',
     component: ContactInfo,
+  },
+  {
+    path: 'waste-info',
+    name: 'waste-info',
+    component: WasteInfo,
+  },
+  {
+    path: 'event-info',
+    name: 'event-info',
+    component: EventInfo,
+  },
+  {
+    path: 'recycle-info',
+    name: 'recycle-info',
+    component: RecycleInfo,
   },
 ],
   },

@@ -1,12 +1,25 @@
 <template>
   <div class="bg-white">
     <div class="mx-auto pb-10">
-      <img
-        class="w-full"
-        src="https://www.ptecologicalservices.com/assets/images/products/organicwasteconvertor.gif"
+      <v-img
+        class="w-full h--[90px]"
+        src="https://img.pikbest.com/backgrounds/20190619/simple-environmental-protection-garbage-classification-harmonious-society-green-background_1895979.jpg!sw800"
         alt="Organic Waste Convertor"
-      />
-
+        >
+        <div class="flex flex-col justify-left items-center pl-10 pt-20">
+            <div class="text-4xl font-bold mb-3">Welcome to AntiWaste’s Store</div>
+            <div class="text-h6">
+              Please enjoy buying our product that recycle, also can sell your waste to our service provider
+              and feel free to deliver to other provinces too.
+            </div>
+           <div class="pt-32"> <router-link to="/listing-product">
+              <button class="mt-2  px-4 py-2 text-lg font-bold bg-green-600 border rounded-lg text-green-100 hover:bg-green-800 hover:text-white focus:outline-none">
+                Shop Now
+              </button>
+            </router-link></div>
+          </div>
+      </v-img>
+<!-- "https://www.ptecologicalservices.com/assets/images/products/organicwasteconvertor.gif" -->
       <div class="font-bold text-4xl text-center pt-10">Our Clients</div>
 
       <div class="slider pt-5 ">
