@@ -6,9 +6,9 @@
         <div v-for="event in events" :key="event.id" class="w-full sm:w-1/2 md:w-1/3 p-4">
           <div class="bg-white p-6 rounded-lg shadow-lg">
             <div class="relative">
-              <img
+              <img v-for="image in event.images" :key="image.id"
                 class="w-full h-48 object-cover rounded-lg"
-                :src="`/storage/${event.photo}`"
+                    :src="image.image_url"
                 alt="Event Image"
               />
               <div
@@ -22,9 +22,10 @@
               </div>
             </div>
             <div class="mt-4">
-              <h2 class="text-xl font-bold text-green-600">{{ event.event_name }}</h2>
+              <h2 class="text-xl font-bold text-green-600">{{ event.name }}</h2>
               <p class="text-gray-500">{{ formatDate(event.date) }}</p>
               <p class="text-gray-700">{{ event.description }}</p>
+              <p class="text-gray-700">{{ event.location }}</p>
             </div>
           </div>
         </div>
@@ -73,10 +74,29 @@ export default {
     fetchEvents(page = 1) {
       axios.get(`${API_BASE_URL}events?page=${page}`)
         .then(response => {
+          console.log(response.data); // Log response for debugging
+          this.events = response.data;
+          this.totalPages = response.data.meta.last_page;
+          this.page = page;
+        })
+        .catch(error => {
+          console.error('Error fetching events:', error);
+          // Handle specific error scenarios
+          if (error.response) {
+            console.error('Server error details:', error.response.data);
+          } else if (error.request) {
+            console.error('Request made but no response received:', error.request);
+          } else {
+            console.error('Error setting up the request:', error.message);
+          }
+        });
+    },
+    fetchAllEvents() {
+      axios.get(`${API_BASE_URL}events`)
+        .then(response => {
           console.log('API Response:', response.data); // Log response for debugging
           this.events = response.data.data;
           this.totalPages = response.data.meta.last_page;
-          this.page = page;
         })
         .catch(error => {
           console.error('Error fetching events:', error);

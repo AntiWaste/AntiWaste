@@ -116,7 +116,7 @@
           </div>
 
           <!-- Display selected images -->
-          <div class="col-span-6" v-if="selectedImages.length > 0">
+          <div class="col-span-6" v-if="formData.selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
               <div v-for="(image, index) in selectedImages" :key="index" class="relative">
@@ -156,6 +156,8 @@
 </template>
 
 <script>
+import { API_BASE_URL } from '@/config';
+import axios from 'axios';
 import { useToast } from 'vue-toastification';
 
 export default {
@@ -167,12 +169,12 @@ export default {
         location: '',
         contactNumber: '',
         itemAmount:'',
-       WasteCategories:'',
+        WasteCategories:'',
         price:'',
-        WasteImage: null,
-        WasteDescription: ''
+        WasteDescription: '',
+        selectedImages: []
       },
-      selectedImages: []
+      imageFiles:[]
     };
   },
   methods: {
@@ -180,41 +182,84 @@ export default {
       this.$router.go(-1); // Navigate back to previous page
     },
     onImagesSelected(event) {
-      this.selectedImages = [];
-      Array.from(event.target.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.selectedImages.push({ file, url: reader.result });
-        };
-        reader.readAsDataURL(file);
-      });
+      this.imageFiles = Array.from(event.target.files);
+      this.convertToBase64();
+      // this.selectedImages = [];
+      // Array.from(event.target.files).forEach(file => {
+      //   const reader = new FileReader();
+      //   reader.onload = () => {
+      //     this.formData.selectedImages.push({ file, url: reader.result });
+      //   };
+      //   reader.readAsDataURL(file);
+      // });
     },
     removeImage(index) {
-      this.selectedImages.splice(index, 1);  // Remove image from selectedImages array
+      this.formData.selectedImages.splice(index, 1);  // Remove image from selectedImages array
     },
-    saveWaste() {
-      // Perform form validation
-      if (
-        !this.formData.WasteName ||
-        !this.formData.owner ||
-        !this.formData.WasteCategories ||
-        !this.formData.location ||
-        !this.formData.contactNumber ||
-        !this.formData.itemAmount ||
-        !this.formData.price ||
-        this.selectedImages.length === 0 ||
-        !this.formData.WasteDescription
-      ) {
-        const toast = useToast();
-        toast.error('Please fill in all required fields and select at least one image.');
-        return;
-      }
+    convertToBase64() {
+      const promises = this.imageFiles.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            resolve({ file, url: e.target.result });
+          };
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
+      });
 
-      // Handle save Waste logic
-      console.log('Saving Waste:', this.formData);
+      Promise.all(promises)
+        .then(results => {
+          this.formData.selectedImages = results;
+        })
+        .catch(error => {
+          console.error('Error converting files to base64:', error);
+        });
+    },
+    async saveWaste() {
+      // Perform form validation
       const toast = useToast();
-      toast.success('Waste saved successfully!');
-      this.$router.push('/thank-you'); // Navigate to the Thank You page
+      // if (
+      //   !this.formData.WasteName ||
+      //   !this.formData.owner ||
+      //   !this.formData.WasteCategories ||
+      //   !this.formData.location ||
+      //   !this.formData.contactNumber ||
+      //   !this.formData.itemAmount ||
+      //   !this.formData.price ||
+      //   !this.formData.WasteDescription
+      // ) {
+      //   toast.error('Please fill in all required fields and select at least one image.');
+      //   return;
+      // }
+      try {
+        const formData = new FormData();
+        formData.append('name', this.formData.WasteName);
+        formData.append('owner', this.formData.owner);
+        formData.append('price', this.formData.price);
+        formData.append('categories', this.formData.WasteCategories);
+        formData.append('contact_number', this.formData.contactNumber);
+        formData.append('location', this.formData.eventLocation);
+        formData.append('item_amount', this.formData.itemAmount);
+        formData.append('description', this.formData.eventDescription);
+
+        this.formData.selectedImages.forEach((image, index) => {
+          formData.append(`waste_images[${index}]`, image.file);
+        });
+
+        await axios.post(`${API_BASE_URL}wastes`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        toast.success('Waste saved successfully!');
+        this.$router.push('/thank-you');
+      } catch (error) {
+        toast.error('Error saving event. Please try again later.');
+        if (error.response) {
+          console.error('Server error details:', error.response.data);
+        }
+      }
     }
   }
 };
