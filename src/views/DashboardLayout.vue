@@ -15,25 +15,26 @@
             <UsersIcon class="h-6 w-6 mr-2"/>
             User
           </router-link>
+          <router-link to="/recycle-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
+            <LightBulbIcon class="h-6 w-6 mr-2"/>
+            Recycle
+          </router-link>
+          <router-link to="/waste-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
+            <TrashIcon class="h-6 w-6 mr-2"/>
+            Waste 
+          </router-link>
+          <router-link to="/event-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
+            <LibraryIcon class="h-6 w-6 mr-2"/>
+            Event 
+          </router-link>
+  
+          <router-link to="/contact-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
+            <PhoneIcon class="h-6 w-6 mr-2"/>
+            Contact
+          </router-link>
           <router-link to="/product-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
             <ShoppingCartIcon class="h-6 w-6 mr-2"/>
             Product 
-          </router-link>
-          <router-link to="/product-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
-            <ShoppingCartIcon class="h-6 w-6 mr-2"/>
-            Waste 
-          </router-link>
-          <router-link to="/product-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
-            <ShoppingCartIcon class="h-6 w-6 mr-2"/>
-            Event 
-          </router-link>
-          <router-link to="/product-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
-            <ShoppingCartIcon class="h-6 w-6 mr-2"/>
-            Recycle
-          </router-link>
-          <router-link to="/contact-info" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
-            <ShoppingCartIcon class="h-6 w-6 mr-2"/>
-            Contact
           </router-link>
           <router-link to="/" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:text-green-700">
             <ChevronDoubleLeftIcon class="h-6 w-6 mr-2"/>
@@ -57,9 +58,14 @@
           <input class="mx-4 w-full border rounded-md px-4 py-2" type="text" placeholder="Search" />
         </div>
         <div class="flex items-center pr-4">
-          <button class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
-            <ArrowRightIcon class="h-6 w-6"/>
-          </button>
+          <router-link to="/register">
+      <button 
+        class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700" 
+        @click.prevent="confirmLogout"
+      >
+        <LogoutIcon class="h-6 w-6"/>
+      </button>
+    </router-link>
         </div>
       </div>
       <div class="p-4">
@@ -72,11 +78,15 @@
 
 <script>
 import {
-ArrowRightIcon,
+LogoutIcon,
 ChevronDoubleLeftIcon,
+LibraryIcon,
+LightBulbIcon,
+TrashIcon,
+ShoppingCartIcon,
 // CogIcon,
 MenuIcon,
-ShoppingCartIcon,
+PhoneIcon,
 UsersIcon,
 ViewGridAddIcon
 } from '@heroicons/vue/solid';
@@ -87,13 +97,24 @@ export default {
     UsersIcon,
     ShoppingCartIcon,
     ChevronDoubleLeftIcon,
+    LightBulbIcon,
+    TrashIcon,
+    PhoneIcon,
+    LibraryIcon,
     // CogIcon,
     MenuIcon,
-    ArrowRightIcon
+    LogoutIcon
   },
   methods: {
     toggleSidebar() {
       this.sidebarOpen = !this.sidebarOpen;
+    },
+    confirmLogout() {
+      if (confirm("Do you want to logout your account?")) {
+        // Clear any authentication tokens or user data here
+        // localStorage.removeItem('token'); // Example of token removal
+        this.$router.push('/register');
+      }
     }
   }
 };

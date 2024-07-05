@@ -142,6 +142,7 @@ export default {
         owner: '',
         location: '',
         contactNumber: '',
+        price:'',
         productImage: null,
         productDescription: ''
       },
@@ -172,6 +173,7 @@ export default {
         !this.formData.owner ||
         !this.formData.location ||
         !this.formData.contactNumber ||
+        !this.formData.price ||
         this.selectedImages.length === 0 ||
         !this.formData.productDescription
       ) {

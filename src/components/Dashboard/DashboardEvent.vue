@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Dashboard - Messages</h2>
+  <div class="max-w-6xl mx-auto px-4 max-sm:px-6 lg:px-8 py-8">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Dashboard - Event Management</h2>
     <div class="overflow-hidden border border-gray-200 rounded-lg">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -12,10 +12,13 @@
               Name
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Email
+              Date
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Message Description
+              Location
+            </th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Description
             </th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Actions
@@ -23,22 +26,25 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="(message, index) in messages" :key="index">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ message.id }}</div>
+          <tr v-for="(event, index) in events" :key="event.id">
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">{{ index + 1 }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ message.name }}</div>
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">{{ event.event_name }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="text-sm text-gray-900">{{ message.email }}</div>
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">{{ event.event_date }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-wrap max-w-xs">
-              <div class="text-sm text-gray-900 break-words" v-html="message.description"></div>
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">{{ event.event_location }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <button @click="editMessage(message)" class="text-blue-600 hover:text-blue-900">Edit</button>
-              <button @click="confirmDelete(message.id)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
+            <td class="px-6 py-4 max-w-xs">
+              <div class="text-sm text-gray-900 break-words">{{ event.event_description }}</div>
+            </td>
+            <td class="px-6 py-4">
+              <button @click="editEvent(event)" class="text-green-600 hover:text-green-900">Edit</button>
+              <button @click="confirmDelete(event.id)" class="text-red-600 hover:text-red-900 ml-4">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -55,20 +61,24 @@
           <div class="bg-white px-4 pt-5 pb-4 max-sm:p-6 max-sm:pb-4">
             <div class="max-sm:flex max-sm:items-start">
               <div class="mt-3 text-center max-sm:mt-0 max-sm:ml-4 max-sm:text-left">
-                <h3 class="text-lg text-center font-medium text-gray-900">Edit Message</h3>
+                <h3 class="text-lg text-center font-medium text-gray-900">Edit Event</h3>
                 <div class="mt-2">
-                  <form @submit.prevent="updateMessage">
+                  <form @submit.prevent="updateEvent">
                     <div>
-                      <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                      <input v-model="editForm.name" type="text" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
+                      <label for="edit-event-name" class="block text-sm font-medium text-gray-700">Name</label>
+                      <input v-model="editForm.event_name" type="text" id="edit-event-name" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
                     </div>
                     <div class="mt-4">
-                      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                      <input v-model="editForm.email" type="email" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
+                      <label for="edit-event-date" class="block text-sm font-medium text-gray-700">Date</label>
+                      <input v-model="editForm.event_date" type="date" id="edit-event-date" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
                     </div>
                     <div class="mt-4">
-                      <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                      <textarea v-model="editForm.description" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md h-32 resize-none"></textarea>
+                      <label for="edit-event-location" class="block text-sm font-medium text-gray-700">Location</label>
+                      <input v-model="editForm.event_location" type="text" id="edit-event-location" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
+                    </div>
+                    <div class="mt-4">
+                      <label for="edit-event-description" class="block text-sm font-medium text-gray-700">Description</label>
+                      <textarea v-model="editForm.event_description" id="edit-event-description" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md h-32 resize-none"></textarea>
                     </div>
                     <div class="mt-4">
                       <button type="submit" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 max-sm:col-start-2 max-sm:text-sm">Save</button>
@@ -95,7 +105,7 @@
               <div class="mt-3 text-center max-sm:mt-0 max-sm:ml-4 max-sm:text-left">
                 <h3 class="text-lg leading-6 font-medium text-gray-900">Confirm Delete</h3>
                 <div class="mt-2">
-                  <p class="text-sm text-gray-500">Are you sure you want to delete this message?</p>
+                  <p class="text-sm text-gray-500">Are you sure you want to delete this event?</p>
                 </div>
                 <div class="mt-4">
                   <button @click="deleteConfirmed" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 max-sm:text-sm">Delete</button>
@@ -111,53 +121,71 @@
 </template>
 
 <script>
+import { API_BASE_URL } from '@/config';
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      messages: [
-        { id: 1, name: "John Doe", email: "john.doe@example.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-        { id: 2, name: "Jane Smith", email: "jane.smith@example.com", description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas." },
-        { id: 3, name: "Mike Johnson", email: "mike.johnson@example.com", description: "Nullam ac urna eu felis dapibus condimentum sit amet a augue." },
-        { id: 4, name: "Emily Brown", email: "emily.brown@example.com", description: "Fusce efficitur nisi vel felis vehicula, a feugiat magna rutrum." },
-      ],
+      events: [],
       showEditModal: false,
       showDeleteModal: false,
       editForm: {
         id: null,
-        name: '',
-        email: '',
-        description: '',
+        event_name: '',
+        event_date: '',
+        event_location: '',
+        event_description: '',
       },
-      messageIdToDelete: null,
+      eventToDelete: null,
     };
   },
+  mounted() {
+    this.fetchEvents();
+  },
   methods: {
-    editMessage(message) {
-      this.editForm.id = message.id;
-      this.editForm.name = message.name;
-      this.editForm.email = message.email;
-      this.editForm.description = message.description;
+    fetchEvents() {
+      axios.get(`${API_BASE_URL}events`)
+        .then(response => {
+          this.events = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching events:', error);
+        });
+    },
+    editEvent(event) {
+      this.editForm = { ...event };
       this.showEditModal = true;
     },
-    updateMessage() {
-      // Logic to update message
-      const index = this.messages.findIndex(msg => msg.id === this.editForm.id);
-      if (index !== -1) {
-        this.messages[index].name = this.editForm.name;
-        this.messages[index].email = this.editForm.email;
-        this.messages[index].description = this.editForm.description;
-      }
-      this.showEditModal = false;
+    updateEvent() {
+      axios.put(`${API_BASE_URL}events/${this.editForm.id}`, this.editForm)
+        .then(response => {
+          const updatedEvent = response.data;
+          const index = this.events.findIndex(e => e.id === updatedEvent.id);
+          if (index !== -1) {
+            this.$set(this.events, index, updatedEvent);
+          }
+          this.showEditModal = false;
+        })
+        .catch(error => {
+          console.error('Error updating event:', error);
+        });
     },
-    confirmDelete(messageId) {
-      this.messageIdToDelete = messageId;
+    confirmDelete(eventId) {
+      this.eventToDelete = eventId;
       this.showDeleteModal = true;
     },
     deleteConfirmed() {
-      this.messages = this.messages.filter(message => message.id !== this.messageIdToDelete);
-      this.showDeleteModal = false;
-    }
-  }
+      axios.delete(`${API_BASE_URL}events/${this.eventToDelete}`)
+        .then(() => {
+          this.events = this.events.filter(event => event.id !== this.eventToDelete);
+          this.showDeleteModal = false;
+        })
+        .catch(error => {
+          console.error('Error deleting event:', error);
+        });
+    },
+  },
 };
 </script>
 

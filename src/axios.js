@@ -1,9 +1,9 @@
 // src/axios.js
 import axios from 'axios';
+import { API_BASE_URL } from './config';
 
 const instance = axios.create({
-  // baseURL: 'https://backend.antiwaste.shop:8000/api',
-  baseURL: 'http://127.0.0.1:8000/api' // Adjust as per your backend API URL
+  baseURL: API_BASE_URL, // Use the base URL from the config file
 });
 
 instance.interceptors.request.use(
