@@ -1,20 +1,26 @@
 // src/axios.js
-import axios from 'axios';
+import axios from "axios";
 
 const instance = axios.create({
-  // baseURL: 'https://backend.antiwaste.shop:8000/api',
-  baseURL: 'http://127.0.0.1:8000/api' // Adjust as per your backend API URL
+  baseURL: "http://127.0.0.1:8000/api", // Adjust as per your backend API URL
+  withCredentials: true, // This is important for CSRF
 });
 
+// Interceptor to add Authorization header
 instance.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem('token');
+  (config) => {
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    // Add CSRF token from localStorage or cookie
+    const csrfToken = localStorage.getItem("csrf_token"); // Or get from a cookie
+    if (csrfToken) {
+      config.headers["X-CSRF-TOKEN"] = csrfToken;
+    }
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
   }
 );
