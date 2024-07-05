@@ -190,7 +190,7 @@ export default {
   methods: {
     fetchProducts() {
       axios
-        .get(`${API_BASE_URL}products`)
+        .get(`${API_BASE_URL}/products`)
         .then((response) => {
           this.items = response.data;
           this.filteredItems = this.items; // Initialize filteredItems with all items

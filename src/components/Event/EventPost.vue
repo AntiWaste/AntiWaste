@@ -1,10 +1,7 @@
 <template>
   <div class="bg-white border rounded-lg shadow relative m-10">
     <div class="flex items-start justify-between p-5 border-b rounded-t">
-      <h3 class="text-2xl font-semibold">
-        Post Your event now!
-      </h3>
-      <!-- Back Button -->
+      <h3 class="text-2xl font-semibold">Post Your Event Now!</h3>
       <div class="px-5 pb-2">
         <button
           @click="navigateBack"
@@ -16,7 +13,7 @@
     </div>
 
     <div class="p-6 space-y-6">
-      <form @submit.prevent="saveevent">
+      <form @submit.prevent="saveEvent">
         <div class="grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">
             <label for="event-name" class="text-sm font-medium text-gray-900 block mb-2">Event Name</label>
@@ -76,12 +73,11 @@
             />
           </div>
 
-          <!-- Display selected images -->
-          <div class="col-span-6" v-if="selectedImages.length > 0">
+          <div class="col-span-6" v-if="formData.selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
-              <div v-for="(image, index) in selectedImages" :key="index" class="relative">
-                <img :src="image.url" alt="Selected Image" class="rounded-lg h-32 w-full object-cover">
+              <div v-for="(image, index) in formData.selectedImages" :key="index" class="relative">
+                <img :src="image.url" :alt="'Selected Image ' + index" class="rounded-lg h-32 w-full object-cover">
                 <button @click="removeImage(index)" class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -97,7 +93,7 @@
     <div class="p-6 border-t border-gray-200 rounded-b">
       <button
         class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        @click="saveevent"
+        @click="saveEvent"
       >
         Post Now
       </button>
@@ -108,7 +104,6 @@
 <script>
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-
 import { API_BASE_URL } from '@/config';
 
 export default {
@@ -119,65 +114,94 @@ export default {
         eventDescription: '',
         eventDate: '',
         eventLocation: '',
-        eventImage: null,
+        selectedImages: [],
       },
-      selectedImages: []
+      imageFiles: [],
     };
   },
   methods: {
     navigateBack() {
-      this.$router.go(-1); // Navigate back to previous page
+      this.$router.go(-1);
     },
     onImagesSelected(event) {
-      this.selectedImages = [];
-      Array.from(event.target.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.selectedImages.push({ file, url: reader.result });
-        };
-        reader.readAsDataURL(file);
+      this.imageFiles = Array.from(event.target.files);
+      this.convertToBase64();
+      // this.formData.selectedImages = [];
+      // Array.from(event.target.files).forEach(file => {
+      //   const reader = new FileReader();
+      //   reader.onload = (e) => {
+      //     this.formData.selectedImages.push({
+      //       file,
+      //       url: e.target.result
+      //     });+741
+      //   };
+      //   reader.readAsDataURL(file);
+      // });
+      console.log(this.formData.selectedImages);
+    },
+    convertToBase64() {
+      const promises = this.imageFiles.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            resolve({ file, url: e.target.result });
+          };
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
       });
+
+      Promise.all(promises)
+        .then(results => {
+          this.formData.selectedImages = results;
+        })
+        .catch(error => {
+          console.error('Error converting files to base64:', error);
+        });
     },
+    // convertToBase64() {
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     this.base64Image = reader.result;
+    //   };
+    //   reader.readAsDataURL(this.imageFile);
+    // },
     removeImage(index) {
-      this.selectedImages.splice(index, 1);  // Remove image from selectedImages array
+      this.formData.selectedImages.splice(index, 1);
+      
     },
-    async saveevent() {
-  try {
-    const formData = new FormData();
-    formData.append('event_name', this.formData.eventName);
-    formData.append('event_description', this.formData.eventDescription);
-    formData.append('event_date', this.formData.eventDate); // Ensure correct date format 'YYYY-MM-DD'
-    formData.append('event_location', this.formData.eventLocation);
-    
-    // Append selected images
-    this.selectedImages.forEach((image, index) => {
-      formData.append(`photos[${index}]`, image.file);
-    });
+    async saveEvent() {
+      const toast = useToast();
+      try {
+        const formData = new FormData();
+        formData.append('event_name', this.formData.eventName);
+        formData.append('event_description', this.formData.eventDescription);
+        formData.append('event_date', this.formData.eventDate);
+        formData.append('event_location', this.formData.eventLocation);
 
-    const response = await axios.post(`${API_BASE_URL}events`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+        this.formData.selectedImages.forEach((image, index) => {
+          formData.append(`event_images[${index}]`, image.file);
+        });
 
-    console.log('Event saved successfully:', response.data);
-    const toast = useToast();
-    toast.success('Event saved successfully!');
-    this.$router.push('/thank-you'); // Navigate to Thank You page
-  } catch (error) {
-    console.error('Error saving event:', error);
-    const toast = useToast();
-    toast.error('Error saving event. Please try again later.');
+        await axios.post(`${API_BASE_URL}events`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-    if (error.response) {
-      console.error('Server error details:', error.response.data);
-    }
-  }
-}
-  }
+        toast.success('Event saved successfully!');
+        this.$router.push('/thank-you');
+      } catch (error) {
+        toast.error('Error saving event. Please try again later.');
+        if (error.response) {
+          console.error('Server error details:', error.response.data);
+        }
+      }
+    },
+  },
 };
 </script>
 
 <style>
-/* Add any additional styles here */
+/* Your existing styles */
 </style>
