@@ -201,6 +201,27 @@ export default {
           this.isLoading = false;
         });
     },
+    filterByAll() {
+      this.filteredItems = this.items; // Reset to all items
+    },
+    filterByRecentlyViewed() {
+      // Example: Filter by items with rating greater than 4.0
+      this.filteredItems = this.items.filter((item) => item.rating > 4.0);
+    },
+    filterByFavorites() {
+      // Example: Filter by items with 'favorite' flag set
+      this.filteredItems = this.items.filter((item) => item.favorite);
+    },
+    searchProducts() {
+      if (this.searchQuery.trim() === "") {
+        this.filteredItems = this.items; // Reset to all items if search query is empty
+      } else {
+        // Filter items based on searchQuery
+        this.filteredItems = this.items.filter((item) =>
+          item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+    },
     navigateBack() {
       this.$router.go(-1); // Navigate back to previous page
     },

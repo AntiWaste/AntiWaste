@@ -86,7 +86,51 @@
             </p>
           </div>
         </div>
+        <!-- Rating Form -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Rate this product</h3>
+          <select v-model="rating" class="border rounded p-2">
+            <option disabled value="">Select Rating</option>
+            <option v-for="n in 5" :key="n" :value="n">{{ n }} Star(s)</option>
+          </select>
+          <button
+            @click="submitRating"
+            class="ml-2 bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Leave a comment</h3>
+          <textarea
+            v-model="comment"
+            class="border rounded p-2 w-full"
+            rows="4"
+          ></textarea>
+          <button
+            @click="submitComment"
+            class="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </div>
+
+        <!-- Display Comments -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Comments</h3>
+          <div
+            v-for="comment in product.comments"
+            :key="comment.id"
+            class="mb-4"
+          >
+            <p class="text-gray-600">{{ comment.comment }}</p>
+            <p class="text-sm text-gray-500">- {{ comment.user.name }}</p>
+          </div>
+        </div>
       </div>
+
       <div v-else class="text-center py-8">
         <p class="text-gray-600">Loading product details...</p>
       </div>
@@ -102,16 +146,18 @@ export default {
   data() {
     return {
       product: null,
+      rating: "",
+      comment: "",
     };
+  },
+  mounted() {
+    this.fetchProduct();
   },
   computed: {
     // Dynamically construct the image URL if the product has an image
     getProductImage() {
       return (imageName) => `${API_BASE_URL}storage/${imageName}`;
     },
-  },
-  mounted() {
-    this.fetchProduct();
   },
   methods: {
     fetchProduct() {
@@ -135,6 +181,34 @@ export default {
     contactOwner(product) {
       // Replace with your contact owner logic
       console.log("Contacting owner:", product);
+    },
+    submitRating() {
+      const productId = this.$route.params.id;
+      axios
+        .post(`${API_BASE_URL}products/${productId}/rate`, {
+          rating: this.rating,
+        })
+        .then((response) => {
+          console.log("Rating submitted:", response.data);
+          this.fetchProduct(); // Refresh product data to include new rating
+        })
+        .catch((error) => {
+          console.error("Error submitting rating:", error);
+        });
+    },
+    submitComment() {
+      const productId = this.$route.params.id;
+      axios
+        .post(`${API_BASE_URL}products/${productId}/comment`, {
+          comment: this.comment,
+        })
+        .then((response) => {
+          console.log("Comment submitted:", response.data);
+          this.fetchProduct(); // Refresh product data to include new comment
+        })
+        .catch((error) => {
+          console.error("Error submitting comment:", error);
+        });
     },
   },
 };
