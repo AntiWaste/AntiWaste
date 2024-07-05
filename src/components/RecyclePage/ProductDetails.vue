@@ -7,16 +7,21 @@
       >
         Back
       </button>
-      <div v-if="product" class="mt-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md">
+      <div
+        v-if="product"
+        class="mt-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md"
+      >
         <div class="flex flex-col md:flex-row -mx-4">
           <div class="md:flex-1 px-4">
+            <!-- IMAGE -->
             <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
               <img
                 class="w-full h-full object-cover"
-                :src="productImage"
+                :src="product.img ? getProductImage(product.img) : ''"
                 alt="Product Image"
               />
             </div>
+            <!-- ADD TO CART & CONTACT OWNER -->
             <div class="flex -mx-2 mb-4">
               <div class="w-1/2 px-2">
                 <button
@@ -37,9 +42,11 @@
             </div>
           </div>
           <div class="md:flex-1 px-4">
-            <h2 class="text-2xl font-bold text-gray-800  mb-2">{{ product.title }}</h2>
-            <div class="flex items-center text-sm text-gray-600  mb-4">
-              <span class="mr-1">{{ product.store }}</span>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">
+              {{ product.name }}
+            </h2>
+            <div class="flex items-center text-sm text-gray-600 mb-4">
+              <span class="mr-1">{{ product.owner_name }}</span>
               <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
             <div class="flex items-center mt-2">
@@ -51,60 +58,117 @@
                 readonly
                 size="small"
               ></v-rating>
-              <div class="text-gray-600  ml-4">{{ product.rating }} ({{ product.reviews }})</div>
+              <div class="text-gray-600 ml-4">
+                {{ product.rating }} ({{ product.reviews }})
+              </div>
             </div>
             <div class="flex mb-4">
               <div class="mr-4">
-                <span class="font-bold text-gray-700 ">Price:</span>
-                <span class="text-gray-600 ">${{ product.price }}</span>
+                <span class="font-bold text-gray-700">Price:</span>
+                <span class="text-gray-600">${{ product.price }}</span>
               </div>
               <div>
-                <span class="font-bold text-gray-700 ">Availability:</span>
-                <span class="text-gray-600 ">In Stock</span>
+                <span class="font-bold text-gray-700">Availability:</span>
+                <span class="text-gray-600">In Stock</span>
               </div>
             </div>
             <div>
-              <span class="font-bold text-gray-700 ">Product Description:</span>
-              <p class="text-gray-600  text-sm mt-2">{{ product.description }}</p>
+              <span class="font-bold text-gray-700">Product Description:</span>
+              <p class="text-gray-600 text-sm mt-2">
+                {{ product.description }}
+              </p>
             </div>
-            <p class="text-lg font-bold   mt-2">Location: {{ product.location }}</p>
-            <p class="text-lg font-bold  ">Contact Number: {{ product.contact }}</p>
+            <p class="text-lg font-bold mt-2">
+              Location: {{ product.location }}
+            </p>
+            <p class="text-lg font-bold">
+              Contact Number: {{ product.contact_number }}
+            </p>
           </div>
         </div>
+        <!-- Rating Form -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Rate this product</h3>
+          <select v-model="rating" class="border rounded p-2">
+            <option disabled value="">Select Rating</option>
+            <option v-for="n in 5" :key="n" :value="n">{{ n }} Star(s)</option>
+          </select>
+          <button
+            @click="submitRating"
+            class="ml-2 bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Leave a comment</h3>
+          <textarea
+            v-model="comment"
+            class="border rounded p-2 w-full"
+            rows="4"
+          ></textarea>
+          <button
+            @click="submitComment"
+            class="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+        </div>
+
+        <!-- Display Comments -->
+        <div class="mt-6">
+          <h3 class="text-xl font-bold mb-2">Comments</h3>
+          <div
+            v-for="comment in product.comments"
+            :key="comment.id"
+            class="mb-4"
+          >
+            <p class="text-gray-600">{{ comment.comment }}</p>
+            <p class="text-sm text-gray-500">- {{ comment.user.name }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="text-center py-8">
+        <p class="text-gray-600">Loading product details...</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import { API_BASE_URL } from '@/config'; // Adjust the path as per your project structure
+import axios from "axios";
+import { API_BASE_URL } from "@/config"; // Adjust the path as per your project structure
 
 export default {
   data() {
     return {
       product: null,
+      rating: "",
+      comment: "",
     };
-  },
-  computed: {
-    productImage() {
-      // Handle null case to avoid errors
-      if (!this.product) return null;
-      return require(`../../assets/recycledproduct/${this.product.image}`);
-    },
   },
   mounted() {
     this.fetchProduct();
   },
+  computed: {
+    // Dynamically construct the image URL if the product has an image
+    getProductImage() {
+      return (imageName) => `${API_BASE_URL}storage/${imageName}`;
+    },
+  },
   methods: {
     fetchProduct() {
       const productId = this.$route.params.id;
-      axios.get(`${API_BASE_URL}products/${productId}`)
-        .then(response => {
+      axios
+        .get(`${API_BASE_URL}products/${productId}`)
+        .then((response) => {
           this.product = response.data; // Assuming your API response contains product data
         })
-        .catch(error => {
-          console.error('Error fetching product:', error);
+        .catch((error) => {
+          console.error("Error fetching product:", error);
         });
     },
     navigateBack() {
@@ -112,11 +176,39 @@ export default {
     },
     addToCart(product) {
       // Replace with your cart logic
-      console.log('Adding to cart:', product);
+      console.log("Adding to cart:", product);
     },
     contactOwner(product) {
       // Replace with your contact owner logic
-      console.log('Contacting owner:', product);
+      console.log("Contacting owner:", product);
+    },
+    submitRating() {
+      const productId = this.$route.params.id;
+      axios
+        .post(`${API_BASE_URL}products/${productId}/rate`, {
+          rating: this.rating,
+        })
+        .then((response) => {
+          console.log("Rating submitted:", response.data);
+          this.fetchProduct(); // Refresh product data to include new rating
+        })
+        .catch((error) => {
+          console.error("Error submitting rating:", error);
+        });
+    },
+    submitComment() {
+      const productId = this.$route.params.id;
+      axios
+        .post(`${API_BASE_URL}products/${productId}/comment`, {
+          comment: this.comment,
+        })
+        .then((response) => {
+          console.log("Comment submitted:", response.data);
+          this.fetchProduct(); // Refresh product data to include new comment
+        })
+        .catch((error) => {
+          console.error("Error submitting comment:", error);
+        });
     },
   },
 };

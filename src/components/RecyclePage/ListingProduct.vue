@@ -13,6 +13,73 @@
           Back
         </button>
       </div>
+      <!-- Welcome Banner -->
+      <v-card max-height="230">
+        <v-img
+          class="text-white flex justify-center items-center"
+          height="230"
+          src="../../assets/recycledproduct/image_cover.jpg"
+          cover
+        >
+          <div class="flex flex-col justify-center items-center">
+            <div class="text-4xl font-bold mb-3">
+              Discover Sustainable Solutions - Explore Our Range of Eco-Friendly
+              Products
+            </div>
+            <router-link to="/product-post">
+              <button
+                class="mt-2 px-4 py-2 font-bold bg-green-600 border rounded-lg text-white hover:bg-green-800 hover:text-white focus:outline-none"
+              >
+                Sell Your Product Now
+              </button>
+            </router-link>
+          </div>
+        </v-img>
+      </v-card>
+
+      <!-- Filter and Search Bar -->
+      <div class="bg-green-100">
+        <div class="px-4 py-2">
+          <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <!-- Filter Menu -->
+            <div class="flex items-center space-x-4">
+              <button
+                class="text-gray-700 hover:text-green-500 focus:outline-none"
+                @click="filterByAll"
+              >
+                All
+              </button>
+              <button
+                class="text-gray-700 hover:text-green-500 focus:outline-none"
+                @click="filterByRecentlyViewed"
+              >
+                Recently Viewed
+              </button>
+              <button
+                class="text-gray-700 hover:text-green-500 focus:outline-none"
+                @click="filterByFavorites"
+              >
+                Favorites
+              </button>
+            </div>
+            <!-- Search Bar -->
+            <div class="flex items-center">
+              <input
+                v-model="searchQuery"
+                type="text"
+                class="w-64 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:border-green-500"
+                placeholder="Search products..."
+              />
+              <button
+                @click="searchProducts"
+                class="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600 focus:outline-none"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Product Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-20 py-5">
@@ -133,6 +200,27 @@ export default {
           console.error("Error fetching products:", error);
           this.isLoading = false;
         });
+    },
+    filterByAll() {
+      this.filteredItems = this.items; // Reset to all items
+    },
+    filterByRecentlyViewed() {
+      // Example: Filter by items with rating greater than 4.0
+      this.filteredItems = this.items.filter((item) => item.rating > 4.0);
+    },
+    filterByFavorites() {
+      // Example: Filter by items with 'favorite' flag set
+      this.filteredItems = this.items.filter((item) => item.favorite);
+    },
+    searchProducts() {
+      if (this.searchQuery.trim() === "") {
+        this.filteredItems = this.items; // Reset to all items if search query is empty
+      } else {
+        // Filter items based on searchQuery
+        this.filteredItems = this.items.filter((item) =>
+          item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
     },
     navigateBack() {
       this.$router.go(-1); // Navigate back to previous page
