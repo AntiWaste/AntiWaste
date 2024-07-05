@@ -4,7 +4,6 @@
       <h3 class="text-2xl font-semibold">
         Post Your event now!
       </h3>
-      <!-- Back Button -->
       <div class="px-5 pb-2">
         <button
           @click="navigateBack"
@@ -76,7 +75,6 @@
             />
           </div>
 
-          <!-- Display selected images -->
           <div class="col-span-6" v-if="selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
@@ -108,7 +106,6 @@
 <script>
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-
 import { API_BASE_URL } from '@/config';
 
 export default {
@@ -126,7 +123,7 @@ export default {
   },
   methods: {
     navigateBack() {
-      this.$router.go(-1); // Navigate back to previous page
+      this.$router.go(-1);
     },
     onImagesSelected(event) {
       this.selectedImages = [];
@@ -139,45 +136,40 @@ export default {
       });
     },
     removeImage(index) {
-      this.selectedImages.splice(index, 1);  // Remove image from selectedImages array
+      this.selectedImages.splice(index, 1);
     },
     async saveevent() {
-  try {
-    const formData = new FormData();
-    formData.append('event_name', this.formData.eventName);
-    formData.append('event_description', this.formData.eventDescription);
-    formData.append('event_date', this.formData.eventDate); // Ensure correct date format 'YYYY-MM-DD'
-    formData.append('event_location', this.formData.eventLocation);
-    
-    // Append selected images
-    this.selectedImages.forEach((image, index) => {
-      formData.append(`photos[${index}]`, image.file);
-    });
+      const toast = useToast();
+      try {
+        const formData = new FormData();
+        formData.append('event_name', this.formData.eventName);
+        formData.append('event_description', this.formData.eventDescription);
+        formData.append('event_date', this.formData.eventDate);
+        formData.append('event_location', this.formData.eventLocation);
+        
+        this.selectedImages.forEach((image, index) => {
+          formData.append(`photos[${index}]`, image.file);
+        });
 
-    const response = await axios.post(`${API_BASE_URL}events`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+        await axios.post(`${API_BASE_URL}events`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
 
-    console.log('Event saved successfully:', response.data);
-    const toast = useToast();
-    toast.success('Event saved successfully!');
-    this.$router.push('/thank-you'); // Navigate to Thank You page
-  } catch (error) {
-    console.error('Error saving event:', error);
-    const toast = useToast();
-    toast.error('Error saving event. Please try again later.');
-
-    if (error.response) {
-      console.error('Server error details:', error.response.data);
+        toast.success('Event saved successfully!');
+        this.$router.push('/thank-you');
+      } catch (error) {
+        toast.error('Error saving event. Please try again later.');
+        if (error.response) {
+          console.error('Server error details:', error.response.data);
+        }
+      }
     }
-  }
-}
   }
 };
 </script>
 
 <style>
-/* Add any additional styles here */
+/* Your existing styles */
 </style>

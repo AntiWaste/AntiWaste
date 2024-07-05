@@ -109,17 +109,14 @@
     </div>
   </div>
 </template>
-
 <script>
+import { API_BASE_URL } from '@/config';
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      messages: [
-        { id: 1, name: "John Doe", email: "john.doe@example.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-        { id: 2, name: "Jane Smith", email: "jane.smith@example.com", description: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas." },
-        { id: 3, name: "Mike Johnson", email: "mike.johnson@example.com", description: "Nullam ac urna eu felis dapibus condimentum sit amet a augue." },
-        { id: 4, name: "Emily Brown", email: "emily.brown@example.com", description: "Fusce efficitur nisi vel felis vehicula, a feugiat magna rutrum." },
-      ],
+      messages: [],
       showEditModal: false,
       showDeleteModal: false,
       editForm: {
@@ -131,7 +128,19 @@ export default {
       messageIdToDelete: null,
     };
   },
+  mounted() {
+    this.fetchMessages();
+  },
   methods: {
+    fetchMessages() {
+      axios.get(`${API_BASE_URL}contacts`)
+        .then(response => {
+          this.messages = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching messages:', error);
+        });
+    },
     editMessage(message) {
       this.editForm.id = message.id;
       this.editForm.name = message.name;
@@ -140,27 +149,37 @@ export default {
       this.showEditModal = true;
     },
     updateMessage() {
-      // Logic to update message
-      const index = this.messages.findIndex(msg => msg.id === this.editForm.id);
-      if (index !== -1) {
-        this.messages[index].name = this.editForm.name;
-        this.messages[index].email = this.editForm.email;
-        this.messages[index].description = this.editForm.description;
-      }
-      this.showEditModal = false;
+      axios.put(`${API_BASE_URL}contacts/${this.editForm.id}`, this.editForm)
+        .then(response => {
+          const updatedMessage = response.data;
+          const index = this.messages.findIndex(msg => msg.id === updatedMessage.id);
+          if (index !== -1) {
+    // Directly update properties of the object
+    this.messages[index].name = this.editForm.name;
+    this.messages[index].email = this.editForm.email;
+    this.messages[index].description = this.editForm.description;
+  }
+  this.showEditModal = false;
+          
+        })
+        .catch(error => {
+          console.error('Error updating message:', error);
+        });
     },
     confirmDelete(messageId) {
       this.messageIdToDelete = messageId;
       this.showDeleteModal = true;
     },
     deleteConfirmed() {
-      this.messages = this.messages.filter(message => message.id !== this.messageIdToDelete);
-      this.showDeleteModal = false;
-    }
-  }
+      axios.delete(`${API_BASE_URL}contacts/${this.messageIdToDelete}`)
+        .then(() => {
+          this.messages = this.messages.filter(msg => msg.id !== this.messageIdToDelete);
+          this.showDeleteModal = false;
+        })
+        .catch(error => {
+          console.error('Error deleting message:', error);
+        });
+    },
+  },
 };
 </script>
-
-<style scoped>
-/* Add scoped styles here if needed */
-</style>

@@ -1,5 +1,3 @@
-<!-- ContactForm.vue -->
-
 <template>
   <div class="container mx-auto p-6">
     <form @submit.prevent="submitForm" class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
@@ -32,6 +30,8 @@
 </template>
 
 <script>
+import { API_BASE_URL } from '@/config'; // Adjust the path based on your project structure
+import axios from 'axios';
 import { useToast } from 'vue-toastification';
 
 export default {
@@ -47,16 +47,9 @@ export default {
   methods: {
     async submitForm() {
       try {
-        // Example API endpoint for form submission
-        const response = await fetch('https://backend.antiwaste.shop:8000/api/contacts', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.formData)
-        });
+        const response = await axios.post(`${API_BASE_URL}contacts`, this.formData);
 
-        if (!response.ok) {
+        if (response.status !== 201) {
           throw new Error('Failed to submit form');
         }
 
