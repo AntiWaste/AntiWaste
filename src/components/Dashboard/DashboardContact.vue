@@ -234,7 +234,7 @@ export default {
   methods: {
     fetchMessages() {
       axios
-        .get(`${API_BASE_URL}/contacts`)
+        .get(`${API_BASE_URL}contacts`)
         .then((response) => {
           this.messages = response.data;
         })
@@ -251,7 +251,7 @@ export default {
     },
     updateMessage() {
       axios
-        .put(`${API_BASE_URL}/contacts/${this.editForm.id}`, this.editForm)
+        .put(`${API_BASE_URL}contacts/${this.editForm.id}`, this.editForm)
         .then((response) => {
           const updatedMessage = response.data;
           const index = this.messages.findIndex(
@@ -272,7 +272,7 @@ export default {
     },
     deleteConfirmed() {
       axios
-        .delete(`${API_BASE_URL}/contacts/${this.messageIdToDelete}`)
+        .delete(`${API_BASE_URL}contacts/${this.messageIdToDelete}`)
         .then(() => {
           this.messages = this.messages.filter(
             (msg) => msg.id !== this.messageIdToDelete
