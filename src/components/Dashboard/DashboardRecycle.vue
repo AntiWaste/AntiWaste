@@ -42,8 +42,8 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ message.name }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap max-w-xs">
-              <div class="text-sm text-gray-900 break-words">{{ message.description }}</div>
+            <td class="px-6 py-4 whitespace-nowrap max-w-xs break-words">
+              <div class="text-sm text-gray-900">{{ message.description }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ message.owner }}</div>
@@ -199,5 +199,7 @@ export default {
 </script>
 
 <style scoped>
-/* Add scoped styles here if needed */
+.break-words {
+  word-break: break-word;
+}
 </style>
