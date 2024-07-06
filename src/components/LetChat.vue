@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import axios from "@/axios";
+import axios from 'axios';
+import { API_BASE_URL } from '@/config';
 
 export default {
   name: "ChatForm",
@@ -37,20 +38,22 @@ export default {
     };
   },
   methods: {
-    submitEmail() {
-      axios
-        .post("contacts", {
+    async submitEmail() {
+      if (!this.email) {
+        alert("Please enter an email address.");
+        return;
+      }
+      try {
+        const response = await axios.post(`${API_BASE_URL}contacts`, {
           name: "User", // or use a form field for the name
           email: this.email,
           description: "Chat request", // or use a form field for the description
-        })
-        .then((response) => {
-          console.log("Email submitted:", response.data);
-          this.email = "";
-        })
-        .catch((error) => {
-          console.error("Error submitting email:", error);
         });
+        console.log("Email submitted:", response.data);
+        this.email = "";
+      } catch (error) {
+        console.error("Error submitting email:", error);
+      }
     },
   },
 };
