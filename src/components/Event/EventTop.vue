@@ -19,9 +19,8 @@
         </div>
       </div>
     </div>
-    <UpEvent />
-    <PostEvent />
-    <let-chat />
+    <UpEvent></UpEvent>
+    <PostEvent></PostEvent>
   </div>
 </template>
 
