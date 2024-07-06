@@ -86,8 +86,7 @@
         <span
           class="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
-          >​</span
-        >
+        ></span>
         <div
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full"
         >
@@ -169,7 +168,7 @@
         <span
           class="hidden sm:inline-block sm:align-middle sm:h-screen"
           aria-hidden="true"
-          >​</span
+          ></span
         >
         <div
           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full"
