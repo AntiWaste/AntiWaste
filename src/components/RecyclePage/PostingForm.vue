@@ -17,11 +17,7 @@
       <form @submit.prevent="saveProduct">
         <div class="grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">
-            <label
-              for="product-name"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Product Name</label
-            >
+            <label for="product-name" class="text-sm font-medium text-gray-900 block mb-2">Product Name</label>
             <input
               v-model="formData.productName"
               type="text"
@@ -33,11 +29,7 @@
             />
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <label
-              for="owner"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Owner</label
-            >
+            <label for="owner" class="text-sm font-medium text-gray-900 block mb-2">Owner</label>
             <input
               v-model="formData.owner"
               type="text"
@@ -48,13 +40,8 @@
               required
             />
           </div>
-
           <div class="col-span-6 sm:col-span-3">
-            <label
-              for="location"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Location</label
-            >
+            <label for="location" class="text-sm font-medium text-gray-900 block mb-2">Location</label>
             <input
               v-model="formData.location"
               type="text"
@@ -66,11 +53,7 @@
             />
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <label
-              for="contact-number"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Contact Number</label
-            >
+            <label for="contact-number" class="text-sm font-medium text-gray-900 block mb-2">Contact Number</label>
             <input
               v-model="formData.contactNumber"
               type="text"
@@ -82,11 +65,7 @@
             />
           </div>
           <div class="col-span-6">
-            <label
-              for="product-images"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Product Images</label
-            >
+            <label for="product-images" class="text-sm font-medium text-gray-900 block mb-2">Product Images</label>
             <input
               type="file"
               name="product-images"
@@ -101,11 +80,7 @@
           <div class="col-span-6" v-if="selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
-              <div
-                v-for="(image, index) in selectedImages"
-                :key="index"
-                class="relative"
-              >
+              <div v-for="(image, index) in selectedImages" :key="index" class="relative">
                 <img
                   :src="image.url"
                   alt="Selected Image"
@@ -134,11 +109,7 @@
             </div>
           </div>
           <div class="col-span-6 sm:col-span-3">
-            <label
-              for="price"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Price</label
-            >
+            <label for="price" class="text-sm font-medium text-gray-900 block mb-2">Price</label>
             <input
               v-model="formData.price"
               type="text"
@@ -150,11 +121,7 @@
             />
           </div>
           <div class="col-span-6">
-            <label
-              for="product-description"
-              class="text-sm font-medium text-gray-900 block mb-2"
-              >Product Description</label
-            >
+            <label for="product-description" class="text-sm font-medium text-gray-900 block mb-2">Product Description</label>
             <textarea
               v-model="formData.productDescription"
               id="product-description"
@@ -180,8 +147,10 @@
 </template>
 
 <script>
+import { API_BASE_URL } from "@/config"; // Import the API_BASE_URL from config
 import axios from "axios";
 import { useToast } from "vue-toastification";
+
 const csrfToken = window.csrf_token; // Access CSRF token from global variable
 axios.defaults.headers.common["X-CSRF-TOKEN"] = csrfToken;
 
@@ -230,9 +199,7 @@ export default {
         !this.formData.price
       ) {
         const toast = useToast();
-        toast.error(
-          "Please fill in all required fields and select at least one image."
-        );
+        toast.error("Please fill in all required fields and select at least one image.");
         return;
       }
 
@@ -245,16 +212,14 @@ export default {
       formData.append("description", this.formData.productDescription);
       formData.append("price", this.formData.price); // Add price if available
 
-      //log img
       // Append selected images
       this.selectedImages.forEach((image) => {
         formData.append("img", image.file);
-        console.log(image.file);
       });
 
       // Make POST request to backend API
       axios
-        .post("http://localhost:8000/api/products", formData)
+        .post(`${API_BASE_URL}products`, formData)
         .then((response) => {
           console.log("Product saved successfully:", response.data);
           const toast = useToast();
