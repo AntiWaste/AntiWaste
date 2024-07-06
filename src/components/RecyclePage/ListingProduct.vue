@@ -90,20 +90,19 @@
         >
           <img
             class="object-cover h-64 w-full"
-            :src="item.image_url"
+            :src="item.img"
             alt="Product Image"
           />
-
           <div class="p-4">
-            <h3 class="text-lg font-semibold">{{ item.productName }}</h3>
+            <h3 class="text-lg font-semibold">{{ item.name }}</h3>
             <div class="flex items-center text-sm text-gray-600">
-              <span class="me-1">{{ item.owner }}</span>
+              <span class="mr-1">{{ item.owner_name }}</span>
               <!-- Replace with your actual rating component -->
               <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
             <div class="flex items-center mt-2">
               <!-- Replace with your actual rating component -->
-              <div class="text-gray-600 ms-4">
+              <div class="text-gray-600 ml-4">
                 {{ item.rating }} ({{ item.reviews }})
               </div>
             </div>
@@ -111,7 +110,7 @@
               Location: {{ item.location }}
             </p>
             <p class="text-sm text-gray-600">
-              Contact Number: {{ item.contactNumber }}
+              Contact Number: {{ item.contact_number }}
             </p>
             <hr class="my-4" />
             <div class="text-lg font-semibold">${{ item.price }}</div>
@@ -218,7 +217,7 @@ export default {
       } else {
         // Filter items based on searchQuery
         this.filteredItems = this.items.filter((item) =>
-          item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+          item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
     },
