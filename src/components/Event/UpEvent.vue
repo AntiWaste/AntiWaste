@@ -68,20 +68,23 @@ export default {
   },
   methods: {
     formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  },
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
+    },
     fetchEvents(page = 1) {
       axios.get(`${API_BASE_URL}events?page=${page}`)
         .then(response => {
-          console.log(response.data); // Log response for debugging
-          this.events = response.data;
-          this.totalPages = response.data.meta.last_page;
+          console.log(response.data); // Log the entire response for debugging
+          this.events = response.data.data; // Access the correct property
+          if (response.data.meta) {
+            this.totalPages = response.data.meta.last_page; // Ensure this is the correct path
+          } else {
+            console.error('Pagination meta data missing in response:', response.data);
+          }
           this.page = page;
         })
         .catch(error => {
           console.error('Error fetching events:', error);
-          // Handle specific error scenarios
           if (error.response) {
             console.error('Server error details:', error.response.data);
           } else if (error.request) {
@@ -96,11 +99,14 @@ export default {
         .then(response => {
           console.log('API Response:', response.data); // Log response for debugging
           this.events = response.data.data;
-          this.totalPages = response.data.meta.last_page;
+          if (response.data.meta) {
+            this.totalPages = response.data.meta.last_page;
+          } else {
+            console.error('Pagination meta data missing in response:', response.data);
+          }
         })
         .catch(error => {
           console.error('Error fetching events:', error);
-          // Handle specific error scenarios
           if (error.response) {
             console.error('Server error details:', error.response.data);
           } else if (error.request) {
@@ -131,7 +137,6 @@ export default {
       })
       .catch(error => {
         console.error('Error creating event:', error);
-        // Handle specific error scenarios
         if (error.response) {
           console.error('Server error details:', error.response.data);
         } else if (error.request) {
@@ -148,3 +153,6 @@ export default {
 };
 </script>
 
+<style scoped>
+/* Add any additional styles if needed */
+</style>
