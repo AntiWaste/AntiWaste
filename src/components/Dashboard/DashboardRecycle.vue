@@ -42,7 +42,7 @@
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="text-sm text-gray-900">{{ message.name }}</div>
             </td>
-            <td class="px-6 py-4 whitespace-nowrap max-w-xs break-words">
+            <td class="px-6 py-4 whitespace-wrap max-w-xs break-words">
               <div class="text-sm text-gray-900">{{ message.description }}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
