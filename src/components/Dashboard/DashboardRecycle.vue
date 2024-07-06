@@ -88,7 +88,7 @@
                     </div>
                     <div class="mt-4">
                       <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                      <textarea v-model="editForm.description" rows="4" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md"></textarea>
+                      <textarea v-model="editForm.description" rows="4" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md h-32 resize-none"></textarea>
                     </div>
                     <div class="mt-4">
                       <label for="owner" class="block text-sm font-medium text-gray-700">Owner</label>
