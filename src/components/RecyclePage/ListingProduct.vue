@@ -93,11 +93,11 @@
             :src="item.img"
             alt="Product Image"
           />
+
           <div class="p-4">
             <h3 class="text-lg font-semibold">{{ item.name }}</h3>
             <div class="flex items-center text-sm text-gray-600">
               <span class="mr-1">{{ item.owner_name }}</span>
-              <!-- Replace with your actual rating component -->
               <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
             <div class="flex items-center mt-2">
@@ -155,7 +155,7 @@ import LoadingSpinner from "../LoadingSpinner.vue";
 import { API_BASE_URL } from "@/config";
 
 export default {
-  name: "WelcomeCard",
+  name: "ProductGrid",
   components: {
     LoadingSpinner,
   },
