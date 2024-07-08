@@ -15,6 +15,7 @@
             :class="{ 'text-green-500 font-bold': activeLink === item.link }"
             @click="handleClick(item.link)"
           >
+            <v-icon>{{ item.icon }}</v-icon>
             {{ item.text }}
           </router-link>
           <router-link
@@ -29,6 +30,17 @@
           </router-link>
         </v-toolbar-items>
         <div class="flex space-x-2">
+          <router-link
+            to="/cart"
+            title="Cart"
+            class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
+            :class="{ 'text-green-500 font-bold': activeLink === '/cart' }"
+            @click="handleClick('/cart')"
+          >
+            <v-icon>
+              <i class="fa-regular fa-cart-shopping"></i>
+            </v-icon>
+          </router-link>
           <v-btn
             v-if="isAuthenticated"
             @click="handleLogout"
@@ -90,6 +102,17 @@
             Register
           </router-link>
         </template>
+        <router-link
+          to="/cart"
+          title="Cart"
+          class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
+          :class="{ 'text-green-500 font-bold': activeLink === '/cart' }"
+          @click="handleClick('/cart')"
+        >
+          <v-icon>
+            <i class="fa-regular fa-cart-shopping"></i>
+          </v-icon>
+        </router-link>
       </div>
     </div>
 
@@ -101,7 +124,10 @@
           class="flex justify-center"
           :key="item.icon"
           :to="item.link"
-          @click="handleClick(item.link); drawer = false"
+          @click="
+            handleClick(item.link);
+            drawer = false;
+          "
         >
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
@@ -118,16 +144,40 @@
           v-if="isAdmin"
           class="flex justify-center"
           to="/dashboard"
-          @click="handleClick('/dashboard'); drawer = false"
+          @click="
+            handleClick('/dashboard');
+            drawer = false;
+          "
         >
           <v-list-item-icon>
             <v-icon>dashboard</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title
-              :class="{ 'text-green-500 font-bold': activeLink === '/dashboard' }"
+              :class="{
+                'text-green-500 font-bold': activeLink === '/dashboard',
+              }"
             >
               Dashboard
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
+          class="flex justify-center"
+          to="/cart"
+          @click="
+            handleClick('/cart');
+            drawer = false;
+          "
+        >
+          <v-list-item-icon>
+            <v-icon>shopping_cart</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title
+              :class="{ 'text-green-500 font-bold': activeLink === '/cart' }"
+            >
+              Cart
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -137,30 +187,61 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'NavTop',
+  name: "NavTop",
   data() {
     return {
       drawer: false,
-      logo: require('../assets/anti-waste-logo.png'),
-      activeLink: '/',
+      logo: require("../assets/anti-waste-logo.png"),
+      activeLink: "/",
       nav: [
-        { icon: 'home', text: 'Home', link: '/', title: 'Go back home page' },
-        { icon: 'info', text: 'Waste', link: '/waste', title: 'Learn more about waste and recycling' },
-        { icon: 'assignment_turned_in', text: 'Recycle', link: '/recycle', title: 'Some stuff that needs doing' },
-        { icon: 'event', text: 'Event', link: '/event', title: 'Subscribe to our newsletter' },
-        { icon: 'contact_mail', text: 'Contact', link: '/contact', title: 'Get in touch with us!' },
-        { icon: 'dashboard', text: 'Dashboard', link: '/dashboard-layout', title: 'Manage your user' },
+        { icon: "home", text: "Home", link: "/", title: "Go back home page" },
+        {
+          icon: "info",
+          text: "Waste",
+          link: "/waste",
+          title: "Learn more about waste and recycling",
+        },
+        {
+          icon: "assignment_turned_in",
+          text: "Recycle",
+          link: "/recycle",
+          title: "Some stuff that needs doing",
+        },
+        {
+          icon: "event",
+          text: "Event",
+          link: "/event",
+          title: "Subscribe to our newsletter",
+        },
+        {
+          icon: "contact_mail",
+          text: "Contact",
+          link: "/contact",
+          title: "Get in touch with us!",
+        },
+        {
+          icon: "dashboard",
+          text: "Dashboard",
+          link: "/dashboard-layout",
+          title: "Manage your user",
+        },
+        {
+          icon: "shopping_cart",
+          text: "Cart",
+          link: "/cart",
+          title: "View your cart",
+        }, // Added Cart link
       ],
     };
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'user', 'isAdmin']),
+    ...mapGetters(["isAuthenticated", "user", "isAdmin"]),
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(["logout"]),
     handleClick(link) {
       this.activeLink = link;
     },
