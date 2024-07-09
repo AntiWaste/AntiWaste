@@ -25,7 +25,7 @@ import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
-import CartView from "../components/CartView.vue";
+import CartView from "../components/Cart/CartView.vue";
 
 const routes = [
   {

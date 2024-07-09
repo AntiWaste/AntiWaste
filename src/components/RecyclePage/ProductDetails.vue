@@ -119,11 +119,20 @@ export default {
       this.$router.go(-1);
     },
     addToCart(product) {
+      const token = localStorage.getItem("auth_token");
       axios
-        .post(`${API_BASE_URL}cart-items`, {
-          product_id: product.id,
-          quantity: 1, // You can adjust the quantity as needed
-        })
+        .post(
+          `${API_BASE_URL}cart-items`,
+          {
+            product_id: product.id,
+            quantity: 1, // You can adjust the quantity as needed
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           toast.success("Product added to cart!"); // Using Vue Toastification for success message
           console.log("Product added to cart:", response.data);
