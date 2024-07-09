@@ -14,22 +14,29 @@
         />
       </li>
     </ul>
+    <button @click="checkout" v-if="cartItems.length != 0">Checkout</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 
 export default {
   data() {
     return {
       cartItems: [],
+      stripe: null,
     };
   },
   created() {
     this.fetchCartItems();
+    this.setupStripe();
   },
   methods: {
+    async setupStripe() {
+      this.stripe = await loadStripe("your-publishable-key-here");
+    },
     fetchCartItems() {
       axios.get("/api/cart-items").then((response) => {
         this.cartItems = response.data;
