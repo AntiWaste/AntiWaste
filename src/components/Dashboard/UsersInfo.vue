@@ -109,17 +109,14 @@
     </div>
   </div>
 </template>
-
 <script>
+import { API_BASE_URL } from '@/config'; // Adjust the path as per your project structure
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      users: [
-        { id: 1, name: "John Doe", email: "john.doe@example.com", role: "admin" },
-        { id: 2, name: "Jane Smith", email: "jane.smith@example.com", role: "user" },
-        { id: 3, name: "Mike Johnson", email: "mike.johnson@example.com", role: "role" },
-        { id: 4, name: "Emily Brown", email: "emily.brown@example.com", role: "service provider" },
-      ],
+      users: [],
       showEditModal: false,
       showDeleteModal: false,
       editForm: {
@@ -131,7 +128,19 @@ export default {
       userIdToDelete: null,
     };
   },
+  mounted() {
+    this.fetchUsers();
+  },
   methods: {
+    fetchUsers() {
+      axios.get(`${API_BASE_URL}users`)
+        .then(response => {
+          this.users = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching users:', error);
+        });
+    },
     editUser(user) {
       this.editForm.id = user.id;
       this.editForm.name = user.name;
@@ -140,26 +149,33 @@ export default {
       this.showEditModal = true;
     },
     updateUser() {
-      // Logic to update user
-      const index = this.users.findIndex(u => u.id === this.editForm.id);
-      if (index !== -1) {
-        this.users[index] = { ...this.editForm };
-      }
-      this.showEditModal = false;
+      axios.put(`${API_BASE_URL}users/${this.editForm.id}`, this.editForm)
+        .then(response => {
+          const updatedUser = response.data;
+          const index = this.users.findIndex(u => u.id === updatedUser.id);
+          if (index !== -1) {
+            this.$set(this.users, index, updatedUser);
+          }
+          this.showEditModal = false;
+        })
+        .catch(error => {
+          console.error('Error updating user:', error);
+        });
     },
     confirmDelete(userId) {
       this.userIdToDelete = userId;
       this.showDeleteModal = true;
     },
     deleteConfirmed() {
-      // Logic to delete user
-      this.users = this.users.filter(user => user.id !== this.userIdToDelete);
-      this.showDeleteModal = false;
-    }
-  }
+      axios.delete(`${API_BASE_URL}users/${this.userIdToDelete}`)
+        .then(() => {
+          this.users = this.users.filter(user => user.id !== this.userIdToDelete);
+          this.showDeleteModal = false;
+        })
+        .catch(error => {
+          console.error('Error deleting user:', error);
+        });
+    },
+  },
 };
 </script>
-
-<style scoped>
-/* Add scoped styles here if needed */
-</style>

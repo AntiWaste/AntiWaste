@@ -40,56 +40,57 @@ export default {
       formData: {
         name: '',
         email: '',
-        message: ''
+        message: '',
       }
     };
   },
   methods: {
-    async submitForm() {
-      try {
-        const response = await axios.post(`${API_BASE_URL}contacts`, this.formData);
+  async submitForm() {
+    try {
+      console.log('Form Data:', this.formData); // Log form data before sending
+      const response = await axios.post(`${API_BASE_URL}contacts`, this.formData);
 
-        if (response.status !== 201) {
-          throw new Error('Failed to submit form');
-        }
-
-        // Clear form data after successful submission
-        this.formData.name = '';
-        this.formData.email = '';
-        this.formData.message = '';
-
-        // Show success toast
-        const toast = useToast();
-        toast.success('Form submitted successfully', {
-          position: 'top-right',
-          timeout: 3000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 80,
-          showCloseButtonOnHover: false,
-          hideProgressBar: false,
-          closeButton: 'button',
-        });
-
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        // Show error toast
-        const toast = useToast();
-        toast.error('Failed to submit form', {
-          position: 'top-right',
-          timeout: 3000,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          draggablePercent: 80,
-          showCloseButtonOnHover: false,
-          hideProgressBar: false,
-          closeButton: 'button',
-        });
+      if (response.status !== 201) {
+        throw new Error('Failed to submit form');
       }
+
+      // Clear form data after successful submission
+      this.formData.name = '';
+      this.formData.email = '';
+      this.formData.message = '';
+
+      // Show success toast
+      const toast = useToast();
+      toast.success('Form submitted successfully', {
+        position: 'top-right',
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 80,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+      });
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // Show error toast
+      const toast = useToast();
+      toast.error('Failed to submit form', {
+        position: 'top-right',
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 80,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: 'button',
+      });
     }
   }
+}
 };
 </script>
 

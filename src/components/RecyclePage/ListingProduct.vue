@@ -112,6 +112,10 @@
             <p class="text-sm text-gray-600">
               Contact Number: {{ item.contact_number }}
             </p>
+            <!-- Display Description -->
+            <div class="text-sm text-gray-600 mt-2">
+              <span class="font-bold">Description: </span>{{ item.description }}
+            </div>
             <hr class="my-4" />
             <div class="text-lg font-semibold">${{ item.price }}</div>
             <div>
@@ -150,9 +154,9 @@
 </template>
 
 <script>
+import { API_BASE_URL } from "@/config";
 import axios from "axios";
 import LoadingSpinner from "../LoadingSpinner.vue";
-import { API_BASE_URL } from "@/config";
 
 export default {
   name: "ProductGrid",

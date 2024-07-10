@@ -145,14 +145,15 @@ export default {
   },
   methods: {
     fetchEvents() {
-      axios.get(`${API_BASE_URL}events`)
-        .then(response => {
-          this.events = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching events:', error);
-        });
-    },
+  axios.get(`${API_BASE_URL}events`)
+    .then(response => {
+      console.log('Fetched events:', response.data);
+      this.events = response.data;
+    })
+    .catch(error => {
+      console.error('Error fetching events:', error);
+    });
+},
     editEvent(event) {
       this.editForm = { ...event };
       this.showEditModal = true;

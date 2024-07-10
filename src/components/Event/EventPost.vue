@@ -102,9 +102,9 @@
 </template>
 
 <script>
+import { API_BASE_URL } from '@/config';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-import { API_BASE_URL } from '@/config';
 
 export default {
   data() {
@@ -116,88 +116,40 @@ export default {
         eventLocation: '',
         selectedImages: [],
       },
-      imageFiles: [],
     };
   },
   methods: {
-    navigateBack() {
-      this.$router.go(-1);
-    },
-    onImagesSelected(event) {
-      this.imageFiles = Array.from(event.target.files);
-      this.convertToBase64();
-      // this.formData.selectedImages = [];
-      // Array.from(event.target.files).forEach(file => {
-      //   const reader = new FileReader();
-      //   reader.onload = (e) => {
-      //     this.formData.selectedImages.push({
-      //       file,
-      //       url: e.target.result
-      //     });+741
-      //   };
-      //   reader.readAsDataURL(file);
-      // });
-      console.log(this.formData.selectedImages);
-    },
-    convertToBase64() {
-      const promises = this.imageFiles.map(file => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            resolve({ file, url: e.target.result });
-          };
-          reader.onerror = (error) => reject(error);
-          reader.readAsDataURL(file);
-        });
-      });
-
-      Promise.all(promises)
-        .then(results => {
-          this.formData.selectedImages = results;
-        })
-        .catch(error => {
-          console.error('Error converting files to base64:', error);
-        });
-    },
-    // convertToBase64() {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     this.base64Image = reader.result;
-    //   };
-    //   reader.readAsDataURL(this.imageFile);
-    // },
-    removeImage(index) {
-      this.formData.selectedImages.splice(index, 1);
-      
-    },
     async saveEvent() {
       const toast = useToast();
       try {
+        // Prepare form data
         const formData = new FormData();
         formData.append('event_name', this.formData.eventName);
         formData.append('event_description', this.formData.eventDescription);
         formData.append('event_date', this.formData.eventDate);
         formData.append('event_location', this.formData.eventLocation);
 
+        // Append selected images
         this.formData.selectedImages.forEach((image, index) => {
           formData.append(`event_images[${index}]`, image.file);
         });
 
+        // Make POST request with Axios
         await axios.post(`${API_BASE_URL}events`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
+        // Display success message and redirect
         toast.success('Event saved successfully!');
         this.$router.push('/thank-you');
       } catch (error) {
         toast.error('Error saving event. Please try again later.');
-        if (error.response) {
-          console.error('Server error details:', error.response.data);
-        }
+        console.error('Error saving event:', error);
       }
     },
+    // Other methods like image handling, etc.
   },
 };
 </script>

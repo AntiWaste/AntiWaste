@@ -26,21 +26,27 @@
               name="Waste-name"
               id="Waste-name"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
-              placeholder="Kromar Khmer"
+              placeholder="Enter Waste Name"
               required
             />
           </div>
           <div class="col-span-6 sm:col-span-3">
             <label for="Waste-categories" class="text-sm font-medium text-gray-900 block mb-2">Waste Categories</label>
-            <input
+            <select
               v-model="formData.WasteCategories"
-              type="text"
-              name="Waste-categories"
-              id="Waste-categories"
+              name="waste-categories"
+              id="waste-categories"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
-              placeholder="Textiles"
               required
-            />
+            >
+              <option value="">Select Waste Category</option>
+              <option value="Glass Bottle">Glass Bottle</option>
+              <option value="Plastic">Plastic</option>
+              <option value="Metals">Metals</option>
+              <option value="Paper">Paper</option>
+              <option value="E-Waste">E-Waste</option>
+              <option value="Textiles">Textiles</option>
+            </select>
           </div>
           <div class="col-span-6 sm:col-span-3">
             <label for="owner" class="text-sm font-medium text-gray-900 block mb-2">Seller</label>
@@ -50,7 +56,7 @@
               name="owner"
               id="owner"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
-              placeholder="Srey Sros"
+              placeholder="Enter Seller Name"
               required
             />
           </div>
@@ -63,7 +69,7 @@
               name="location"
               id="location"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-              placeholder="New York, USA"
+              placeholder="Enter Location"
               required
             />
           </div>
@@ -75,7 +81,7 @@
               name="contact-number"
               id="contact-number"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-              placeholder="+1 234 567 890"
+              placeholder="Enter Contact Number"
               required
             />
           </div>
@@ -87,7 +93,7 @@
               name="amount"
               id="amount"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-              placeholder="1 kg"
+              placeholder="Enter Amount"
               required
             />
           </div>
@@ -99,7 +105,7 @@
               name="price"
               id="price"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-              placeholder="00.00$"
+              placeholder="Enter Price"
               required
             />
           </div>
@@ -119,8 +125,8 @@
           <div class="col-span-6" v-if="formData.selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
-              <div v-for="(image, index) in selectedImages" :key="index" class="relative">
-                <img :src="image.url" alt="Selected Image" class="rounded-lg h-32 w-full object-cover">
+              <div v-for="(image, index) in formData.selectedImages" :key="index" class="relative">
+                <img :src="image.url" :alt="'Selected Image ' + (index + 1)" class="rounded-lg h-32 w-full object-cover">
                 <button @click="removeImage(index)" class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -136,7 +142,7 @@
               id="Waste-description"
               rows="6"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
-              placeholder="Details"
+              placeholder="Enter Waste Description"
               required
             ></textarea>
           </div>
@@ -146,6 +152,7 @@
 
     <div class="p-6 border-t border-gray-200 rounded-b">
       <button
+        type="submit"
         class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
         @click="saveWaste"
       >
@@ -168,13 +175,13 @@ export default {
         owner: '',
         location: '',
         contactNumber: '',
-        itemAmount:'',
-        WasteCategories:'',
-        price:'',
+        itemAmount: '',
+        WasteCategories: '',
+        price: '',
         WasteDescription: '',
         selectedImages: []
       },
-      imageFiles:[]
+      imageFiles: []
     };
   },
   methods: {
@@ -184,17 +191,9 @@ export default {
     onImagesSelected(event) {
       this.imageFiles = Array.from(event.target.files);
       this.convertToBase64();
-      // this.selectedImages = [];
-      // Array.from(event.target.files).forEach(file => {
-      //   const reader = new FileReader();
-      //   reader.onload = () => {
-      //     this.formData.selectedImages.push({ file, url: reader.result });
-      //   };
-      //   reader.readAsDataURL(file);
-      // });
     },
     removeImage(index) {
-      this.formData.selectedImages.splice(index, 1);  // Remove image from selectedImages array
+      this.formData.selectedImages.splice(index, 1); // Remove image from selectedImages array
     },
     convertToBase64() {
       const promises = this.imageFiles.map(file => {
@@ -217,21 +216,24 @@ export default {
         });
     },
     async saveWaste() {
-      // Perform form validation
       const toast = useToast();
-      // if (
-      //   !this.formData.WasteName ||
-      //   !this.formData.owner ||
-      //   !this.formData.WasteCategories ||
-      //   !this.formData.location ||
-      //   !this.formData.contactNumber ||
-      //   !this.formData.itemAmount ||
-      //   !this.formData.price ||
-      //   !this.formData.WasteDescription
-      // ) {
-      //   toast.error('Please fill in all required fields and select at least one image.');
-      //   return;
-      // }
+      
+      // Form validation (uncomment and complete)
+      if (
+        !this.formData.WasteName ||
+        !this.formData.owner ||
+        !this.formData.WasteCategories ||
+        !this.formData.location ||
+        !this.formData.contactNumber ||
+        !this.formData.itemAmount ||
+        !this.formData.price ||
+        !this.formData.WasteDescription ||
+        this.formData.selectedImages.length === 0
+      ) {
+        toast.error('Please fill in all required fields and select at least one image.');
+        return;
+      }
+
       try {
         const formData = new FormData();
         formData.append('name', this.formData.WasteName);
@@ -239,9 +241,9 @@ export default {
         formData.append('price', this.formData.price);
         formData.append('categories', this.formData.WasteCategories);
         formData.append('contact_number', this.formData.contactNumber);
-        formData.append('location', this.formData.eventLocation);
+        formData.append('location', this.formData.location);
         formData.append('item_amount', this.formData.itemAmount);
-        formData.append('description', this.formData.eventDescription);
+        formData.append('description', this.formData.WasteDescription);
 
         this.formData.selectedImages.forEach((image, index) => {
           formData.append(`waste_images[${index}]`, image.file);
@@ -255,7 +257,7 @@ export default {
         toast.success('Waste saved successfully!');
         this.$router.push('/thank-you');
       } catch (error) {
-        toast.error('Error saving event. Please try again later.');
+        toast.error('Error saving waste. Please try again later.');
         if (error.response) {
           console.error('Server error details:', error.response.data);
         }
@@ -265,6 +267,3 @@ export default {
 };
 </script>
 
-<style>
-/* Add any additional styles here */
-</style>
