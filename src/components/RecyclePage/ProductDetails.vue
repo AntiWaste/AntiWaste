@@ -110,8 +110,6 @@
 <script>
 import { API_BASE_URL } from '@/config';
 import axios from 'axios';
-import axios from "axios";
-import { API_BASE_URL } from "@/config"; // Adjust the path as per your project structure
 import { useToast } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 const toast = useToast();
@@ -165,9 +163,7 @@ export default {
       this.$router.go(-1);
     },
     addToCart(product) {
-<<<<<<< HEAD
       console.log('Adding to cart:', product);
-=======
       const token = localStorage.getItem("auth_token");
       axios
         .post(
@@ -190,7 +186,6 @@ export default {
           toast.error("Failed to add product to cart."); // Using Vue Toastification for error message
           console.error("Error adding product to cart:", error);
         });
->>>>>>> aee349bcac9a1da318d4be98e7c87ce9c1533f40
     },
     contactOwner(product) {
       console.log('Contacting owner:', product);
