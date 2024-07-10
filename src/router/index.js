@@ -3,7 +3,7 @@ import EventInfo from "../components/Dashboard/DashboardEvent.vue";
 import ProductInfo from "../components/Dashboard/DashboardProduct.vue";
 import RecycleInfo from "../components/Dashboard/DashboardRecycle.vue";
 import WasteInfo from "../components/Dashboard/DashboardWaste.vue";
-import UsersInfo from '../components/Dashboard/UsersInfo.vue';
+import UsersInfo from "../components/Dashboard/UsersInfo.vue";
 import HomePage from "../components/Home/HomePage.vue";
 import HomeLayout from "../views/HomeLayout.vue";
 // import TopBar from '../components/Waste/TopBar.vue';
@@ -14,17 +14,18 @@ import DashboardLayout from "@/views/DashboardLayout.vue";
 import EventView from "@/views/EventView.vue";
 import WasteView from "@/views/WasteView.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import DetailPage from '../components/Event/DetailPage.vue';
-import EventPost from '../components/Event/EventPost.vue';
+import DetailPage from "../components/Event/DetailPage.vue";
+import EventPost from "../components/Event/EventPost.vue";
 import PostingForm from "../components/RecyclePage/PostingForm.vue";
 import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
 import ThankYou from "../components/RecyclePage/ThankYou.vue";
-import SellWaste from '../components/Waste/SellWaste.vue';
-import WasteListing from '../components/Waste/WasteListing.vue';
-import store from '../store';
+import SellWaste from "../components/Waste/SellWaste.vue";
+import WasteListing from "../components/Waste/WasteListing.vue";
+import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
+import CartView from "../components/Cart/CartView.vue";
 
 const routes = [
   {
@@ -49,42 +50,47 @@ const routes = [
   // },
   //Dashboard Layout have children,
   {
+    path: "/cart",
+    name: "Cart",
+    component: CartView,
+  },
+  {
     path: "/",
     name: "dashboard",
     redirect: "/home",
     component: DashboardLayout,
     children: [
-  {
-    path: 'user-info',
-    name: 'user-info',
-    component: UsersInfo,
-  },
-  {
-    path: 'product-info',
-    name: 'product-info',
-    component: ProductInfo,
-  },
-  {
-    path: 'contact-info',
-    name: 'contact-info',
-    component: ContactInfo,
-  },
-  {
-    path: 'waste-info',
-    name: 'waste-info',
-    component: WasteInfo,
-  },
-  {
-    path: 'event-info',
-    name: 'event-info',
-    component: EventInfo,
-  },
-  {
-    path: 'recycle-info',
-    name: 'recycle-info',
-    component: RecycleInfo,
-  },
-],
+      {
+        path: "user-info",
+        name: "user-info",
+        component: UsersInfo,
+      },
+      {
+        path: "product-info",
+        name: "product-info",
+        component: ProductInfo,
+      },
+      {
+        path: "contact-info",
+        name: "contact-info",
+        component: ContactInfo,
+      },
+      {
+        path: "waste-info",
+        name: "waste-info",
+        component: WasteInfo,
+      },
+      {
+        path: "event-info",
+        name: "event-info",
+        component: EventInfo,
+      },
+      {
+        path: "recycle-info",
+        name: "recycle-info",
+        component: RecycleInfo,
+      },
+    ],
   },
   //Home Layout have children,
   {
@@ -141,30 +147,30 @@ const routes = [
       {
         path: "thank-you",
         name: "thank-you",
-        component: ThankYou  
+        component: ThankYou,
       },
       {
         path: "waste-listing",
         name: "waste-listing",
-        component: WasteListing  
+        component: WasteListing,
       },
       {
         path: "waste-form",
         name: "waste-form",
-        component: SellWaste 
+        component: SellWaste,
       },
       {
         path: "event-detail",
         name: "event-detail",
-        component: DetailPage
+        component: DetailPage,
       },
       {
         path: "event-post",
         name: "event-post",
-        component: EventPost
-      }
-    ]
-  }
+        component: EventPost,
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
@@ -176,7 +182,7 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = store.getters.isAuthenticated;
 
   if (requiresAuth && !isAuthenticated) {
-    next('/login');
+    next("/login");
   } else {
     next();
   }
