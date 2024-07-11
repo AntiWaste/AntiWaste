@@ -35,12 +35,17 @@
       </table>
     </div>
 
-    <!-- Edit Modal -->
-    <div v-if="showEditModal" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-      <div class="bg-white rounded-lg shadow-xl max-w-lg w-full mx-4">
-        <div class="p-4">
-          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Edit Event</h3>
+    <div v-if="showEditModal" class="fixed z-10 inset-0 overflow-y-auto">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <div class="bg-white rounded-lg shadow-xl transform transition-all max-w-lg w-full">
+          <div class="bg-white px-4 pt-5 pb-4">
+            <div class="max-sm:flex max-sm:items-start">
+              <div class="mt-3 text-center max-sm:mt-0 max-sm:ml-4 max-sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Edit Event</h3>
+                <div class="mt-2">
           <form @submit.prevent="updateEvent">
             <div class="mb-4">
               <label for="event_name" class="block text-sm font-medium text-gray-700">Event Name</label>
@@ -70,17 +75,32 @@
         </div>
       </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div v-if="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-      <div class="bg-white rounded-lg shadow-xl max-w-lg w-full mx-4">
-        <div class="p-4">
-          <h3 class="text-lg leading-6 font-medium text-gray-900">Confirm Delete</h3>
-          <p class="text-sm text-gray-500 mt-2">Are you sure you want to delete this event?</p>
-          <div class="flex justify-end mt-4">
-            <button @click="deleteConfirmed" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 max-sm:text-sm">Delete</button>
-            <button @click="showDeleteModal = false" type="button" class="ml-4 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 max-sm:text-sm">Cancel</button>
+    
+
+    <div v-if="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto">
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="fixed inset-0 transition-opacity">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full">
+          <div class="bg-white px-4 pt-5 pb-4">
+            <div class="max-sm:flex max-sm:items-start">
+              <div class="mt-3 text-center max-sm:mt-0 max-sm:ml-4 max-sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Confirm Delete</h3>
+                <div class="mt-2">
+                  <p class="text-sm text-gray-500">Are you sure you want to delete this message?</p>
+                </div>
+                <div class="mt-4">
+                  <button @click="deleteConfirmed" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 max-sm:text-sm">Delete</button>
+                  <button @click="showDeleteModal = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 max-sm:mt-0 max-sm:text-sm">Cancel</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -132,18 +152,18 @@ export default {
     this.showEditModal = true;
   }
 },
-    async updateEvent() {
-      try {
-        const response = await axios.put(`${API_BASE_URL}events/${this.editForm.id}`, this.editForm);
-        const updatedEventIndex = this.events.findIndex(ev => ev.id === this.editForm.id);
-        if (updatedEventIndex !== -1) {
-          this.$set(this.events, updatedEventIndex, response.data);
-          this.showEditModal = false;
-        }
-      } catch (error) {
-        console.error('Error updating event:', error);
-      }
-    },
+async updateEvent() {
+  try {
+    const response = await axios.put(`${API_BASE_URL}events/${this.editForm.id}`, this.editForm);
+    const updatedEventIndex = this.events.findIndex(ev => ev.id === this.editForm.id);
+    if (updatedEventIndex !== -1) {
+      this.events[updatedEventIndex] = response.data.event; // Update the specific event in the events array
+      this.showEditModal = false; // Close the edit modal after successful update
+    }
+  } catch (error) {
+    console.error('Error updating event:', error);
+  }
+},
     confirmDelete(eventId) {
       this.eventToDelete = eventId;
       this.showDeleteModal = true;

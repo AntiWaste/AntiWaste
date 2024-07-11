@@ -1,85 +1,141 @@
 <template>
   <div class="flex flex-col">
-    <div>
-      <div class="m-10 text-3xl font-bold">Upcoming Events</div>
-      <div class="flex flex-wrap -mx-4">
-        <div v-for="event in events" :key="event.id" class="w-full sm:w-1/2 md:w-1/3 p-4">
-          <div class="bg-white p-6 rounded-lg shadow-lg">
-            <div class="relative">
-              <img
-                v-if="event.photo"
-                :src="`${API_BASE_URL}/storage/${event.photo}`"
-                class="w-full h-48 object-cover rounded-lg"
-                alt="Event Image"
-              />
-              <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity">
-                  <router-link :to="'/event-detail/' + event.id">
-                  <button class="text-white bg-red-500 px-4 py-2 rounded">
-                    See more info
-                  </button>
-                </router-link>
-              </div>
+    <div class="m-10 text-3xl font-bold">Upcoming Events</div>
+    <div class="flex flex-wrap -mx-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-20 py-5">
+        <div
+          v-for="event in paginatedevents"
+          :key="event.id"
+          class="w-auto overflow-hidden rounded-xl border"
+        >
+          <img
+            class="object-cover h-64 w-full"
+            :src="event.photo"
+            alt="event Image"
+          />
+
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">{{ event.event_name }}</h3>
+            <div class="flex events-center text-sm text-gray-600">
+              <span class="mr-1">{{ event.date }}</span>
+              <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
-            <div class="mt-4">
-              <h2 class="text-xl font-bold text-green-600">{{ event.event_name }}</h2>
-              <p class="text-gray-500">{{ formatDate(event.date) }}</p>
-              <p class="text-gray-700">{{ event.description }}</p>
-              <p class="text-gray-700">{{ event.location }}</p>
+            <p class="text-sm text-gray-600 mt-2">
+              Location: {{ event.location }}
+            </p>
+            <div class="text-sm text-gray-600 mt-2">
+              <span class="font-bold">Description: </span>{{ event.description }}
+            </div>
+            <div>
+              <router-link :to="'/event-detail/' + event.id">
+                <button
+                  class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none"
+                >
+                  View Detail
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-6 mb-10">
-        <div class="flex justify-center space-x-2">
-          <button
-            v-for="pageNum in totalPages"
-            :key="pageNum"
-            @click="fetchEvents(pageNum)"
-            :class="{'bg-green-500 text-white': pageNum === page, 'bg-white text-green-500': pageNum !== page}"
-            class="px-4 py-2 rounded-full border border-green-500"
-          >
-            {{ pageNum }}
-          </button>
-        </div>
-      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex justify-center mt-5">
+      <button
+        :disabled="currentPage === 1"
+        @click="currentPage -= 1"
+        class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
+      >
+        Previous
+      </button>
+      <span class="text-gray-700">{{ currentPage }}</span>
+      <button
+        :disabled="currentPage === totalPages"
+        @click="currentPage += 1"
+        class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>
-
 <script>
-import { API_BASE_URL } from '@/config';
-import axios from 'axios';
+import { API_BASE_URL } from "@/config";
+import axios from "axios";
+// import LoadingSpinner from "../LoadingSpinner.vue"; // Ensure correct path to your LoadingSpinner component
 
 export default {
+  name: "eventGrid",
+  // components: {
+  //   LoadingSpinner,
+  // },
   data() {
     return {
-      events: [],
-      page: 1,
-      totalPages: 1,
+      isLoading: true,
+      events: [], // Store fetched events
+      currentPage: 1,
+      eventsPerPage: 8,
+      searchQuery: "", // Store search query
+      filteredevents: [], // Store filtered events
     };
   },
-  methods: {
-    formatDate(dateString) {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(dateString).toLocaleDateString(undefined, options);
+  computed: {
+    // Calculate total pages based on filtered events count and eventsPerPage
+    totalPages() {
+      return Math.ceil(this.filteredevents.length / this.eventsPerPage);
     },
-    async fetchEvents(page = 1) {
-      try {
-        const response = await axios.get(`${API_BASE_URL}events`);
-        if (response.data && response.data.data) {
-          this.events = response.data.data;
-          this.totalPages = response.data.meta.last_page;
-          this.page = page;
-        } else {
-          console.error('Unexpected API response structure:', response.data);
-        }
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
+    // Calculate paginated events based on currentPage and eventsPerPage
+    paginatedevents() {
+      const startIndex = (this.currentPage - 1) * this.eventsPerPage;
+      return this.filteredevents.slice(
+        startIndex,
+        startIndex + this.eventsPerPage
+      );
     },
   },
-  created() {
-    this.fetchEvents();
+  mounted() {
+    this.fetchEvents(); // Corrected method name
+  },
+  methods: {
+    fetchEvents() {
+      axios
+        .get(`${API_BASE_URL}events`)
+        .then((response) => {
+          this.events = response.data;
+          this.filteredevents = this.events; // Initialize filteredevents with all events
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          console.error("Error fetching events:", error);
+          this.isLoading = false;
+          // Handle error state or show error message to user
+        });
+    },
+    filterByAll() {
+      this.filteredevents = this.events; // Reset to all events
+    },
+    filterByRecentlyViewed() {
+      // Example: Filter by events with rating greater than 4.0
+      this.filteredevents = this.events.filter((event) => event.rating > 4.0);
+    },
+    filterByFavorites() {
+      // Example: Filter by events with 'favorite' flag set
+      this.filteredevents = this.events.filter((event) => event.favorite);
+    },
+    searchEvents() {
+      if (this.searchQuery.trim() === "") {
+        this.filteredevents = this.events; // Reset to all events if search query is empty
+      } else {
+        // Filter events based on searchQuery
+        this.filteredevents = this.events.filter((event) =>
+          event.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+    },
+    navigateBack() {
+      this.$router.go(-1); // Navigate back to previous page
+    },
   },
 };
 </script>
