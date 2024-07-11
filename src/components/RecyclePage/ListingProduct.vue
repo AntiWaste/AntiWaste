@@ -103,7 +103,7 @@
             <div class="flex items-center mt-2">
               <!-- Replace with your actual rating component -->
               <div class="text-gray-600 ml-4">
-                {{ item.rating }} ({{ item.reviews }})
+                {{ item.rating }} {{ item.reviews }}
               </div>
             </div>
             <p class="text-sm text-gray-600 mt-2">
@@ -196,6 +196,7 @@ export default {
         .get(`${API_BASE_URL}products`)
         .then((response) => {
           this.items = response.data;
+          console.log(response.data);
           this.filteredItems = this.items; // Initialize filteredItems with all items
           this.isLoading = false;
         })
