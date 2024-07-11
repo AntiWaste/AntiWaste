@@ -52,7 +52,7 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <v-select
+      <!-- <v-select
         v-model="role"
         :items="roleOptions"
         label="Role"
@@ -60,7 +60,7 @@
         outlined
         placeholder="Select Role"
         class="w-full mt-4"
-      ></v-select>
+      ></v-select> -->
       <v-text v-if="validated" class="text-red-500 mb-2">
         {{ messageError }}
       </v-text>
@@ -113,62 +113,62 @@ export default {
   data() {
     return {
       img: Image,
-      roleOptions: [
-        { value: 'user', title: 'User' },
-        { value: 'service_provider', title: 'Service Provider' },
-      ],
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: '',
+      // roleOptions: [
+      //   { value: 'user', title: 'User' },
+      //   { value: 'service_provider', title: 'Service Provider' },
+      // ],
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      // role: '',
       validated: false,
-      messageError: '',
+      messageError: "",
     };
   },
   methods: {
     async register() {
       const toast = useToast();
       if (
-        this.username === '' ||
-        this.email === '' ||
-        this.password === '' ||
-        this.confirmPassword === '' ||
-        this.role === ''
+        this.username === "" ||
+        this.email === "" ||
+        this.password === "" ||
+        this.confirmPassword === "" ||
+        this.role === ""
       ) {
         this.validated = true;
-        this.messageError = 'Please fill all the fields';
+        this.messageError = "Please fill all the fields";
         toast.error(this.messageError);
       } else if (this.password !== this.confirmPassword) {
         this.validated = true;
-        this.messageError = 'Passwords do not match';
+        this.messageError = "Passwords do not match";
         toast.error(this.messageError);
       } else {
         console.log(this.username, this.email, this.password, this.role);
         try {
-          const response = await this.$axios.post('/register', {
+          const response = await this.$axios.post("/register", {
             name: this.username,
             email: this.email,
             password: this.password,
             role: this.role,
           });
           this.validated = false;
-          this.messageError = '';
-          toast.success('Registration successful');
-          this.$router.push('login');
+          this.messageError = "";
+          toast.success("Registration successful");
+          this.$router.push("login");
           console.log(response.data);
         } catch (error) {
           this.validated = true;
           if (error.response) {
             this.messageError =
-              error.response.data.message || 'Registration failed';
+              error.response.data.message || "Registration failed";
           } else if (error.request) {
-            this.messageError = 'No response received from server';
+            this.messageError = "No response received from server";
           } else {
-            this.messageError = 'Error in making request: ' + error.message;
+            this.messageError = "Error in making request: " + error.message;
           }
           toast.error(this.messageError);
-          console.error('Error details:', error);
+          console.error("Error details:", error);
         }
       }
     },
