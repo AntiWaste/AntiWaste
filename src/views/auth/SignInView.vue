@@ -1,5 +1,7 @@
 <template>
-  <div class="container flex flex-col lg:flex-row items-center justify-center min-h-screen">
+  <div
+    class="container flex flex-col lg:flex-row items-center justify-center min-h-screen"
+  >
     <div class="hidden lg:block">
       <img :src="img" alt="recycle" class="w-full max-w-md" />
     </div>
@@ -30,19 +32,25 @@
       <v-text v-if="validated" class="error-validation-message">
         {{ messageError }}
       </v-text>
-      <v-btn 
+      <v-btn
         color="green"
         class="text-white py-2 px-4 rounded cursor-pointer mb-4"
         @click="handleLogin"
       >
         Login
-    </v-btn>
+      </v-btn>
       <p class="text-gray-700">
         Don't you have an account?
-        <a @click="this.$router.push('register')" class="text-red-500 hover:text-green-500 cursor-pointer">Sign Up</a>
+        <a
+          @click="this.$router.push('register')"
+          class="text-red-500 hover:text-green-500 cursor-pointer"
+          >Sign Up</a
+        >
       </p>
       <div class="flex space-x-4 mt-4">
-        <div class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+        <div
+          class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer"
+        >
           <img
             src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png"
             width="20"
@@ -50,7 +58,9 @@
           />
           <span>Google</span>
         </div>
-        <div class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer">
+        <div
+          class="flex items-center space-x-2 bg-gray-100 hover:bg-green-500 p-2 rounded-lg cursor-pointer"
+        >
           <img
             src="https://static-00.iconduck.com/assets.00/facebook-icon-512x512-seb542ju.png"
             width="20"
@@ -64,10 +74,10 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification';
-import Image from '../../assets/recycle.jpg';
-// import axios from 'axios';
-import { mapActions } from 'vuex';
+import { useToast } from "vue-toastification";
+import Image from "../../assets/recycle.jpg";
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -75,17 +85,19 @@ export default {
       email: "",
       password: "",
       validated: false,
-      messageError: '',
+      messageError: "",
       user: null,
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     async handleLogin() {
       const toast = useToast();
-      if (this.email === '' || this.password === '') {
+      const adminEmail = process.env.VUE_APP_ADMIN_EMAIL;
+      // Check if the fields are filled
+      if (this.email === "" || this.password === "") {
         this.validated = true;
-        this.messageError = 'Please fill all the fields';
+        this.messageError = "Please fill all the fields";
         toast.error(this.messageError);
       } else {
         const data = {
@@ -93,18 +105,25 @@ export default {
           password: this.password,
         };
         try {
+          // Attempt to login
           await this.login(data);
           this.validated = false;
-          this.messageError = '';
-          //  this.user = res.data;
-          // localStorage.setItem('token', res.data.token);
-          toast.success('Login successful');
-          this.$router.push('/');
+          this.messageError = "";
+          toast.success("Login successful");
+
+          // Check if the logged-in user is the admin
+          if (this.email === adminEmail) {
+            toast.success("Welcome, Admin!");
+            this.$router.push("/dashboard-layout");
+          } else {
+            this.$router.push("/");
+          }
         } catch (err) {
+          // Handle login failure
           this.validated = true;
-          this.messageError = err.response?.data?.message || 'Login failed';
+          this.messageError = err.response?.data?.message || "Login failed";
           toast.error(this.messageError);
-          console.error('Error details:', err);
+          console.error("Error details:", err);
         }
       }
     },
