@@ -4,7 +4,6 @@
       <h3 class="text-2xl font-semibold">
         Post Your Waste now!
       </h3>
-      <!-- Back Button -->
       <div class="px-5 pb-2">
         <button
           @click="navigateBack"
@@ -40,10 +39,10 @@
               required
             >
               <option value="">Select Waste Category</option>
-              <option value="Glass Bottle">Glass Bottle</option>
-              <option value="Plastic">Plastic</option>
+              <option value="Glass Bottle">Glass Bottles</option>
+              <option value="Plastic">Plastics</option>
               <option value="Metals">Metals</option>
-              <option value="Paper">Paper</option>
+              <option value="Paper">Papers</option>
               <option value="E-Waste">E-Waste</option>
               <option value="Textiles">Textiles</option>
             </select>
@@ -110,11 +109,11 @@
             />
           </div>
           <div class="col-span-6">
-            <label for="Waste-images" class="text-sm font-medium text-gray-900 block mb-2">Waste Images</label>
+            <label for="photo" class="text-sm font-medium text-gray-900 block mb-2">Waste Images</label>
             <input
               type="file"
-              name="Waste-images"
-              id="Waste-images"
+              name="photo"
+              id="photo"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
               @change="onImagesSelected"
               multiple
@@ -192,9 +191,6 @@ export default {
       this.imageFiles = Array.from(event.target.files);
       this.convertToBase64();
     },
-    removeImage(index) {
-      this.formData.selectedImages.splice(index, 1); // Remove image from selectedImages array
-    },
     convertToBase64() {
       const promises = this.imageFiles.map(file => {
         return new Promise((resolve, reject) => {
@@ -217,8 +213,8 @@ export default {
     },
     async saveWaste() {
       const toast = useToast();
-      
-      // Form validation (uncomment and complete)
+
+      // Form validation
       if (
         !this.formData.WasteName ||
         !this.formData.owner ||
@@ -246,24 +242,28 @@ export default {
         formData.append('description', this.formData.WasteDescription);
 
         this.formData.selectedImages.forEach((image, index) => {
-          formData.append(`waste_images[${index}]`, image.file);
+          formData.append(`photo[${index}]`, image.file);
         });
 
-        await axios.post(`${API_BASE_URL}wastes`, formData, {
+        const response = await axios.post(`${API_BASE_URL}wastes`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
+
+        console.log('Response from server:', response.data);
+
         toast.success('Waste saved successfully!');
         this.$router.push('/thank-you');
       } catch (error) {
         toast.error('Error saving waste. Please try again later.');
         if (error.response) {
           console.error('Server error details:', error.response.data);
+        } else {
+          console.error('Error:', error.message);
         }
       }
     }
   }
 };
 </script>
-

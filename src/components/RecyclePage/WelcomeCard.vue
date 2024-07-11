@@ -12,13 +12,14 @@
           cover
         >
           <div id="welcomeText" class="flex flex-col justify-center items-center">
-            <div class="text-4xl font-bold mb-3">Welcome to AntiWaste Recycling’s Store</div>
-            <div class="text-h6">
-              Please enjoy buying our product, feel free to deliver to other provinces too.
+            <div class="text-5xl font-bold mb-3">Welcome to our Recycle Product Marketplace!</div>
+            <div class="text-xl text-center">
+              Got recyclable items you want to sell? Post them here easily and reach buyers who appreciate the value of sustainability.
+              <br/>Join us in making a difference. Start exploring and contributing to a greener future today!
             </div>
-            <router-link to="/listing-product">
-              <button class="mt-2 px-4 py-2 text-lg font-bold bg-green-600 border rounded-lg text-green-100 hover:bg-green-800 hover:text-white focus:outline-none">
-                Buy Now
+            <router-link to="/product-post">
+              <button class="mt-4 px-4 py-2 text-lg font-bold bg-green-600 border rounded-lg text-green-100 hover:bg-green-800 hover:text-white focus:outline-none">
+                Sell Now
               </button>
             </router-link>
           </div>
