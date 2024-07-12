@@ -39,7 +39,7 @@
 
             <!-- Event Description -->
             <div class="text-sm text-gray-600 mt-2 line-clamp-3">
-              <span class="font-bold ">Description: </span>{{ event.description }}
+              <span class="font-bold">Description: </span>{{ event.description }}
             </div>
 
             <!-- View Detail Button -->
@@ -58,10 +58,10 @@
     </div>
 
     <!-- Pagination Controls -->
-    <div v-if="totalPages > 1" class="flex justify-center mt-5">
+    <div v-if="totalPages > 1" class="flex justify-center mt-5 mb-10">
       <button
         :disabled="currentPage === 1"
-        @click="currentPage -= 1"
+        @click="previousPage"
         class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
       >
         Previous
@@ -69,7 +69,7 @@
       <span class="text-gray-700">{{ currentPage }}</span>
       <button
         :disabled="currentPage === totalPages"
-        @click="currentPage += 1"
+        @click="nextPage"
         class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
       >
         Next
@@ -90,7 +90,6 @@ export default {
       events: [], // Store fetched events
       currentPage: 1,
       eventsPerPage: 8,
-      searchQuery: "", // Store search query
       filteredevents: [], // Store filtered events
     };
   },
@@ -102,14 +101,11 @@ export default {
     // Calculate paginated events based on currentPage and eventsPerPage
     paginatedevents() {
       const startIndex = (this.currentPage - 1) * this.eventsPerPage;
-      return this.filteredevents.slice(
-        startIndex,
-        startIndex + this.eventsPerPage
-      );
+      return this.filteredevents.slice(startIndex, startIndex + this.eventsPerPage);
     },
   },
   mounted() {
-    this.fetchEvents(); // Corrected method name
+    this.fetchEvents();
   },
   methods: {
     fetchEvents() {
@@ -123,16 +119,27 @@ export default {
         .catch((error) => {
           console.error("Error fetching events:", error);
           this.isLoading = false;
-          // Handle error state or show error message to user
         });
     },
-    navigateBack() {
-      this.$router.go(-1); // Navigate back to previous page
+    previousPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add any custom styles here */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 </style>
