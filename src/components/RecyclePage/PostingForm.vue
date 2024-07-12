@@ -279,7 +279,7 @@ export default {
           console.log('Product saved successfully:', response.data);
           const toast = useToast();
           toast.success('Product saved successfully!');
-          this.$router.push('/thank-you'); // Navigate to the Thank You page
+          this.$router.push('/thank-recycle'); // Navigate to the Thank You page
         })
         .catch((error) => {
           console.error('Error saving product:', error);

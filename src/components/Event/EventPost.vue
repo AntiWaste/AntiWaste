@@ -149,7 +149,7 @@ export default {
         console.log("Event saved successfully:", response.data);
         toast.success("Event saved successfully!");
         this.resetForm();
-        this.$router.push("/thank-you"); // Navigate to the Thank You page
+        this.$router.push("/thank-event"); // Navigate to the Thank You page
       } catch (error) {
         console.error("Error saving event:", error);
         toast.error("Error saving event. Please try again later.");

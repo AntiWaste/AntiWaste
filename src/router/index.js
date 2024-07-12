@@ -17,10 +17,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import CartView from "../components/Cart/CartView.vue";
 import DetailPage from "../components/Event/DetailPage.vue";
 import EventPost from "../components/Event/EventPost.vue";
+import ThankEvent from "../components/Event/ThankYou.vue";
 import PostingForm from "../components/RecyclePage/PostingForm.vue";
 import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
-import ThankYou from "../components/RecyclePage/ThankYou.vue";
+import ThankRecycle from "../components/RecyclePage/ThankYou.vue";
 import SellWaste from "../components/Waste/SellWaste.vue";
+import ThankWaste from "../components/Waste/ThankYou.vue";
 import WasteListing from "../components/Waste/WasteListing.vue";
 import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
@@ -148,9 +150,19 @@ const routes = [
         component: PostingForm,
       },
       {
-        path: "thank-you",
-        name: "thank-you",
-        component: ThankYou,
+        path: "thank-recycle",
+        name: "thank-recycle",
+        component: ThankRecycle,
+      },
+      {
+        path: "thank-waste",
+        name: "thank-waste",
+        component: ThankWaste,
+      },
+      {
+        path: "thank-event",
+        name: "thank-event",
+        component: ThankEvent,
       },
       {
         path: "waste-listing",

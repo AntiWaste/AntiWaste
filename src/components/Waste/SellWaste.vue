@@ -254,7 +254,7 @@ export default {
         console.log('Response from server:', response.data);
 
         toast.success('Waste saved successfully!');
-        this.$router.push('/thank-you');
+        this.$router.push('/thank-waste');
       } catch (error) {
         toast.error('Error saving waste. Please try again later.');
         if (error.response) {
