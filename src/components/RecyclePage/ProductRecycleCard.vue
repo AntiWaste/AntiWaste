@@ -2,8 +2,8 @@
   <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-20 py-5">
     <div v-for="item in filteredItems" :key="item.id" class="w-auto overflow-hidden rounded-xl border">
       <img
-        class="object-cover h-64 w-full"
-        :src="item.img"
+        class="object-cover h-34 w-35"
+        :src="item.image"
         alt="Product Image"
       />
       <div class="p-4">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <p class="text-sm text-gray-600 mt-2">Location: {{ item.location }}</p>
-        <p class="text-sm text-gray-600">Contact Number: {{ item.contact }}</p>
+        <p class="text-sm text-gray-600">Contact Number: {{ item.contact_number }}</p>
         <div class="mt-4">
           <p class="text-gray-600 text-sm mt-2">
             {{ item.description }}
@@ -106,6 +106,7 @@ export default {
     fetchProducts() {
       axios.get(`${API_BASE_URL}products`)
         .then(response => {
+        console.log(response.data);
           // Assuming response.data is an array of products
           this.items = response.data.map(product => ({
             ...product,
