@@ -1,6 +1,6 @@
 // store/index.js
-import { createStore } from 'vuex';
 import axios from '@/axios';
+import { createStore } from 'vuex';
 import router from '../router';
 
 export default createStore({
@@ -35,6 +35,23 @@ export default createStore({
       localStorage.removeItem('token');
       commit('setUser', null);
       router.push('/home');
+    },
+    async fetchUser({ commit }) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const { data } = await axios.get('/user', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          commit('setUser', data);
+        } catch (error) {
+          localStorage.removeItem('token');
+          commit('setUser', null);
+          console.error('Failed to fetch user:', error);
+        }
+      }
     },
     // Uncomment and use fetchUser if you need to fetch user details after page reload
     // async fetchUser({ commit }) {

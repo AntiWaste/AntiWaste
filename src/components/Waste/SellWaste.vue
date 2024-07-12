@@ -39,10 +39,10 @@
               required
             >
               <option value="">Select Waste Category</option>
-              <option value="Glass Bottle">Glass Bottles</option>
-              <option value="Plastic">Plastics</option>
+              <option value="Glass Bottles">Glass Bottles</option>
+              <option value="Plastics">Plastics</option>
               <option value="Metals">Metals</option>
-              <option value="Paper">Papers</option>
+              <option value="Papers">Papers</option>
               <option value="E-Waste">E-Waste</option>
               <option value="Textiles">Textiles</option>
             </select>

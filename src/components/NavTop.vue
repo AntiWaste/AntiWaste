@@ -18,7 +18,7 @@
             <v-icon>{{ item.icon }}</v-icon>
             {{ item.text }}
           </router-link>
-          <router-link
+          <!-- <router-link
             v-if="isAdmin"
             to="/dashboard-layout"
             title="Admin Dashboard"
@@ -27,10 +27,10 @@
             @click="handleClick('/dashboard-layout')"
           >
             Dashboard
-          </router-link>
+          </router-link> -->
         </v-toolbar-items>
         <div class="flex space-x-2">
-          <router-link
+          <!-- <router-link
             to="/cart"
             title="Cart"
             class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
@@ -40,7 +40,7 @@
             <v-icon>
               <i class="fa-regular fa-cart-shopping"></i>
             </v-icon>
-          </router-link>
+          </router-link> -->
           <v-btn
             v-if="isAuthenticated"
             @click="handleLogout"

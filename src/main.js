@@ -1,4 +1,5 @@
 import "@fortawesome/fontawesome-free/css/all.css";
+import axios from "axios"; // This import is fine for global Axios settings
 import { createApp } from "vue";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
@@ -7,14 +8,8 @@ import "vuetify/dist/vuetify.min.css";
 import { aliases, fa } from "vuetify/iconsets/fa";
 import App from "./App.vue";
 import "./assets/tailwind.css";
-import axios from "axios";
-import "./axios";
+import "./axios"; // This is your Axios instance with interceptors
 import router from "./router";
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
-
-// import { Cloudinary } from "cloudinary-vue";
-
-// import "vuetify/styles";
 
 import FooterView from "@/components/FooterView.vue";
 import AboutUs from "@/components/Home/AboutUs.vue";
@@ -24,23 +19,19 @@ import HowTo from "@/components/Home/HowTo.vue";
 import TrashCenter from "@/components/Home/TrashCenter.vue";
 import TrustUser from "@/components/Home/TrustUser.vue";
 
-//import component
 import NavTop from "@/components/NavTop.vue";
 import CarouselCard from "./components/RecyclePage/CarouselCard.vue";
 import CategoriesIcon from "./components/RecyclePage/CategoriesIcon.vue";
 import ProductRecycleCard from "./components/RecyclePage/ProductRecycleCard";
 import WelcomeCard from "./components/RecyclePage/WelcomeCard.vue";
 
-// Import Vuetify components and directives if needed
 import store from "@/store/index";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import LetChat from "./components/LetChat.vue";
-// import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:8000/api';
-import axiosInstance from "./axios"; // Import the Axios instance
 const app = createApp(App);
+
 axios
   .get("/csrf-token")
   .then((response) => {
@@ -51,13 +42,9 @@ axios
   });
 
 // Make the Axios instance available globally
-app.config.globalProperties.$axios = axiosInstance;
+app.config.globalProperties.$axios = axios;
 
-// const token = localStorage.getItem('token');
-// if (token) {
-//   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-// }
-
+// Initialize Vuetify
 const vuetify = createVuetify({
   components,
   directives,
@@ -69,32 +56,15 @@ const vuetify = createVuetify({
     },
   },
 });
-// app.use(Cloudinary, {
-//   configuration: {
-//     cloudName: "dbuzmmqyh",
-//     apiKey: "593593823476781",
-//   },
-// });
-// const storage = new CloudinaryStorage({
-//   Cloudinary,
-//   params: {
-//     folder: "YelpCamp",
-//     allowedFormats: ["jpeg", "png", "jpg"],
-//   },
-// });
-// module.exports = {
-//   Cloudinary, //what we've configure
-//   storage,
-// };
-//add components to 'app'
+
+// Register components globally
 app.component("nav-top", NavTop);
 app.component("welcome-card", WelcomeCard);
 app.component("categories-icon", CategoriesIcon);
 app.component("carousel-card", CarouselCard);
 app.component("let-chat", LetChat);
 
-//home components
-
+// Home components
 app.component("about-us", AboutUs);
 app.component("trash-center", TrashCenter);
 app.component("trust-user", TrustUser);
@@ -103,7 +73,7 @@ app.component("founder-web", FounderWeb);
 app.component("how-to", HowTo);
 app.component("footer-view", FooterView);
 
-// Register components
+// Register Vuetify components globally if needed
 app.component("v-app", components.VApp);
 app.component("v-main", components.VMain);
 app.component("v-container", components.VContainer);
@@ -111,5 +81,11 @@ app.component("v-container", components.VContainer);
 // Register ProductDetails and ProductRecycle globally
 app.component("product-recycle-card", ProductRecycleCard);
 
+// Use plugins and mount the app
 app.use(Toast);
-app.use(router).use(store).use(vuetify).mount("#app");
+app.use(router).use(store).use(vuetify);
+
+// Dispatch fetchUser to rehydrate the user state
+store.dispatch('fetchUser').then(() => {
+  app.mount("#app");
+});
