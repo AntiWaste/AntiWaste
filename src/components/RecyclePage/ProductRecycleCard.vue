@@ -7,7 +7,7 @@
         alt="Product Image"
       />
       <div class="p-4">
-        <h3 class="text-lg font-semibold">{{ item.name}}</h3>
+        <h3 class="text-lg font-semibold">{{ item.name }}</h3>
         <div class="flex items-center text-sm text-gray-600">
           <span class="me-1">{{ item.owner_name }}</span>
           <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
@@ -33,7 +33,7 @@
         <p class="text-sm text-gray-600 mt-2">Location: {{ item.location }}</p>
         <p class="text-sm text-gray-600">Contact Number: {{ item.contact }}</p>
         <div class="mt-4">
-          <p class="text-gray-600 text-sm mt-2">
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">
             {{ item.description }}
           </p>
         </div>
@@ -178,7 +178,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Scoped styles for this component */
-</style>

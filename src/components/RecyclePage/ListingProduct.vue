@@ -113,7 +113,7 @@
               Contact Number: {{ item.contact_number }}
             </p>
             <!-- Display Description -->
-            <div class="text-sm text-gray-600 mt-2">
+            <div class="text-sm text-gray-600 mt-2 line-clamp-3">
               <span class="font-bold">Description: </span>{{ item.description }}
             </div>
             <hr class="my-4" />

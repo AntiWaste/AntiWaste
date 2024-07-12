@@ -14,6 +14,7 @@ import DashboardLayout from "@/views/DashboardLayout.vue";
 import EventView from "@/views/EventView.vue";
 import WasteView from "@/views/WasteView.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import CartView from "../components/Cart/CartView.vue";
 import DetailPage from "../components/Event/DetailPage.vue";
 import EventPost from "../components/Event/EventPost.vue";
 import PostingForm from "../components/RecyclePage/PostingForm.vue";
@@ -25,7 +26,6 @@ import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
-import CartView from "../components/Cart/CartView.vue";
 
 const routes = [
   {
@@ -161,6 +161,11 @@ const routes = [
       },
       {
         path: "event-detail",
+        name: "event-detail",
+        component: DetailPage,
+      },
+      {
+        path: "event-detail/:id",
         name: "event-detail",
         component: DetailPage,
       },
