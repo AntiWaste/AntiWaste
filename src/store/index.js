@@ -5,7 +5,9 @@ import router from '../router';
 
 export default createStore({
   state: {
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
+    token: localStorage.getItem('token') || '',
+
   },
   mutations: {
     setUser(state, user) {
@@ -14,21 +16,22 @@ export default createStore({
   },
   actions: {
     async login({ commit }, credentials) {
+      try {
       const response = await axios.post('/login', credentials);
       const token = response.data.token;
+      console.log(response.data);
+      axios.defaults.headers.common['Authorization'] = token;
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       localStorage.setItem('token', token);
-      if (token) {
-        const { data } = await axios.get('/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        commit('setUser', data);
-        if (data) {
-          router.push('/home');
-        }
-      }
+      commit('setUser', response.data.user);
+      router.push('/home');
+    } catch (error) {
+      localStorage.removeItem('token');
+      throw error;
+    }
     },
+
+// Parse the JSON string into an object
     async logout({ commit }) {
       await axios.post('/logout');
       delete axios.defaults.headers.common['Authorization'];
@@ -37,20 +40,21 @@ export default createStore({
       router.push('/home');
     },
     // Uncomment and use fetchUser if you need to fetch user details after page reload
-    // async fetchUser({ commit }) {
-    //   const token = localStorage.getItem('token');
-    //   if (token) {
-    //     const { data } = await axios.get('/user', {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     });
-    //     commit('setUser', data);
-    //   }
-    // },
+    async fetchUser({ commit }) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const { data } = await axios.get('/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(data);
+        commit('setUser', data);
+      }
+    },
   },
   getters: {
-    isAuthenticated: (state) => !!state.user,
+    isAuthenticated: state => !!state.token,
     user: (state) => state.user,
     isAdmin: (state) => state.user && state.user.role === 'admin',
   },

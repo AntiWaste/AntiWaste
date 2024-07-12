@@ -13,12 +13,12 @@
     </div>
 
     <div class="p-6 space-y-6">
-      <form @submit.prevent="saveEvent">
+      <form @submit.prevent="createEvent">
         <div class="grid grid-cols-6 gap-6">
           <div class="col-span-6 sm:col-span-3">
             <label for="event-name" class="text-sm font-medium text-gray-900 block mb-2">Event Name</label>
             <input
-              v-model="formData.eventName"
+              v-model="eventName"
               type="text"
               name="event-name"
               id="event-name"
@@ -30,7 +30,7 @@
           <div class="col-span-6">
             <label for="event-description" class="text-sm font-medium text-gray-900 block mb-2">Event Description</label>
             <textarea
-              v-model="formData.eventDescription"
+              v-model="eventDescription"
               id="event-description"
               rows="6"
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-4"
@@ -41,7 +41,7 @@
           <div class="col-span-6 sm:col-span-3">
             <label for="event-date" class="text-sm font-medium text-gray-900 block mb-2">Event Date</label>
             <input
-              v-model="formData.eventDate"
+              v-model="eventDate"
               type="date"
               name="event-date"
               id="event-date"
@@ -52,7 +52,7 @@
           <div class="col-span-6 sm:col-span-3">
             <label for="event-location" class="text-sm font-medium text-gray-900 block mb-2">Event Location</label>
             <input
-              v-model="formData.eventLocation"
+              v-model="eventLocation"
               type="text"
               name="event-location"
               id="event-location"
@@ -62,28 +62,40 @@
             />
           </div>
           <div class="col-span-6">
-            <label for="event-images" class="text-sm font-medium text-gray-900 block mb-2">Event Images</label>
+            <label for="event-images" class="text-sm font-medium text-gray-900 block mb-2">Event Photo</label>
             <input
               type="file"
               name="event-images"
               id="event-images"
-              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-              @change="onImagesSelected"
-              multiple
+              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+              @change="onPhotoSelected"
+              required
             />
           </div>
-
-          <div class="col-span-6" v-if="formData.selectedImages.length > 0">
-            <h3 class="text-lg font-medium">Selected Images:</h3>
-            <div class="mt-2 grid grid-cols-3 gap-4">
-              <div v-for="(image, index) in formData.selectedImages" :key="index" class="relative">
-                <img :src="image.url" :alt="'Selected Image ' + index" class="rounded-lg h-32 w-full object-cover">
-                <button @click="removeImage(index)" class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                  </svg>
-                </button>
-              </div>
+          <!-- Display selected images -->
+          <div class="col-span-6" v-if="imagePreview">
+            <h3 class="text-lg font-medium">Selected Image:</h3>
+            <div class="relative">
+              <img :src="imagePreview" alt="Selected Image" class="mt-2 max-h-48 rounded-lg" />
+              <button
+                @click="removeImage"
+                class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none"
+              >
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -93,9 +105,9 @@
     <div class="p-6 border-t border-gray-200 rounded-b">
       <button
         class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        @click="saveEvent"
+        @click="createEvent"
       >
-        Post Now
+        Post Event
       </button>
     </div>
   </div>
@@ -109,51 +121,60 @@ import { useToast } from 'vue-toastification';
 export default {
   data() {
     return {
-      formData: {
-        eventName: '',
-        eventDescription: '',
-        eventDate: '',
-        eventLocation: '',
-        selectedImages: [],
-      },
+      eventName: '',
+      eventDescription: '',
+      eventDate: '',
+      eventLocation: '',
+      eventImages: null,
+      imagePreview: null,
     };
   },
   methods: {
-    async saveEvent() {
+    async createEvent() {
       const toast = useToast();
       try {
-        // Prepare form data
         const formData = new FormData();
-        formData.append('event_name', this.formData.eventName);
-        formData.append('event_description', this.formData.eventDescription);
-        formData.append('event_date', this.formData.eventDate);
-        formData.append('event_location', this.formData.eventLocation);
+        formData.append('event_name', this.eventName);
+        formData.append('description', this.eventDescription);
+        formData.append('date', this.eventDate);
+        formData.append('location', this.eventLocation);
+        formData.append('photo', this.eventImages);
 
-        // Append selected images
-        this.formData.selectedImages.forEach((image, index) => {
-          formData.append(`event_images[${index}]`, image.file);
-        });
-
-        // Make POST request with Axios
-        await axios.post(`${API_BASE_URL}events`, formData, {
+        const response = await axios.post(`${API_BASE_URL}events`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
 
-        // Display success message and redirect
-        toast.success('Event saved successfully!');
-        this.$router.push('/thank-you');
+        console.log("Event saved successfully:", response.data);
+        toast.success("Event saved successfully!");
+        this.resetForm();
+        this.$router.push("/thank-you"); // Navigate to the Thank You page
       } catch (error) {
-        toast.error('Error saving event. Please try again later.');
-        console.error('Error saving event:', error);
+        console.error("Error saving event:", error);
+        toast.error("Error saving event. Please try again later.");
       }
     },
-    // Other methods like image handling, etc.
+    onPhotoSelected(event) {
+      const file = event.target.files[0];
+      this.eventImages = file;
+      this.imagePreview = URL.createObjectURL(file);
+    },
+    removeImage() {
+      this.eventImages = null;
+      this.imagePreview = null;
+    },
+    resetForm() {
+      this.eventName = '';
+      this.eventDescription = '';
+      this.eventDate = '';
+      this.eventLocation = '';
+      this.eventImages = null;
+      this.imagePreview = null;
+    },
+    navigateBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
-
-<style>
-/* Your existing styles */
-</style>
