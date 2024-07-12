@@ -13,6 +13,7 @@
           Back
         </button>
       </div>
+
       <!-- Welcome Banner -->
       <v-card max-height="230">
         <v-img
@@ -23,12 +24,11 @@
         >
           <div class="flex flex-col justify-center items-center">
             <div class="text-4xl font-bold mb-3">
-              Discover Sustainable Solutions - Explore Our Range of Eco-Friendly
-              Products
+              Discover Sustainable Solutions - Explore Our Range of Eco-Friendly Products
             </div>
             <router-link to="/product-post">
               <button
-                class="mt-2 px-4 py-2 font-bold bg-green-600 border rounded-lg text-white hover:bg-green-800 hover:text-white focus:outline-none"
+                class="mt-2 px-4 py-2 font-bold bg-green-600 border rounded-lg text-white hover:bg-green-800 focus:outline-none"
               >
                 Sell Your Product Now
               </button>
@@ -41,34 +41,33 @@
       <div class="bg-green-100">
         <div class="px-4 py-2">
           <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <!-- Filter Menu -->
             <div class="flex items-center space-x-4">
               <button
                 class="text-gray-700 hover:text-green-500 focus:outline-none"
-                @click="filterByAll"
+                @click="filterItems('all')"
               >
                 All
               </button>
               <button
                 class="text-gray-700 hover:text-green-500 focus:outline-none"
-                @click="filterByRecentlyViewed"
+                @click="filterItems('recent')"
               >
                 Recently Viewed
               </button>
               <button
                 class="text-gray-700 hover:text-green-500 focus:outline-none"
-                @click="filterByFavorites"
+                @click="filterItems('favorites')"
               >
                 Favorites
               </button>
             </div>
-            <!-- Search Bar -->
             <div class="flex items-center">
               <input
                 v-model="searchQuery"
                 type="text"
                 class="w-64 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:border-green-500"
                 placeholder="Search products..."
+                @input="searchProducts"
               />
               <button
                 @click="searchProducts"
@@ -89,11 +88,11 @@
           class="w-auto overflow-hidden rounded-xl border"
         >
           <img
-            class="object-cover h-64 w-full"
-            :src="item.img"
+            class="object-contain h-44 w-full"
+            :src="item.image"
             alt="Product Image"
+            loading="lazy"
           />
-
           <div class="p-4">
             <h3 class="text-lg font-semibold">{{ item.name }}</h3>
             <div class="flex items-center text-sm text-gray-600">
@@ -101,9 +100,8 @@
               <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
             <div class="flex items-center mt-2">
-              <!-- Replace with your actual rating component -->
               <div class="text-gray-600 ml-4">
-                {{ item.rating }} ({{ item.reviews }})
+                {{ item.rating }} ({{ item.reviews }} reviews)
               </div>
             </div>
             <p class="text-sm text-gray-600 mt-2">
@@ -166,67 +164,63 @@ export default {
   data() {
     return {
       isLoading: true,
-      items: [], // Store fetched products
+      items: [],
       currentPage: 1,
       itemsPerPage: 8,
-      searchQuery: "", // Store search query
-      filteredItems: [], // Store filtered items
+      searchQuery: "",
+      filteredItems: [],
     };
   },
   computed: {
-    // Calculate total pages based on filtered items count and itemsPerPage
     totalPages() {
       return Math.ceil(this.filteredItems.length / this.itemsPerPage);
     },
-    // Calculate paginated items based on currentPage and itemsPerPage
     paginatedItems() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      return this.filteredItems.slice(
-        startIndex,
-        startIndex + this.itemsPerPage
-      );
+      return this.filteredItems.slice(startIndex, startIndex + this.itemsPerPage);
     },
   },
   mounted() {
     this.fetchProducts();
   },
   methods: {
-    fetchProducts() {
-      axios
-        .get(`${API_BASE_URL}products`)
-        .then((response) => {
-          this.items = response.data;
-          this.filteredItems = this.items; // Initialize filteredItems with all items
-          this.isLoading = false;
-        })
-        .catch((error) => {
-          console.error("Error fetching products:", error);
-          this.isLoading = false;
-        });
+    async fetchProducts() {
+      try {
+        const response = await axios.get(`${API_BASE_URL}products`);
+        this.items = response.data;
+        this.filteredItems = this.items;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        this.isLoading = false;
+      }
     },
-    filterByAll() {
-      this.filteredItems = this.items; // Reset to all items
-    },
-    filterByRecentlyViewed() {
-      // Example: Filter by items with rating greater than 4.0
-      this.filteredItems = this.items.filter((item) => item.rating > 4.0);
-    },
-    filterByFavorites() {
-      // Example: Filter by items with 'favorite' flag set
-      this.filteredItems = this.items.filter((item) => item.favorite);
+    filterItems(filterType) {
+      switch (filterType) {
+        case 'recent':
+          this.filteredItems = this.items.filter(item => item.rating > 4.0);
+          break;
+        case 'favorites':
+          this.filteredItems = this.items.filter(item => item.favorite);
+          break;
+        default:
+          this.filteredItems = this.items;
+      }
+      this.currentPage = 1; // Reset to first page on filter change
     },
     searchProducts() {
       if (this.searchQuery.trim() === "") {
-        this.filteredItems = this.items; // Reset to all items if search query is empty
+        this.filteredItems = this.items;
       } else {
-        // Filter items based on searchQuery
-        this.filteredItems = this.items.filter((item) =>
-          item.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        const query = this.searchQuery.toLowerCase();
+        this.filteredItems = this.items.filter(item => 
+          item.name.toLowerCase().includes(query)
         );
       }
+      this.currentPage = 1; // Reset to first page on search
     },
     navigateBack() {
-      this.$router.go(-1); // Navigate back to previous page
+      this.$router.go(-1);
     },
   },
 };
