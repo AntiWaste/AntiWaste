@@ -20,11 +20,11 @@
           </router-link>
           <router-link
             v-if="isAdmin"
-            to="/dashboard"
+            to="/dashboard-layout"
             title="Admin Dashboard"
             class="no-underline text-center flex justify-center items-center px-5 text-gray-700 hover:text-green-500"
-            :class="{ 'text-green-500 font-bold': activeLink === '/dashboard' }"
-            @click="handleClick('/dashboard')"
+            :class="{ 'text-green-500 font-bold': activeLink === '/dashboard-layout' }"
+            @click="handleClick('/dashboard-layout')"
           >
             Dashboard
           </router-link>
@@ -143,9 +143,9 @@
         <v-list-item
           v-if="isAdmin"
           class="flex justify-center"
-          to="/dashboard"
+          to="/dashboard-layout"
           @click="
-            handleClick('/dashboard');
+            handleClick('/dashboard-layout');
             drawer = false;
           "
         >
@@ -155,7 +155,7 @@
           <v-list-item-content>
             <v-list-item-title
               :class="{
-                'text-green-500 font-bold': activeLink === '/dashboard',
+                'text-green-500 font-bold': activeLink === '/dashboard-layout',
               }"
             >
               Dashboard

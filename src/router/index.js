@@ -21,11 +21,13 @@ import ProductDetails from "../components/RecyclePage/ProductDetails.vue";
 import ThankYou from "../components/RecyclePage/ThankYou.vue";
 import SellWaste from "../components/Waste/SellWaste.vue";
 import WasteListing from "../components/Waste/WasteListing.vue";
+import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
 import CartView from "../components/Cart/CartView.vue";
-import store from '@/store';
+import { useToast } from 'vue-toastification';
+
 const routes = [
   {
     path: "/register",
@@ -41,9 +43,7 @@ const routes = [
     path: "/dashboard-layout",
     name: "dashboard-layout",
     component: DashboardLayout,
-    meta:{
-      requiresAuth: true
-    }
+    meta: { requiresAdmin: true }
   },
   // {
   //   path: "/post-product",
@@ -61,7 +61,6 @@ const routes = [
     name: "dashboard",
     redirect: "/home",
     component: DashboardLayout,
-
     children: [
       {
         path: "user-info",
@@ -146,9 +145,6 @@ const routes = [
         path: "product-post",
         name: "product-post",
         component: PostingForm,
-        
-          meta: { requiresAuth: true } 
-        
       },
       {
         path: "thank-you",
@@ -184,12 +180,12 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters.isAuthenticated) {
-      next({ name: 'login' });
-    } else {
-      next();
-    }
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+  const isAdmin = store.getters.isAdmin;
+
+  if (requiresAdmin && !isAdmin) {
+    next('/home'); // Redirect to home or another page if not admin
+    useToast().error("You don't have permission to view this page")
   } else {
     next();
   }
