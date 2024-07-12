@@ -110,7 +110,8 @@
             <p class="text-sm text-gray-600">
               Contact Number: {{ item.contact_number }}
             </p>
-            <div class="text-sm text-gray-600 mt-2">
+            <!-- Display Description -->
+            <div class="text-sm text-gray-600 mt-2 line-clamp-3">
               <span class="font-bold">Description: </span>{{ item.description }}
             </div>
             <hr class="my-4" />

@@ -26,7 +26,7 @@
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.contact_number }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.location }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <img :src="message.photo" alt="Product Photo" class="h-12 w-12 object-cover rounded-full" />
+              <img :src="message.img" alt="Product Photo" class="h-12 w-12 object-cover rounded-full" />
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <button @click="editMessage(message)" class="text-green-600 hover:text-green-900">Edit</button>

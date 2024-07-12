@@ -1,25 +1,44 @@
 <template>
-  <!-- <div class="bg-white">
-    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-      <h2 class="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
-
-      <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        <div v-for="product in filteredItems" :key="product.id" class="group relative">
-          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img :src="product.image" alt="product imageAlt" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-8 px-20 py-5">
+    <div v-for="item in filteredItems" :key="item.id" class="w-auto overflow-hidden rounded-xl border">
+      <img
+        class="object-cover h-64 w-full"
+        :src="item.img"
+        alt="Product Image"
+      />
+      <div class="p-4">
+        <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+        <div class="flex items-center text-sm text-gray-600">
+          <span class="me-1">{{ item.owner_name }}</span>
+          <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
+        </div>
+        <div class="flex items-center mt-2">
+          <v-rating
+            v-model="item.user_rating"
+            color="amber"
+            density="compact"
+            half-increments
+            @input="submitRating(item)"
+            v-if="!item.rated && isAuthenticated"
+          ></v-rating>
+          <div v-else-if="item.rated" class="text-gray-600 ms-4">
+            <v-rating
+              v-model="item.user_rating"
+              color="amber"
+              density="compact"
+              readonly
+            ></v-rating>
           </div>
-          <div class="mt-4 flex justify-between">
-            <div>
-              <h3 class="text-sm text-gray-700">
-                <a :href="product.href">
-                  <span aria-hidden="true" class="absolute inset-0" />
-                  {{ product.name }}
-                </a>
-              </h3>
-              <p class="mt-1 text-sm text-gray-500">{{ product.description }}</p>
-            </div>
-            <p class="text-sm font-medium text-gray-900">{{ product.price }}</p>
-          </div>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Location: {{ item.location }}</p>
+        <p class="text-sm text-gray-600">Contact Number: {{ item.contact }}</p>
+        <div class="mt-4">
+          <p class="text-gray-600 text-sm mt-2 line-clamp-3">
+            {{ item.description }}
+          </p>
+        </div>
+        <div class="mt-4">
+          <div class="text-lg font-semibold">${{ item.price }}</div>
           <div>
             <router-link v-if="isAuthenticated" :to="'/product-detail/' + product.id">
               <button
@@ -259,7 +278,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Scoped styles for this component */
-</style>

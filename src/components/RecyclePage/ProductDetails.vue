@@ -86,14 +86,10 @@
                 <span class="font-bold text-gray-700">Price:</span>
                 <span class="text-gray-600">${{ product.price }}</span>
               </div>
-              <div>
-                <span class="font-bold text-gray-700">Availability:</span>
-                <span class="text-gray-600">In Stock</span>
-              </div>
             </div>
 
             <div class="mt-4">
-              <span class="font-bold text-gray-700">Product Description:</span>
+              <span class="font-bold text-gray-700">Description: </span>
               <p class="text-gray-600 text-sm mt-2">
                 {{ product.description }}
               </p>
@@ -109,6 +105,8 @@
           </div>
         </div>
       </div>
+
+      <LoadingSpinner v-if="product === null" />
       <div v-else class="text-center py-8">
         <p class="text-gray-600">Loading product details...</p>
       </div>
@@ -178,6 +176,7 @@
 </template>
 
 <script>
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { API_BASE_URL } from '@/config';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
@@ -187,6 +186,9 @@ import debounce from 'lodash/debounce';
 const toast = useToast();
 
 export default {
+  components: {
+    LoadingSpinner,
+  },
   data() {
     return {
       product: null,
@@ -240,6 +242,16 @@ export default {
 
     async submitRating(rating) {
       if (this.isLoggedIn && !this.rated) {
+        axios.post(`${API_BASE_URL}products/${this.product.id}/rate, { rating }`)
+          .then(response => {
+            this.product.average_rating = response.data.average_rating;
+            this.product.reviews = response.data.reviews;
+            this.userRating = rating;
+            this.rated = true;
+          })
+          .catch(error => {
+            console.error('Error submitting rating:', error);
+          });
         try {
           const response = await axios.post(`${API_BASE_URL}products/${this.product.id}/rate`, { rating });
           this.product.average_rating = response.data.average_rating;

@@ -1,31 +1,48 @@
 <template>
   <div class="flex flex-col">
     <div class="m-10 text-3xl font-bold">Upcoming Events</div>
-    <div class="flex flex-wrap -mx-4">
+
+    <!-- Loading Indicator -->
+    <div v-if="isLoading" class="text-center py-8">
+      <p class="text-gray-600">Loading events...</p>
+    </div>
+
+    <!-- Event Grid -->
+    <div v-else class="flex flex-wrap -mx-4">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 px-20 py-5">
         <div
           v-for="event in paginatedevents"
           :key="event.id"
           class="w-auto overflow-hidden rounded-xl border"
         >
+          <!-- Event Image -->
           <img
             class="object-cover h-64 w-full"
             :src="event.photo"
-            alt="event Image"
+            :alt="event.event_name + ' Image'"
           />
 
           <div class="p-4">
+            <!-- Event Title -->
             <h3 class="text-lg font-semibold">{{ event.event_name }}</h3>
-            <div class="flex events-center text-sm text-gray-600">
+
+            <!-- Event Date -->
+            <div class="flex items-center text-sm text-gray-600">
               <span class="mr-1">{{ event.date }}</span>
               <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
             </div>
+
+            <!-- Event Location -->
             <p class="text-sm text-gray-600 mt-2">
               Location: {{ event.location }}
             </p>
-            <div class="text-sm text-gray-600 mt-2">
-              <span class="font-bold">Description: </span>{{ event.description }}
+
+            <!-- Event Description -->
+            <div class="text-sm text-gray-600 mt-2 line-clamp-3">
+              <span class="font-bold ">Description: </span>{{ event.description }}
             </div>
+
+            <!-- View Detail Button -->
             <div>
               <router-link :to="'/event-detail/' + event.id">
                 <button
@@ -41,7 +58,7 @@
     </div>
 
     <!-- Pagination Controls -->
-    <div class="flex justify-center mt-5">
+    <div v-if="totalPages > 1" class="flex justify-center mt-5">
       <button
         :disabled="currentPage === 1"
         @click="currentPage -= 1"
@@ -60,16 +77,13 @@
     </div>
   </div>
 </template>
+
 <script>
 import { API_BASE_URL } from "@/config";
 import axios from "axios";
-// import LoadingSpinner from "../LoadingSpinner.vue"; // Ensure correct path to your LoadingSpinner component
 
 export default {
-  name: "eventGrid",
-  // components: {
-  //   LoadingSpinner,
-  // },
+  name: "EventGrid",
   data() {
     return {
       isLoading: true,
@@ -112,30 +126,13 @@ export default {
           // Handle error state or show error message to user
         });
     },
-    filterByAll() {
-      this.filteredevents = this.events; // Reset to all events
-    },
-    filterByRecentlyViewed() {
-      // Example: Filter by events with rating greater than 4.0
-      this.filteredevents = this.events.filter((event) => event.rating > 4.0);
-    },
-    filterByFavorites() {
-      // Example: Filter by events with 'favorite' flag set
-      this.filteredevents = this.events.filter((event) => event.favorite);
-    },
-    searchEvents() {
-      if (this.searchQuery.trim() === "") {
-        this.filteredevents = this.events; // Reset to all events if search query is empty
-      } else {
-        // Filter events based on searchQuery
-        this.filteredevents = this.events.filter((event) =>
-          event.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      }
-    },
     navigateBack() {
       this.$router.go(-1); // Navigate back to previous page
     },
   },
 };
 </script>
+
+<style scoped>
+/* Add any custom styles here */
+</style>
