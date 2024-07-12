@@ -52,7 +52,7 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <!-- <v-select
+      <v-select
         v-model="role"
         :items="roleOptions"
         label="Role"
@@ -60,7 +60,7 @@
         outlined
         placeholder="Select Role"
         class="w-full mt-4"
-      ></v-select> -->
+      ></v-select>
       <v-text v-if="validated" class="text-red-500 mb-2">
         {{ messageError }}
       </v-text>
@@ -113,10 +113,10 @@ export default {
   data() {
     return {
       img: Image,
-      // roleOptions: [
-      //   { value: 'user', title: 'User' },
-      //   { value: 'service_provider', title: 'Service Provider' },
-      // ],
+      roleOptions: [
+        { value: 'user', title: 'User' },
+        { value: 'service_provider', title: 'Service Provider' },
+      ],
       username: "",
       email: "",
       password: "",
