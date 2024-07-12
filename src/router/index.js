@@ -25,6 +25,8 @@ import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
 import CartView from "../components/Cart/CartView.vue";
+import { useToast } from 'vue-toastification';
+
 import store from '@/store';
 const routes = [
   {
@@ -41,9 +43,7 @@ const routes = [
     path: "/dashboard-layout",
     name: "dashboard-layout",
     component: DashboardLayout,
-    meta:{
-      requiresAuth: true
-    }
+    meta: { requiresAdmin: true }
   },
   // {
   //   path: "/post-product",
@@ -184,6 +184,11 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin);
+  const isAdmin = store.getters.isAdmin;
+
+  if (requiresAdmin && !isAdmin) {
+    next('/home'); // Redirect to home or another page if not admin
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isAuthenticated) {
       next({ name: 'login' });
@@ -191,6 +196,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
+    useToast().error("You don't have permission to view this page")
     next();
   }
 });
