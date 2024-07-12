@@ -26,7 +26,7 @@ import store from "../store";
 import RecycleView from "../views/RecycleView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 import SignupView from "../views/auth/SignupView.vue";
-import CartView from "../components/Cart/CartView.vue";
+// import CartView from "../components/Cart/CartView.vue";
 import { useToast } from 'vue-toastification';
 
 const routes = [
@@ -197,4 +197,4 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-export default router;
+export default router; 
