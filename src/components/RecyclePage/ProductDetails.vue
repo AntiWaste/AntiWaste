@@ -20,8 +20,9 @@
             >
               <img
                 class="w-full h-full object-cover"
-                :src="product.img"
+                :src="product.image"
                 alt="Product Image"
+                loading="lazy"
               />
             </div>
 
@@ -62,7 +63,7 @@
                 color="amber"
                 density="compact"
                 half-increments
-                @input="submitRating"
+                @input="debounceSubmitRating"
                 v-if="!rated"
               ></v-rating>
               <div v-else class="text-gray-600 ml-4">
@@ -118,17 +119,23 @@
 
             <div
               class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0"
-           
             >
-              <div class="group relative"  v-for="related in relatedProducts"
-              :key="related.id">
+              <div
+                class="group relative"
+                v-for="related in relatedProducts"
+                :key="related.id"
+              >
                 <div
                   class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64"
                 >
                   <img
-                    :src="related.image || 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg'"
+                    :src="
+                      related.image ||
+                      'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg'
+                    "
                     alt="Related Product Image"
-                    class="h-full w-full object-cover object-center"
+                    class="h-full w-full object-contain object-center"
+                    loading="lazy"
                   />
                 </div>
                 <h3 class="mt-6 text-sm text-gray-500">
@@ -140,6 +147,27 @@
                 <p class="text-base font-semibold text-gray-900">
                   {{ related.name }}
                 </p>
+                <div>
+                  <router-link
+                    v-if="isAuthenticated"
+                    :to="'/product-detail/' + related.id"
+                  >
+                    <button
+                      class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none"
+                      @click="trackClick(related.id)"
+                    >
+                      View Detail
+                    </button>
+                  </router-link>
+                  <span v-else>
+                    <button
+                      class="mt-2 px-4 py-2 text-sm text-gray-400 border border-gray-400 rounded-lg cursor-not-allowed hover:bg-gray-100 focus:outline-none"
+                      disabled
+                    >
+                      Login/Register to View Detail
+                    </button>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -154,6 +182,8 @@ import { API_BASE_URL } from '@/config';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
+import debounce from 'lodash/debounce';
+
 const toast = useToast();
 
 export default {
@@ -169,84 +199,105 @@ export default {
 
   mounted() {
     this.fetchProduct();
+    this.checkAuthentication();
     this.checkLoginStatus(); // Check login status when the component mounts
   },
+
   methods: {
-    fetchProduct() {
-      const productId = this.$route.params.id;
-      axios
-        .get(`${API_BASE_URL}products/${productId}`)
-        .then((response) => {
-          console.log(response.data); // Log response data for debugging
-          this.product = response.data;
-          this.userRating = this.product.user_rating;
-          this.rated = !!this.product.user_rating;
-          this.getRelatedProducts(); // Fetch related products after getting the product
-        })
-        .catch((error) => {
-          console.error('Error fetching product:', error);
-        });
+    checkAuthentication() {
+      const token = localStorage.getItem('token');
+      this.isAuthenticated = !!token; // Convert token to boolean
     },
-    getRelatedProducts() {
-      if (this.product && this.product.category_id) {
-        axios
-          .get(`${API_BASE_URL}products/category/${this.product.category_id}`)
-          .then((response) => {
-            this.relatedProducts = response.data;
-            console.log(this.relatedProducts); // Log response data for debugging
-          })
-          .catch((error) => {
-            console.error('Error fetching related products:', error);
-          });
+
+    async fetchProduct() {
+      const productId = this.$route.params.id;
+      try {
+        const response = await axios.get(`${API_BASE_URL}products/${productId}`);
+        this.product = response.data;
+        this.userRating = this.product.user_rating;
+        this.rated = !!this.product.user_rating;
+        this.getRelatedProducts();
+      } catch (error) {
+        console.error('Error fetching product:', error);
       }
     },
+
+    async getRelatedProducts() {
+      if (this.product && this.product.category_id) {
+        try {
+          const response = await axios.get(`${API_BASE_URL}products/category/${this.product.category_id}`);
+          this.relatedProducts = response.data;
+        } catch (error) {
+          console.error('Error fetching related products:', error);
+        }
+      }
+    },
+
     checkLoginStatus() {
       const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
       this.isLoggedIn = !!token; // Set isLoggedIn based on token existence
     },
-    submitRating(rating) {
+
+    async submitRating(rating) {
       if (this.isLoggedIn && !this.rated) {
-        axios
-          .post(`${API_BASE_URL}products/${this.product.id}/rate`, { rating })
-          .then((response) => {
-            this.product.average_rating = response.data.average_rating;
-            this.product.reviews = response.data.reviews;
-            this.userRating = rating;
-            this.rated = true;
-          })
-          .catch((error) => {
-            console.error('Error submitting rating:', error);
-          });
+        try {
+          const response = await axios.post(`${API_BASE_URL}products/${this.product.id}/rate`, { rating });
+          this.product.average_rating = response.data.average_rating;
+          this.product.reviews = response.data.reviews;
+          this.userRating = rating;
+          this.rated = true;
+        } catch (error) {
+          console.error('Error submitting rating:', error);
+        }
       }
     },
+
+    debounceSubmitRating: debounce(function (rating) {
+      this.submitRating(rating);
+    }, 300),
+
     navigateBack() {
       this.$router.go(-1);
     },
-    addToCart(product) {
-      console.log('Adding to cart:', product);
+
+    trackClick(itemId) {
+      let clickedItems = JSON.parse(localStorage.getItem('clickedItems') || '[]');
+      const itemIndex = clickedItems.findIndex((item) => item.id === itemId);
+      if (itemIndex === -1) {
+        const clickedItem = this.items.find((item) => item.id === itemId);
+        if (clickedItem) {
+          clickedItem.clicks = 1;
+          clickedItems.push(clickedItem);
+        }
+      } else {
+        clickedItems[itemIndex].clicks += 1;
+      }
+      localStorage.setItem('clickedItems', JSON.stringify(clickedItems));
+      this.clickedItems = clickedItems;
+    },
+
+    async addToCart(product) {
       const token = localStorage.getItem('auth_token');
-      axios
-        .post(
+      try {
+        await axios.post(
           `${API_BASE_URL}cart-items`,
           {
             product_id: product.id,
-            quantity: 1, // You can adjust the quantity as needed
+            quantity: 1, // Adjust the quantity as needed
           },
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
-        )
-        .then((response) => {
-          toast.success('Product added to cart!'); // Using Vue Toastification for success message
-          console.log('Product added to cart:', response.data);
-        })
-        .catch((error) => {
-          toast.error('Failed to add product to cart.'); // Using Vue Toastification for error message
-          console.error('Error adding product to cart:', error);
-        });
+        );
+        toast.success('Product added to cart!');
+      } catch (error) {
+        toast.error('Failed to add product to cart.');
+        console.error('Error adding product to cart:', error);
+      }
     },
+
     contactOwner(product) {
       console.log('Contacting owner:', product);
     },
