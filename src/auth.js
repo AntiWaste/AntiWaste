@@ -5,7 +5,7 @@ import { API_BASE_URL } from "./config"; // Adjust the path as per your project 
 // Function to register a user
 export const register = async (credentials) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/register`, credentials);
+    const response = await axios.post(`${API_BASE_URL}register`, credentials);
     const { token, user } = response.data;
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -22,7 +22,7 @@ export const register = async (credentials) => {
 // Function to login a user
 export const login = async (credentials) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+    const response = await axios.post(`${API_BASE_URL}login`, credentials);
     const { token, user } = response.data;
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -39,7 +39,7 @@ export const login = async (credentials) => {
 // Function to log out a user
 export const logout = async () => {
   try {
-    await axios.post(`${API_BASE_URL}/auth/logout`);
+    await axios.post(`${API_BASE_URL}auth/logout`);
     delete axios.defaults.headers.common["Authorization"];
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -55,7 +55,7 @@ export const getUser = async () => {
   if (!token) return null;
 
   try {
-    const response = await axios.get(`${API_BASE_URL}/auth/user`, {
+    const response = await axios.get(`${API_BASE_URL}auth/user`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
