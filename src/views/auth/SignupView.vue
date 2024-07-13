@@ -52,15 +52,17 @@
           class="w-full"
         ></v-text-field>
       </div>
-      <v-select
-        v-model="role"
-        :items="roleOptions"
-        label="Role"
-        dense
-        outlined
-        placeholder="Select Role"
-        class="w-full mt-4"
-      ></v-select>
+      <div class="w-full">
+        <v-select
+          v-model="role"
+          :items="roleOptions"
+          label="Role"
+          dense
+          outlined
+          placeholder="Select Role"
+          class="w-full mt-4"
+        ></v-select>
+      </div>
       <v-text v-if="validated" class="text-red-500 mb-2">
         {{ messageError }}
       </v-text>
@@ -105,7 +107,7 @@
 </template>
 
 <script>
-// import this.$axios from 'this.$axios';
+import axios from '@/axios'; // Adjust according to your axios configuration file
 import { useToast } from 'vue-toastification';
 import Image from '../../assets/recycle.jpg';
 
@@ -121,7 +123,7 @@ export default {
       email: "",
       password: "",
       confirmPassword: "",
-      // role: '',
+      role: '',
       validated: false,
       messageError: "",
     };
@@ -144,31 +146,34 @@ export default {
         this.messageError = "Passwords do not match";
         toast.error(this.messageError);
       } else {
-        console.log(this.username, this.email, this.password, this.role);
+        console.log("Registering user:", this.username, this.email, this.role);
         try {
-          const response = await this.$axios.post("register", {
+          const response = await axios.post("register", {
             name: this.username,
             email: this.email,
             password: this.password,
             role: this.role,
           });
+          console.log("API Response:", response);
           this.validated = false;
           this.messageError = "";
           toast.success("Registration successful");
           this.$router.push("login");
-          console.log(response.data);
         } catch (error) {
           this.validated = true;
+          console.error("Error during registration:", error);
           if (error.response) {
+            console.error("Server responded with an error:", error.response);
             this.messageError =
               error.response.data.message || "Registration failed";
           } else if (error.request) {
+            console.error("No response received from server:", error.request);
             this.messageError = "No response received from server";
           } else {
+            console.error("Error in making request:", error.message);
             this.messageError = "Error in making request: " + error.message;
           }
           toast.error(this.messageError);
-          console.error("Error details:", error);
         }
       }
     },
