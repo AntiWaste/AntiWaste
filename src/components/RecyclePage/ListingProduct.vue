@@ -88,8 +88,8 @@
           class="w-auto overflow-hidden rounded-xl border"
         >
           <img
-            class="object-contain h-44 w-full"
-            :src="item.image"
+             class="object-cover h-64 w-full"
+            :src="item.img"
             alt="Product Image"
             loading="lazy"
           />
@@ -134,15 +134,15 @@
         <button
           :disabled="currentPage === 1"
           @click="currentPage -= 1"
-          class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
+          class="px-4 py-2 bg-green-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
         >
           Previous
         </button>
-        <span class="text-gray-700">{{ currentPage }}</span>
+        <span class="px-4 py-2 bg-green-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none">{{ currentPage }}</span>
         <button
           :disabled="currentPage === totalPages"
           @click="currentPage += 1"
-          class="px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
+          class="px-4 py-2 bg-green-200 text-gray-700 hover:bg-gray-300 rounded-full mx-2 focus:outline-none"
         >
           Next
         </button>
@@ -185,16 +185,17 @@ export default {
   },
   methods: {
     async fetchProducts() {
-      try {
-        const response = await axios.get(`${API_BASE_URL}products`);
-        this.items = response.data;
-        this.filteredItems = this.items;
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
+  try {
+    const response = await axios.get(`${API_BASE_URL}products`);
+    console.log('Fetched products:', response.data); // Log fetched products for debugging
+    this.items = response.data;
+    this.filteredItems = this.items;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  } finally {
+    this.isLoading = false;
+  }
+},
     filterItems(filterType) {
       switch (filterType) {
         case 'recent':

@@ -162,7 +162,7 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item
+        <!-- <v-list-item
           class="flex justify-center"
           to="/cart"
           @click="
@@ -180,7 +180,7 @@
               Cart
             </v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item> -->
       </v-list>
     </v-navigation-drawer>
   </div>
@@ -188,6 +188,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+
 
 export default {
   name: "NavTop",
@@ -228,12 +229,12 @@ export default {
           link: "/dashboard-layout",
           title: "Manage your user",
         },
-        {
-          icon: "shopping_cart",
-          text: "Cart",
-          link: "/cart",
-          title: "View your cart",
-        }, // Added Cart link
+        // {
+        //   icon: "shopping_cart",
+        //   text: "Cart",
+        //   link: "/cart",
+        //   title: "View your cart",
+        // }, // Added Cart link
       ],
     };
   },

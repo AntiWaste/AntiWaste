@@ -40,10 +40,10 @@
         <div class="mt-4">
           <div class="text-lg font-semibold">${{ item.price }}</div>
           <div>
-            <router-link v-if="isAuthenticated" :to="'/product-detail/' + product.id">
+            <router-link v-if="isAuthenticated" :to="'/product-detail/' + item.id">
               <button
                 class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none"
-                @click="trackClick(product.id)"
+                @click="trackClick(item.id)"
               >
                 View Detail
               </button>
@@ -53,89 +53,6 @@
                 Login/Register to View Detail
               </button>
             </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div
-    class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
-  >
-    <div
-      class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-    >
-      <div
-        v-for="item in filteredItems"
-        :key="item.id"
-        class="w-auto overflow-hidden rounded-xl border"
-      >
-        <div
-          class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"
-        >
-          <img
-            :src="item.image"
-            alt="product imageAlt"
-            class="h-45 w-full object-contain object-center lg:h-full lg:w-full"
-          />
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">{{ item.name }}</h3>
-          <div class="flex items-center text-sm text-gray-600">
-            <span class="me-1">{{ item.owner_name }}</span>
-            <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
-          </div>
-          <div class="flex items-center mt-2">
-            <v-rating
-              v-model="item.user_rating"
-              color="amber"
-              density="compact"
-              half-increments
-              @input="submitRating(item)"
-              v-if="!item.rated && isAuthenticated"
-            ></v-rating>
-            <div v-else-if="item.rated" class="text-gray-600 ms-4">
-              <v-rating
-                v-model="item.user_rating"
-                color="amber"
-                density="compact"
-                readonly
-              ></v-rating>
-            </div>
-          </div>
-          <p class="text-sm text-gray-600 mt-2">
-            Location: {{ item.location }}
-          </p>
-          <p class="text-sm text-gray-600">
-            Contact Number: {{ item.contact_number }}
-          </p>
-          <div class="mt-4">
-            <p class="text-gray-600 text-sm mt-2">
-              {{ item.description }}
-            </p>
-          </div>
-          <div class="mt-4">
-            <div class="text-lg font-semibold">${{ item.price }}</div>
-            <div>
-              <router-link
-                v-if="isAuthenticated"
-                :to="'/product-detail/' + item.id"
-              >
-                <button
-                  class="mt-2 px-4 py-2 text-sm text-green-600 border border-green-600 rounded-lg hover:bg-green-100 focus:outline-none"
-                  @click="trackClick(item.id)"
-                >
-                  View Detail
-                </button>
-              </router-link>
-              <span v-else>
-                <button
-                  class="mt-2 px-4 py-2 text-sm text-gray-400 border border-gray-400 rounded-lg cursor-not-allowed hover:bg-gray-100 focus:outline-none"
-                  disabled
-                >
-                  Login/Register to View Detail
-                </button>
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -278,3 +195,5 @@ export default {
   },
 };
 </script>
+
+

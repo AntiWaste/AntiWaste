@@ -32,7 +32,7 @@
               required
             />
           </div>
-          <div class="col-span-6 sm:col-span-3">
+          <!-- <div class="col-span-6 sm:col-span-3">
             <label
               for="category"
               class="text-sm font-medium text-gray-900 block mb-2"
@@ -48,6 +48,24 @@
               <option v-for="category in categories" :key="category.id" :value="category.id">
                 {{ category.name }}
               </option>
+            </select>
+          </div> -->
+          <div class="col-span-6 sm:col-span-3">
+            <label for="Waste-categories" class="text-sm font-medium text-gray-900 block mb-2">Product categories</label>
+            <select
+              v-model="formData.categories"
+              name="waste-categories"
+              id="waste-categories"
+              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+              required
+            >
+              <option value="">Select Waste Category</option>
+              <option value="Glass Bottles">Glass Bottles</option>
+              <option value="Plastics">Plastics</option>
+              <option value="Metals">Metals</option>
+              <option value="Papers">Papers</option>
+              <option value="E-Waste">E-Waste</option>
+              <option value="Textiles">Textiles</option>
             </select>
           </div>
           <div class="col-span-6 sm:col-span-3">
@@ -99,11 +117,11 @@
           </div>
 
           <!-- Display selected images -->
-          <div class="col-span-6" v-if="selectedImages.length > 0">
+          <div class="col-span-6" v-if="formData.selectedImages.length > 0">
             <h3 class="text-lg font-medium">Selected Images:</h3>
             <div class="mt-2 grid grid-cols-3 gap-4">
               <div
-                v-for="(image, index) in selectedImages"
+                v-for="(image, index) in formData.selectedImages"
                 :key="index"
                 class="relative"
               >
@@ -181,12 +199,12 @@
 </template>
 
 <script>
-import { API_BASE_URL } from '@/config'; // Import the API_BASE_URL from config
+import { API_BASE_URL } from '@/config';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import { mapGetters } from 'vuex';
 
-const csrfToken = window.csrf_token; // Access CSRF token from global variable
+const csrfToken = window.csrf_token;
 axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 
 export default {
@@ -197,96 +215,94 @@ export default {
         location: '',
         contactNumber: '',
         productDescription: '',
-        productImages: [], // Array to store selected images
+        selectedImages: [],
+        categories: "",
         price: '',
-        category_id: '',
       },
-      selectedImages: [],
-      categories: [], // Array to store categories
+      imgFiles: [],
+      categories: [],
     };
-  },
-  created() {
-    this.fetchCategories();
   },
   computed: {
     ...mapGetters(["isAuthenticated", "user"]),
   },
   methods: {
     navigateBack() {
-      this.$router.go(-1); // Navigate back to previous page
+      this.$router.go(-1);
     },
     onImagesSelected(event) {
-      this.selectedImages = [];
-      Array.from(event.target.files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.selectedImages.push({ file, url: reader.result });
-        };
-        reader.readAsDataURL(file);
+      this.imgFiles = Array.from(event.target.files);
+      this.convertToBase64();
+    },
+    convertToBase64() {
+      const promises = this.imgFiles.map(file => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            resolve({ file, url: e.target.result });
+          };
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
       });
-    },
-    removeImage(index) {
-      this.selectedImages.splice(index, 1); // Remove image from selectedImages array
-    },
-    fetchCategories() {
-      axios
-        .get(`${API_BASE_URL}categories`)
-        .then((response) => {
-          this.categories = response.data;
+
+      Promise.all(promises)
+        .then(results => {
+          this.formData.selectedImages = results;
         })
-        .catch((error) => {
-          console.error('Error fetching categories:', error);
+        .catch(error => {
+          console.error('Error converting files to base64:', error);
         });
     },
-    saveProduct() {
-      // Perform form validation
+    removeImage(index) {
+      this.formData.selectedImages.splice(index, 1);
+    },
+    async saveProduct() {
+      const toast = useToast();
       if (
         !this.formData.productName ||
         !this.formData.location ||
-        !this.user.id || // Ensure user is authenticated
         !this.formData.contactNumber ||
         !this.formData.price ||
-        this.selectedImages.length === 0 ||
         !this.formData.productDescription ||
-        !this.formData.category_id
+        !this.formData.categories ||
+        this.formData.selectedImages.length === 0
       ) {
-        const toast = useToast();
-        toast.error(
-          'Please fill in all required fields and select at least one image.'
-        );
+        toast.error('Please fill in all required fields and select at least one image.');
         return;
       }
 
-      // Prepare form data as multipart/form-data
-      const formData = new FormData();
-      formData.append('name', this.formData.productName);
-      formData.append('location', this.formData.location);
-      formData.append('user_id', this.user.id); // Add user_id from Vuex store
-      formData.append('contact_number', this.formData.contactNumber);
-      formData.append('category_id', this.formData.category_id);
-      formData.append('description', this.formData.productDescription);
-      formData.append('price', this.formData.price); // Add price if available
+      try {
+        const formData = new FormData();
+        formData.append('name', this.formData.productName);
+        formData.append('location', this.formData.location);
+        formData.append('contact_number', this.formData.contactNumber);
+        formData.append('categories', this.formData.categories);
+        formData.append('description', this.formData.productDescription);
+        formData.append('price', this.formData.price);
 
-      // Append selected images
-      this.selectedImages.forEach((image) => {
-        formData.append('image', image.file);
-      });
-
-      // Make POST request to backend API
-      axios
-        .post(`${API_BASE_URL}products`, formData)
-        .then((response) => {
-          console.log('Product saved successfully:', response.data);
-          const toast = useToast();
-          toast.success('Product saved successfully!');
-          this.$router.push('/thank-recycle'); // Navigate to the Thank You page
-        })
-        .catch((error) => {
-          console.error('Error saving product:', error);
-          const toast = useToast();
-          toast.error('Error saving product. Please try again later.');
+        this.formData.selectedImages.forEach((image, index) => {
+          formData.append(`img[${index}]`, image.file);
         });
-    },
+
+        const response = await axios.post(`${API_BASE_URL}products`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log('Response from server:', response.data);
+
+        toast.success('Product saved successfully!');
+        this.$router.push('/thank-recycle');
+      } catch (error) {
+        toast.error('Error saving product. Please try again later.');
+        if (error.response) {
+          console.error('Server error details:', error.response.data);
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
+    }
   },
 };
 </script>

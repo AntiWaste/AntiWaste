@@ -20,7 +20,7 @@
             >
               <img
                 class="w-full h-full object-cover"
-                :src="product.image"
+                :src="product.img"
                 alt="Product Image"
                 loading="lazy"
               />
@@ -52,10 +52,6 @@
               {{ product.name }}
             </h2>
 
-            <div class="flex items-center text-sm text-gray-600 mb-4">
-              <span class="mr-1">{{ product.owner_name }}</span>
-              <i class="text-red-500 mdi mdi-fire-circle text-sm"></i>
-            </div>
 
             <div class="flex items-center mt-2" v-if="isLoggedIn">
               <v-rating

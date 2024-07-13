@@ -8,7 +8,6 @@
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Owner</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
@@ -21,7 +20,6 @@
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.id }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.name }}</div></td>
             <td class="px-6 py-4 whitespace-wrap max-w-xs break-words"><div class="text-sm text-gray-900">{{ message.description }}</div></td>
-            <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.owner_name }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.price }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.contact_number }}</div></td>
             <td class="px-6 py-4 whitespace-nowrap"><div class="text-sm text-gray-900">{{ message.location }}</div></td>
@@ -57,10 +55,6 @@
                     <div class="mt-4">
                       <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                       <textarea v-model="editForm.description" rows="4" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md h-32 resize-none"></textarea>
-                    </div>
-                    <div class="mt-4">
-                      <label for="owner_name" class="block text-sm font-medium text-gray-700">owner_name</label>
-                      <input v-model="editForm.owner_name" type="text" class="mt-1 block w-full shadow-sm max-sm:text-sm border-gray-300 rounded-md" />
                     </div>
                     <div class="mt-4">
                       <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
@@ -133,7 +127,6 @@ export default {
         id: null,
         name: '',
         description: '',
-        owner_name: '',
         price: '',
         contact_number: '',
         location: '',
@@ -159,15 +152,38 @@ export default {
       this.showEditModal = true;
     },
     async updateMessage() {
-      try {
-        const response = await axios.put(`${API_BASE_URL}products/${this.editForm.id}`, this.editForm);
-        const updatedMessageIndex = this.messages.findIndex(msg => msg.id === this.editForm.id);
-        if (updatedMessageIndex !== -1) {
-          this.$set(this.messages, updatedMessageIndex, response.data);
-          const toast = useToast();
-          toast.success('Message updated successfully!', {
+  try {
+    const response = await axios.put(`${API_BASE_URL}products/${this.editForm.id}`, this.editForm);
+    const updatedMessageIndex = this.messages.findIndex(msg => msg.id === this.editForm.id);
+    if (updatedMessageIndex !== -1) {
+      this.$set(this.messages, updatedMessageIndex, response.data);
+      const toast = useToast();
+      toast.success('Message updated successfully!', {
+        position: 'top-right',
+        timeout: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: true,
+        hideProgressBar: false,
+        closeButton: 'button',
+      });
+    }
+    this.showEditModal = false;
+  } catch (error) {
+    if (error.response && error.response.status === 422) {
+      // Handle validation errors
+      const errors = error.response.data.errors;
+      // Example: Log errors to console
+      console.error('Validation errors:', errors);
+      // Example: Display error messages to user (you can enhance this with Vue Toastification or other notification libraries)
+      const toast = useToast();
+      Object.values(errors).forEach(errorMessages => {
+        errorMessages.forEach(errorMessage => {
+          toast.error(errorMessage, {
             position: 'top-right',
-            timeout: 3000,
+            timeout: 5000,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
@@ -176,12 +192,13 @@ export default {
             hideProgressBar: false,
             closeButton: 'button',
           });
-        }
-        this.showEditModal = false;
-      } catch (error) {
-        console.error('Error updating message:', error);
-      }
-    },
+        });
+      });
+    } else {
+      console.error('Error updating message:', error);
+    }
+  }
+},
     confirmDelete(messageId) {
       this.messageToDelete = messageId;
       this.showDeleteModal = true;
