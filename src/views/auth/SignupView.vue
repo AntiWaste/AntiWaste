@@ -146,7 +146,7 @@ export default {
       } else {
         console.log(this.username, this.email, this.password, this.role);
         try {
-          const response = await this.$axios.post("/register", {
+          const response = await this.$axios.post("register", {
             name: this.username,
             email: this.email,
             password: this.password,
